@@ -5,555 +5,395 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#0b5e52">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Kids Gate – مساعد القبول</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
-  --emerald:#0b5e52;--emerald-mid:#0d7a6a;--emerald-bright:#12a08d;--emerald-light:#d4ede9;--emerald-xlight:#eef7f5;
-  --gold:#b8860b;--gold-bright:#d4a017;--gold-light:#fdf3d0;--gold-warm:#f5c843;--gold-shine:#ffe066;
-  --cream:#faf8f2;--white:#ffffff;
-  --text:#0f1f1c;--text-mid:#2d4a45;--muted:#6b8c85;--border:#c8deda;
-  --shadow-sm:0 2px 12px rgba(11,94,82,.08);
-  --shadow-md:0 6px 30px rgba(11,94,82,.13);
-  --shadow-lg:0 16px 60px rgba(11,94,82,.18);
+  --em:#0b5e52;--em2:#0d7a6a;--em3:#12a08d;--eml:#d4ede9;--emxl:#eef7f5;
+  --gold:#b8860b;--gold2:#d4a017;--goldl:#fdf3d0;--goldw:#f5c843;--golds:#ffe066;
+  --ruby:#c0392b;--rubyl:#fdecea;
+  --cream:#faf8f2;--white:#fff;
+  --text:#0f1f1c;--textm:#2d4a45;--muted:#6b8c85;--brd:#c8deda;
+  --sh1:0 2px 12px rgba(11,94,82,.08);--sh2:0 6px 30px rgba(11,94,82,.13);--sh3:0 16px 60px rgba(11,94,82,.18);
   --r:16px;--rL:22px;--rXL:28px;
 }
 html,body{height:100%;background:var(--cream);color:var(--text);font-size:16px;line-height:1.6;overflow-x:hidden}
 body.ar{font-family:'Cairo',sans-serif;direction:rtl}
 body.en{font-family:'Nunito',sans-serif;direction:ltr}
 
-/* ── ANIMATIONS ── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 @keyframes popIn{from{opacity:0;transform:scale(.82)}to{opacity:1;transform:scale(1)}}
-@keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.55}}
 @keyframes spin{to{transform:rotate(360deg)}}
-@keyframes boing{0%,100%{transform:translateY(0)}45%{transform:translateY(-7px)}}
-@keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes boing{0%,100%{transform:translateY(0)}45%{transform:translateY(-6px)}}
+@keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes grad{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
+@keyframes ring{0%{transform:scale(1)}30%{transform:scale(1.18)}60%{transform:scale(.94)}100%{transform:scale(1)}}
+@keyframes notifIn{from{opacity:0;transform:translateX(110%)}to{opacity:1;transform:translateX(0)}}
 
-/* ══════════════════════════════════════════
-   GATE SCREEN
-══════════════════════════════════════════ */
-#gate{
-  position:fixed;inset:0;z-index:9999;
-  background:linear-gradient(160deg,#0b5e52 0%,#0d7a6a 40%,#0f9980 70%,#12a08d 100%);
-  display:flex;flex-direction:column;overflow-y:auto;
-}
+/* GATE */
+#gate{position:fixed;inset:0;z-index:9999;background:linear-gradient(160deg,#053e36,#0b5e52,#0d7a6a,#12a08d);background-size:300% 300%;animation:grad 10s ease infinite;display:flex;flex-direction:column;overflow-y:auto}
 #gate.gone{display:none}
-
-/* decorative blobs */
-.gate-blob{position:absolute;border-radius:50%;opacity:.12;pointer-events:none}
-.gate-blob-1{width:300px;height:300px;background:#f5c843;top:-100px;right:-80px;animation:float 6s ease-in-out infinite}
-.gate-blob-2{width:200px;height:200px;background:#fff;bottom:100px;left:-60px;animation:float 8s ease-in-out infinite reverse}
-.gate-blob-3{width:150px;height:150px;background:#12a08d;top:40%;right:-40px;animation:float 7s ease-in-out infinite 1s}
-
-.gate-header{padding:20px 20px 0;display:flex;justify-content:center;position:relative;z-index:1}
-.gate-lang-row{display:flex;gap:6px;background:rgba(255,255,255,.12);border-radius:30px;padding:4px;border:1px solid rgba(255,255,255,.2)}
-.g-lang-btn{background:none;border:none;padding:6px 16px;font-size:12px;font-weight:700;color:rgba(255,255,255,.75);cursor:pointer;border-radius:24px;transition:.2s;font-family:'Nunito',sans-serif}
-.g-lang-btn.on{background:rgba(255,255,255,.92);color:var(--emerald)}
-
-.gate-hero{flex:0 0 auto;padding:28px 24px 0;text-align:center;position:relative;z-index:1;animation:fadeUp .7s .1s both ease}
-.gate-logo-wrap{display:inline-flex;align-items:center;justify-content:center;width:96px;height:96px;background:rgba(255,255,255,.12);border-radius:50%;border:2px solid rgba(255,255,255,.25);margin-bottom:16px;animation:float 4s ease-in-out infinite;box-shadow:0 8px 32px rgba(0,0,0,.2)}
-.gate-school-name{font-family:'Playfair Display',serif;font-size:30px;font-weight:900;color:#fff;letter-spacing:.5px;margin-bottom:6px}
-.gate-tagline{font-size:13.5px;color:rgba(255,255,255,.78);line-height:1.65}
-.gate-pill{display:inline-block;background:rgba(245,200,67,.22);border:1.5px solid rgba(245,200,67,.5);color:var(--gold-shine);font-size:11px;font-weight:700;padding:4px 16px;border-radius:20px;margin-top:10px;font-family:'Nunito',sans-serif;letter-spacing:.5px}
-
-.gate-form-wrap{
-  flex:1;margin-top:28px;
-  background:var(--white);
-  border-radius:32px 32px 0 0;
-  padding:28px 22px 40px;
-  box-shadow:0 -12px 50px rgba(0,0,0,.2);
-  position:relative;z-index:1;
-  animation:slideDown .5s .3s both ease;
-}
-.gate-form-handle{width:40px;height:4px;background:#e0e0e0;border-radius:4px;margin:0 auto 22px}
-.gate-form-title{font-size:19px;font-weight:900;color:var(--text);margin-bottom:4px}
-.gate-form-sub{font-size:13px;color:var(--muted);margin-bottom:22px;line-height:1.6}
-
-.field{margin-bottom:16px}
-.field-label{font-size:12.5px;font-weight:700;color:var(--emerald);display:block;margin-bottom:6px;display:flex;align-items:center;gap:5px}
-.field-input{
-  width:100%;padding:13px 16px;
-  border:2px solid var(--border);border-radius:14px;
-  font-size:15px;color:var(--text);background:var(--cream);
-  transition:.2s;font-family:'Cairo',sans-serif;
-}
-body.en .field-input{font-family:'Nunito',sans-serif}
-.field-input:focus{outline:none;border-color:var(--emerald-bright);background:#fff;box-shadow:0 0 0 4px rgba(18,160,141,.1)}
-.field-input.bad{border-color:#e53935;background:#fff8f8}
-.field-err{font-size:11px;color:#e53935;margin-top:4px;display:none;padding-right:4px}
-.field-err.show{display:block}
+.g-stars{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.gstar{position:absolute;border-radius:50%;background:#fff;animation:pulse 2s ease-in-out infinite}
+.g-blob{position:absolute;border-radius:50%;pointer-events:none}
+.g-blob1{width:280px;height:280px;top:-80px;right:-80px;background:radial-gradient(circle,rgba(245,200,67,.22),transparent 70%);animation:float 7s ease-in-out infinite}
+.g-blob2{width:200px;height:200px;bottom:200px;left:-60px;background:radial-gradient(circle,rgba(255,255,255,.08),transparent 70%);animation:float 9s ease-in-out infinite reverse}
+.ghdr{padding:20px 20px 0;display:flex;justify-content:center;position:relative;z-index:1}
+.glang{display:flex;gap:4px;background:rgba(255,255,255,.1);border-radius:30px;padding:4px;border:1.5px solid rgba(255,255,255,.18);backdrop-filter:blur(8px)}
+.glbtn{background:none;border:none;padding:7px 18px;font-size:12px;font-weight:700;color:rgba(255,255,255,.7);cursor:pointer;border-radius:24px;transition:.25s;font-family:'Nunito',sans-serif}
+.glbtn.on{background:rgba(255,255,255,.94);color:var(--em);box-shadow:0 2px 12px rgba(0,0,0,.12)}
+.g-hero{flex:0 0 auto;padding:30px 24px 0;text-align:center;position:relative;z-index:1;animation:fadeUp .65s .1s both}
+.g-logo{display:inline-flex;align-items:center;justify-content:center;width:110px;height:110px;background:rgba(255,255,255,.12);border-radius:50%;border:2.5px solid rgba(255,255,255,.28);margin-bottom:18px;animation:float 4s ease-in-out infinite;box-shadow:0 12px 40px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.18);backdrop-filter:blur(8px);overflow:hidden}
+.g-logo img{width:82px;height:82px;object-fit:contain}
+.g-logo-fb{font-size:54px}
+.g-name{font-family:'Playfair Display',serif;font-size:34px;font-weight:900;background:linear-gradient(135deg,#fff 30%,var(--golds) 65%,#fff 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 4s linear infinite;margin-bottom:6px}
+.g-tag{font-size:13px;color:rgba(255,255,255,.78);line-height:1.7}
+.g-pill{display:inline-flex;align-items:center;gap:7px;background:rgba(245,200,67,.18);border:1.5px solid rgba(245,200,67,.5);color:var(--golds);font-size:11.5px;font-weight:700;padding:5px 18px;border-radius:20px;margin-top:12px;font-family:'Nunito',sans-serif;letter-spacing:.5px}
+.g-form{flex:1;margin-top:30px;background:var(--white);border-radius:36px 36px 0 0;padding:30px 22px 50px;box-shadow:0 -16px 60px rgba(0,0,0,.22);position:relative;z-index:1;animation:slideUp .5s .3s both}
+.g-handle{width:44px;height:5px;background:#e0e0e0;border-radius:4px;margin:0 auto 24px}
+.g-ftitle{font-size:21px;font-weight:900;color:var(--text);margin-bottom:5px}
+.g-fsub{font-size:13px;color:var(--muted);margin-bottom:22px;line-height:1.7}
+.fld{margin-bottom:16px}
+.flbl{font-size:12.5px;font-weight:700;color:var(--em);display:flex;align-items:center;gap:6px;margin-bottom:7px}
+.finp{width:100%;padding:14px 16px;border:2px solid var(--brd);border-radius:14px;font-size:15px;color:var(--text);background:var(--cream);transition:.2s;font-family:'Cairo',sans-serif}
+body.en .finp{font-family:'Nunito',sans-serif}
+.finp:focus{outline:none;border-color:var(--em3);background:#fff;box-shadow:0 0 0 4px rgba(18,160,141,.1)}
+.finp.bad{border-color:#e53935;background:#fff8f8}
+.ferr{font-size:11px;color:#e53935;margin-top:5px;display:none;font-weight:600}
+.ferr.show{display:block}
 input[type=tel]{direction:ltr;text-align:left}
+.gbtn{width:100%;padding:17px;margin-top:10px;background:linear-gradient(135deg,var(--em),var(--em3));color:#fff;border:none;border-radius:16px;font-size:16px;font-weight:900;cursor:pointer;font-family:'Cairo',sans-serif;box-shadow:0 8px 30px rgba(11,94,82,.38);transition:.2s;display:flex;align-items:center;justify-content:center;gap:10px;overflow:hidden;position:relative}
+body.en .gbtn{font-family:'Nunito',sans-serif}
+.gbtn:active{transform:scale(.97)}
+.gbtn:disabled{opacity:.6}
+.g-priv{font-size:11px;color:var(--muted);text-align:center;margin-top:14px;line-height:1.7}
 
-.gate-btn{
-  width:100%;padding:16px;margin-top:8px;
-  background:linear-gradient(135deg,var(--emerald) 0%,var(--emerald-mid) 100%);
-  color:#fff;border:none;border-radius:16px;
-  font-size:16px;font-weight:800;cursor:pointer;
-  font-family:'Cairo',sans-serif;
-  box-shadow:0 6px 24px rgba(11,94,82,.35);
-  transition:.2s;letter-spacing:.3px;
-  display:flex;align-items:center;justify-content:center;gap:8px;
-}
-body.en .gate-btn{font-family:'Nunito',sans-serif}
-.gate-btn:active{transform:scale(.97)}
-.gate-btn:disabled{opacity:.6;cursor:not-allowed}
-.privacy{font-size:11px;color:var(--muted);text-align:center;margin-top:14px;line-height:1.7;padding:0 10px}
-
-/* ══════════════════════════════════════════
-   MAIN APP
-══════════════════════════════════════════ */
+/* APP */
 #app{display:none}
 #app.on{display:block}
-
-/* HEADER */
-.hdr{
-  background:linear-gradient(135deg,var(--emerald) 0%,var(--emerald-mid) 100%);
-  padding:12px 16px;
-  display:flex;align-items:center;justify-content:space-between;
-  position:sticky;top:0;z-index:200;
-  box-shadow:0 4px 20px rgba(11,94,82,.25);
-}
-.hdr-left{display:flex;align-items:center;gap:10px}
-.hdr-logo{width:38px;height:38px;flex-shrink:0}
-.hdr-text-title{color:#fff;font-size:15px;font-weight:700;line-height:1.2}
-.hdr-text-sub{color:rgba(255,255,255,.65);font-size:10.5px}
-.hdr-right{display:flex;align-items:center;gap:7px}
-.lang-sw{display:flex;background:rgba(255,255,255,.13);border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.2)}
-.lang-sw button{background:none;border:none;padding:4px 10px;font-size:11px;font-weight:700;color:rgba(255,255,255,.7);cursor:pointer;transition:.18s;font-family:'Nunito',sans-serif}
-.lang-sw button.on{background:rgba(255,255,255,.88);color:var(--emerald)}
-.user-tag{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:4px 10px;color:#fff;font-size:11px;cursor:pointer;white-space:nowrap;max-width:90px;overflow:hidden;text-overflow:ellipsis;transition:.18s}
-.user-tag:hover{background:rgba(255,255,255,.22)}
-
-/* BOTTOM NAV */
-.bnav{
-  position:fixed;bottom:0;left:0;right:0;
-  background:var(--white);
-  border-top:1px solid var(--border);
-  display:grid;grid-template-columns:repeat(4,1fr);
-  z-index:200;
-  box-shadow:0 -6px 30px rgba(11,94,82,.1);
-  padding-bottom:env(safe-area-inset-bottom);
-}
+.hdr{background:linear-gradient(135deg,#053e36,var(--em),var(--em2));padding:13px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 6px 28px rgba(11,94,82,.28)}
+.hdr-l{display:flex;align-items:center;gap:10px}
+.hdr-logo{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;overflow:hidden;border:1.5px solid rgba(255,255,255,.2);flex-shrink:0}
+.hdr-logo img{width:32px;height:32px;object-fit:contain}
+.hdr-tt{color:#fff;font-size:15px;font-weight:700;line-height:1.2}
+.hdr-ts{color:rgba(255,255,255,.6);font-size:10.5px}
+.hdr-r{display:flex;align-items:center;gap:7px}
+.lsw{display:flex;background:rgba(255,255,255,.12);border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.2)}
+.lsw button{background:none;border:none;padding:5px 10px;font-size:11px;font-weight:700;color:rgba(255,255,255,.7);cursor:pointer;transition:.18s;font-family:'Nunito',sans-serif}
+.lsw button.on{background:rgba(255,255,255,.9);color:var(--em)}
+.utag{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:5px 11px;color:#fff;font-size:11px;cursor:pointer;white-space:nowrap;max-width:100px;overflow:hidden;text-overflow:ellipsis;transition:.18s}
+.utag:hover{background:rgba(255,255,255,.22)}
+.bnav{position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid var(--brd);display:grid;grid-template-columns:repeat(4,1fr);z-index:200;box-shadow:0 -6px 30px rgba(11,94,82,.1);padding-bottom:env(safe-area-inset-bottom)}
 .bnav-btn{background:none;border:none;padding:10px 4px 7px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:.18s;position:relative}
-.bnav-btn .bi{font-size:20px;transition:.2s}
-.bnav-btn .bl{font-size:10px;color:var(--muted);font-weight:600;transition:.18s;font-family:'Cairo',sans-serif}
+.bnav-btn .bi{font-size:20px;transition:.25s}
+.bnav-btn .bl{font-size:10px;color:var(--muted);font-weight:600;font-family:'Cairo',sans-serif}
 body.en .bnav-btn .bl{font-family:'Nunito',sans-serif}
-.bnav-btn.on .bl{color:var(--emerald);font-weight:800}
-.bnav-btn.on .bi{transform:scale(1.15)}
-.bnav-btn::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:3px;background:var(--emerald);border-radius:3px 3px 0 0;transition:.2s}
+.bnav-btn.on .bl{color:var(--em);font-weight:800}
+.bnav-btn.on .bi{transform:scale(1.2)}
+.bnav-btn::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:3px;background:linear-gradient(90deg,var(--em),var(--em3));border-radius:3px 3px 0 0;transition:.25s}
 .bnav-btn.on::after{width:32px}
-
-/* PAGES */
 .pg{display:none;padding:0 0 90px;animation:fadeUp .25s ease;min-height:calc(100vh - 64px)}
 .pg.on{display:block}
 
-/* ── HOME PAGE ── */
-.home-hero{
-  background:linear-gradient(160deg,var(--emerald) 0%,var(--emerald-mid) 50%,var(--emerald-bright) 100%);
-  padding:28px 20px 36px;
-  position:relative;overflow:hidden;
-}
-.home-hero-blob1{position:absolute;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.06);top:-50px;left:-50px}
-.home-hero-blob2{position:absolute;width:120px;height:120px;border-radius:50%;background:rgba(245,200,67,.1);bottom:-30px;right:-20px}
-.home-hero-greeting{font-size:13px;color:rgba(255,255,255,.75);margin-bottom:4px;position:relative;z-index:1}
-.home-hero-name{font-size:23px;font-weight:900;color:#fff;position:relative;z-index:1;line-height:1.25}
-.home-hero-sub{font-size:12.5px;color:rgba(255,255,255,.72);margin-top:6px;position:relative;z-index:1;line-height:1.6}
-.home-hero-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(245,200,67,.2);border:1.5px solid rgba(245,200,67,.45);color:var(--gold-shine);font-size:11px;font-weight:700;padding:5px 14px;border-radius:20px;margin-top:12px;font-family:'Nunito',sans-serif;position:relative;z-index:1}
-
-.home-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:16px 16px 0;margin-top:-18px;position:relative;z-index:10}
-.stat-card{
-  background:var(--white);border-radius:16px;padding:14px 10px;text-align:center;
-  box-shadow:var(--shadow-md);border:1px solid var(--border);
-  animation:fadeUp .4s both ease;
-}
-.stat-card:nth-child(2){animation-delay:.1s}
-.stat-card:nth-child(3){animation-delay:.2s}
-.stat-num{font-size:22px;font-weight:900;color:var(--emerald);font-family:'Nunito',sans-serif;display:block}
-.stat-lbl{font-size:10.5px;color:var(--muted);display:block;margin-top:1px;font-weight:600}
-
-.home-section-title{font-size:13px;font-weight:700;color:var(--muted);padding:18px 16px 8px;letter-spacing:.3px}
-.home-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;padding:0 16px}
-.hg-card{
-  background:var(--white);border-radius:var(--rL);padding:18px 14px;
-  text-align:center;cursor:pointer;
-  border:1.5px solid var(--border);
-  transition:.18s;box-shadow:var(--shadow-sm);
-  position:relative;overflow:hidden;
-}
-.hg-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 60%,rgba(11,94,82,.04));opacity:0;transition:.2s}
-.hg-card:hover::before,.hg-card:active::before{opacity:1}
-.hg-card:active{transform:scale(.95)}
-.hg-icon-wrap{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:26px}
-.hg-icon-wrap.teal{background:var(--emerald-xlight)}
-.hg-icon-wrap.gold{background:var(--gold-light)}
-.hg-icon-wrap.blue{background:#e8f0fe}
-.hg-icon-wrap.pink{background:#fce4ec}
-.hg-label{font-size:13px;font-weight:800;color:var(--text);display:block;margin-bottom:3px}
+/* HOME */
+.h-hero{background:linear-gradient(160deg,#053e36,var(--em),var(--em2),#1db39e);padding:28px 20px 40px;position:relative;overflow:hidden}
+.h-orb{position:absolute;border-radius:50%;pointer-events:none}
+.h-orb1{width:220px;height:220px;background:radial-gradient(circle,rgba(245,200,67,.18),transparent 70%);top:-70px;left:-70px}
+.h-orb2{width:160px;height:160px;background:radial-gradient(circle,rgba(255,255,255,.07),transparent 70%);bottom:-40px;right:-40px}
+.h-greet{font-size:13px;color:rgba(255,255,255,.74);margin-bottom:4px;position:relative;z-index:1}
+.h-name{font-size:24px;font-weight:900;color:#fff;position:relative;z-index:1;line-height:1.25}
+.h-sub{font-size:13px;color:rgba(255,255,255,.77);margin-top:7px;position:relative;z-index:1;line-height:1.65}
+.h-pill{display:inline-flex;align-items:center;gap:7px;background:rgba(245,200,67,.2);border:1.5px solid rgba(245,200,67,.5);color:var(--golds);font-size:11.5px;font-weight:700;padding:6px 16px;border-radius:20px;margin-top:14px;font-family:'Nunito',sans-serif;position:relative;z-index:1}
+.h-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:18px 16px 0}
+.hg{background:var(--white);border-radius:var(--rL);padding:20px 14px;text-align:center;cursor:pointer;border:1.5px solid var(--brd);transition:.2s;box-shadow:var(--sh1);position:relative;overflow:hidden}
+.hg:hover{transform:translateY(-3px);box-shadow:var(--sh2)}
+.hg:active{transform:scale(.94)}
+.hg-ic{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:28px}
+.hg-ic.teal{background:linear-gradient(135deg,var(--emxl),rgba(18,160,141,.12))}
+.hg-ic.gold{background:linear-gradient(135deg,#fff8e1,rgba(245,200,67,.15))}
+.hg-ic.blue{background:linear-gradient(135deg,#e8f0fe,rgba(66,133,244,.12))}
+.hg-ic.pink{background:linear-gradient(135deg,#fce4ec,rgba(233,30,99,.12))}
+.hg-lbl{font-size:13.5px;font-weight:800;color:var(--text);display:block;margin-bottom:3px}
 .hg-sub{font-size:11px;color:var(--muted)}
-
-.hours-card{margin:14px 16px 0;background:var(--white);border-radius:var(--rL);padding:18px;box-shadow:var(--shadow-sm);border:1px solid var(--border)}
-.hours-title{font-size:13.5px;font-weight:700;color:var(--emerald);margin-bottom:12px;display:flex;align-items:center;gap:7px}
-.hours-row{display:flex;align-items:center;gap:9px;padding:6px 0;font-size:13px;color:var(--text-mid);border-bottom:1px dashed var(--border)}
+.hours-card{margin:14px 16px 0;background:var(--white);border-radius:var(--rL);padding:20px;box-shadow:var(--sh1);border:1px solid var(--brd)}
+.hours-title{font-size:14px;font-weight:700;color:var(--em);margin-bottom:13px;display:flex;align-items:center;gap:8px}
+.hours-row{display:flex;align-items:center;gap:10px;padding:8px 0;font-size:13.5px;color:var(--textm);border-bottom:1px dashed var(--brd)}
 .hours-row:last-child{border-bottom:none}
-.hours-icon{font-size:15px;flex-shrink:0;width:20px;text-align:center}
 
-/* ── SHARED CARD ── */
-.section-card{background:var(--white);border-radius:var(--rL);padding:18px;box-shadow:var(--shadow-sm);border:1px solid var(--border);margin:0 16px 13px}
-.section-card-title{font-size:13.5px;font-weight:700;color:var(--emerald);margin-bottom:12px;display:flex;align-items:center;gap:7px}
-.pg-title{font-size:19px;font-weight:900;color:var(--text);margin-bottom:3px}
-.pg-sub{font-size:12.5px;color:var(--muted);margin-bottom:14px}
-.pg-header{padding:20px 16px 14px}
+/* SHARED */
+.sc{background:var(--white);border-radius:var(--rL);padding:18px;box-shadow:var(--sh1);border:1px solid var(--brd);margin:0 16px 13px}
+.sc-title{font-size:13.5px;font-weight:700;color:var(--em);margin-bottom:12px;display:flex;align-items:center;gap:7px}
+.pg-hdr{padding:20px 16px 14px}
+.pg-title{font-size:20px;font-weight:900;color:var(--text);margin-bottom:4px}
+.pg-sub{font-size:13px;color:var(--muted);margin-bottom:14px}
 
-/* ── DATE INPUT ── */
-.date-wrap{background:var(--emerald-xlight);border-radius:var(--r);padding:16px;margin:0 16px 14px;border:2px solid var(--emerald-light)}
-.date-wrap label{font-size:13px;font-weight:700;color:var(--emerald);display:block;margin-bottom:7px}
-input[type=date]{width:100%;padding:12px 14px;border:2px solid var(--border);border-radius:12px;font-size:15px;color:var(--text);background:#fff;direction:ltr;text-align:center;font-family:'Nunito',sans-serif;transition:.2s}
-input[type=date]:focus{outline:none;border-color:var(--emerald-bright);box-shadow:0 0 0 3px rgba(18,160,141,.1)}
-.calc-btn{
-  display:block;width:calc(100% - 32px);margin:0 16px;
-  padding:14px;background:linear-gradient(135deg,var(--emerald),var(--emerald-mid));
-  color:#fff;border:none;border-radius:14px;
-  font-size:15px;font-weight:800;cursor:pointer;
-  font-family:'Cairo',sans-serif;
-  box-shadow:0 6px 20px rgba(11,94,82,.3);transition:.18s;
-}
-body.en .calc-btn{font-family:'Nunito',sans-serif}
-.calc-btn:active{transform:scale(.98)}
+/* AGE */
+.date-wrap{background:linear-gradient(135deg,var(--emxl),#fff);border-radius:var(--r);padding:18px;margin:0 16px 14px;border:2px solid var(--eml)}
+.date-wrap label{font-size:13px;font-weight:700;color:var(--em);display:block;margin-bottom:8px}
+input[type=date]{width:100%;padding:13px 16px;border:2px solid var(--brd);border-radius:13px;font-size:15px;color:var(--text);background:#fff;direction:ltr;text-align:center;font-family:'Nunito',sans-serif;transition:.2s}
+input[type=date]:focus{outline:none;border-color:var(--em3);box-shadow:0 0 0 4px rgba(18,160,141,.1)}
+.res-card{border-radius:var(--rXL);overflow:hidden;box-shadow:var(--sh3);animation:popIn .38s cubic-bezier(.34,1.56,.64,1);margin:14px 16px}
+.res-head{padding:24px 20px 20px;color:#fff;text-align:center;position:relative;overflow:hidden}
+.res-head::before{content:'';position:absolute;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.07);top:-70px;right:-70px}
+.res-lbl{font-size:12px;opacity:.85;margin-bottom:6px;display:flex;align-items:center;justify-content:center;gap:5px;position:relative;z-index:1}
+.res-grade{font-size:26px;font-weight:900;position:relative;z-index:1}
+.res-year{font-size:12px;opacity:.75;margin-top:5px;font-family:'Nunito',sans-serif;position:relative;z-index:1}
+.res-body{background:var(--white);padding:18px}
 
-/* ── RESULT ── */
-.res-card{border-radius:var(--rXL);overflow:hidden;box-shadow:var(--shadow-lg);animation:popIn .38s cubic-bezier(.34,1.56,.64,1);margin:14px 16px}
-.res-head{padding:22px 20px 18px;color:#fff;text-align:center;position:relative;overflow:hidden}
-.res-head::before{content:'';position:absolute;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.07);top:-60px;right:-60px}
-.res-head-label{font-size:12px;opacity:.82;margin-bottom:5px;display:flex;align-items:center;justify-content:center;gap:5px}
-.res-grade{font-size:24px;font-weight:900;position:relative;z-index:1}
-.res-year{font-size:11.5px;opacity:.75;margin-top:4px;font-family:'Nunito',sans-serif;position:relative;z-index:1}
-.res-body{background:var(--white);padding:18px;border-top:0}
+/* FEE ROWS — نص وليس جداول */
+.fee-section{margin:14px 0}
+.fee-section-title{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.8px;text-transform:uppercase;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--eml)}
+.fee-line{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px dashed rgba(200,222,218,.6)}
+.fee-line:last-child{border-bottom:none}
+.fee-line-name{font-size:13.5px;color:var(--textm);font-weight:600}
+.fee-line-val{text-align:left;direction:ltr}
+.fee-line-main{font-size:14px;font-weight:800;color:var(--text);font-family:'Nunito',sans-serif;display:block}
+.fee-line-sub{font-size:10px;color:var(--muted);font-family:'Nunito',sans-serif;direction:ltr}
 
-.fee-sec-lbl{font-size:10.5px;font-weight:700;color:var(--muted);letter-spacing:.6px;text-transform:uppercase;margin:14px 0 8px;padding-bottom:5px;border-bottom:1.5px solid var(--emerald-light)}
-.fee-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px dashed var(--border)}
-.fee-row:last-child{border-bottom:none}
-.fee-label{font-size:13px;color:var(--text-mid)}
-.fee-right{text-align:right}
-.fee-total-price{font-size:15px;font-weight:800;color:var(--text);font-family:'Nunito',sans-serif;direction:ltr;display:block}
-.fee-detail{display:flex;gap:5px;justify-content:flex-end;align-items:center;margin-top:2px}
-.fee-base-tag{background:var(--emerald-xlight);border:1px solid var(--emerald-light);color:var(--emerald);font-size:9.5px;font-weight:700;padding:2px 6px;border-radius:5px;font-family:'Nunito',sans-serif}
-.fee-vat-tag{font-size:10px;color:var(--muted);font-family:'Nunito',sans-serif}
-
-.total-band{
-  background:linear-gradient(135deg,var(--emerald),var(--emerald-mid));
-  border-radius:16px;padding:16px;color:#fff;
-  margin:14px 0 12px;text-align:center;
-  box-shadow:0 8px 24px rgba(11,94,82,.28);
-}
-.total-band-lbl{font-size:11px;opacity:.78;margin-bottom:2px}
-.total-band-breakdown{font-size:12px;opacity:.72;font-family:'Nunito',sans-serif;direction:ltr;margin-bottom:2px}
-.total-band-main{font-size:32px;font-weight:900;font-family:'Nunito',sans-serif;direction:ltr;line-height:1.1}
-.total-band-cur{font-size:15px;opacity:.88}
-
-.disc-after{
-  background:linear-gradient(135deg,#fffbea,#fff8d6);
-  border:2px solid var(--gold-warm);border-radius:14px;
-  padding:13px 16px;margin-top:10px;text-align:center;
-  box-shadow:0 4px 16px rgba(184,134,11,.12);
-}
-.disc-save-lbl{font-size:11px;color:var(--gold);font-weight:700;margin-bottom:3px}
-.disc-final-price{font-size:26px;font-weight:900;color:var(--gold);font-family:'Nunito',sans-serif;direction:ltr;line-height:1.15}
-.disc-label{font-size:11px;color:var(--gold);margin-top:2px}
-
-.disc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.dc{
-  background:var(--emerald-xlight);border:2px solid var(--emerald-light);
-  border-radius:12px;padding:11px 8px;cursor:pointer;text-align:center;transition:.18s;
-}
-.dc.on{background:var(--emerald);border-color:var(--emerald);box-shadow:0 4px 16px rgba(11,94,82,.25)}
-.dc-pct{font-size:20px;font-weight:900;color:var(--emerald);font-family:'Nunito',sans-serif;display:block;line-height:1.1}
+.total-band{background:linear-gradient(135deg,#053e36,var(--em),var(--em2));background-size:200% 200%;animation:grad 6s ease infinite;border-radius:18px;padding:18px;color:#fff;margin:14px 0 12px;text-align:center;box-shadow:0 10px 30px rgba(11,94,82,.33)}
+.tb-lbl{font-size:11px;opacity:.8;margin-bottom:3px}
+.tb-brk{font-size:12px;opacity:.75;font-family:'Nunito',sans-serif;direction:ltr;margin-bottom:4px}
+.tb-main{font-size:36px;font-weight:900;font-family:'Nunito',sans-serif;direction:ltr;line-height:1.1}
+.tb-cur{font-size:16px;opacity:.9}
+.disc-after{background:linear-gradient(135deg,#fffbea,#fff3c4);border:2.5px solid var(--goldw);border-radius:16px;padding:15px 18px;margin-top:12px;text-align:center;box-shadow:0 6px 24px rgba(184,134,11,.13)}
+.da-save{font-size:11.5px;color:var(--gold);font-weight:700;margin-bottom:4px}
+.da-price{font-size:30px;font-weight:900;color:var(--gold);font-family:'Nunito',sans-serif;direction:ltr;line-height:1.15}
+.da-lbl{font-size:11px;color:var(--gold);margin-top:3px;opacity:.82}
+.disc-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}
+.dc{background:var(--emxl);border:2px solid var(--eml);border-radius:14px;padding:12px 8px;cursor:pointer;text-align:center;transition:.22s}
+.dc.on{background:linear-gradient(135deg,var(--em),var(--em2));border-color:var(--em);box-shadow:0 6px 20px rgba(11,94,82,.28)}
+.dc-pct{font-size:22px;font-weight:900;color:var(--em);font-family:'Nunito',sans-serif;display:block;line-height:1.1}
 .dc.on .dc-pct{color:#fff}
-.dc-name{font-size:11px;color:var(--muted);display:block;margin-top:2px;font-weight:600;line-height:1.3}
-.dc.on .dc-name{color:rgba(255,255,255,.85)}
-.dc:active{transform:scale(.95)}
+.dc-name{font-size:11px;color:var(--muted);display:block;margin-top:3px;font-weight:600;line-height:1.35}
+.dc.on .dc-name{color:rgba(255,255,255,.9)}
+.dc:active{transform:scale(.93)}
+.syl-box{background:linear-gradient(135deg,var(--emxl),#fff);border-radius:14px;padding:15px 16px;margin-top:14px;border:1.5px solid var(--eml)}
+.syl-title{font-size:12.5px;font-weight:700;color:var(--em);margin-bottom:9px;display:flex;align-items:center;gap:6px}
+.syl-item{font-size:12.5px;color:var(--textm);padding:3px 0;display:flex;gap:8px;align-items:baseline;line-height:1.55}
+.syl-dot{width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,var(--em),var(--em3));flex-shrink:0;margin-top:6px}
+.warn-box{background:#fffde7;border:2px solid #ffe082;border-radius:13px;padding:12px 14px;font-size:12.5px;color:#7a5c00;line-height:1.7;margin-top:10px}
+.err-box{background:var(--rubyl);border:2px solid rgba(192,57,43,.25);border-radius:13px;padding:12px 14px;font-size:13px;color:var(--ruby);margin:14px 16px}
 
-.syl-box{background:var(--emerald-xlight);border-radius:12px;padding:14px 15px;margin-top:12px;border:1.5px solid var(--emerald-light)}
-.syl-title{font-size:12px;font-weight:700;color:var(--emerald);margin-bottom:8px;display:flex;align-items:center;gap:6px}
-.syl-item{font-size:12.5px;color:var(--text-mid);padding:3px 0;display:flex;gap:7px;align-items:baseline;line-height:1.5}
-.syl-dot{width:6px;height:6px;border-radius:50%;background:var(--emerald-bright);flex-shrink:0;margin-top:5px}
-
-.warn-box{background:#fffde7;border:2px solid #ffe082;border-radius:12px;padding:11px 13px;font-size:12px;color:#7a5c00;line-height:1.7;margin-top:10px}
-.err-box{background:#ffebee;border:2px solid #ef9a9a;border-radius:12px;padding:11px 13px;font-size:13px;color:#c62828;margin:14px 16px}
-
-/* ── DOCS ── */
-.nat-toggle{display:grid;grid-template-columns:1fr 1fr;background:var(--emerald-xlight);border-radius:14px;padding:4px;margin:0 16px 14px;border:2px solid var(--emerald-light)}
-.nat-btn{background:none;border:none;padding:10px;border-radius:11px;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;transition:.18s;font-family:'Cairo',sans-serif}
+/* DOCS */
+.nat-toggle{display:grid;grid-template-columns:1fr 1fr;background:var(--emxl);border-radius:15px;padding:4px;margin:0 16px 14px;border:2px solid var(--eml)}
+.nat-btn{background:none;border:none;padding:11px;border-radius:12px;font-size:13.5px;font-weight:700;color:var(--muted);cursor:pointer;transition:.2s;font-family:'Cairo',sans-serif}
 body.en .nat-btn{font-family:'Nunito',sans-serif}
-.nat-btn.on{background:var(--emerald);color:#fff;box-shadow:0 4px 14px rgba(11,94,82,.25)}
-
-.prog-wrap{background:var(--white);border-radius:var(--r);padding:14px 16px;margin:0 16px 14px;border:1.5px solid var(--border);box-shadow:var(--shadow-sm)}
-.prog-info{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.prog-txt{font-size:13px;font-weight:700;color:var(--emerald)}
-.prog-pct{font-size:13px;font-weight:800;color:var(--emerald);font-family:'Nunito',sans-serif}
-.prog-bar{background:var(--emerald-light);border-radius:20px;height:8px;overflow:hidden}
-.prog-fill{background:linear-gradient(90deg,var(--emerald),var(--emerald-bright));height:100%;border-radius:20px;transition:.5s cubic-bezier(.34,1.56,.64,1)}
-.prog-hint{font-size:11px;color:var(--muted);margin-top:5px}
-
-.doc-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:.15s}
+.nat-btn.on{background:linear-gradient(135deg,var(--em),var(--em2));color:#fff;box-shadow:0 5px 18px rgba(11,94,82,.28)}
+.prog-wrap{background:var(--white);border-radius:var(--r);padding:15px 16px;margin:0 16px 14px;border:1.5px solid var(--brd);box-shadow:var(--sh1)}
+.prog-info{display:flex;justify-content:space-between;margin-bottom:9px}
+.prog-txt{font-size:13px;font-weight:700;color:var(--em)}
+.prog-pct{font-size:13px;font-weight:800;color:var(--em);font-family:'Nunito',sans-serif}
+.prog-bar{background:var(--eml);border-radius:20px;height:9px;overflow:hidden}
+.prog-fill{background:linear-gradient(90deg,var(--em),var(--em3));height:100%;border-radius:20px;transition:.5s cubic-bezier(.34,1.56,.64,1)}
+.prog-hint{font-size:11px;color:var(--muted);margin-top:6px}
+.doc-item{display:flex;align-items:flex-start;gap:11px;padding:11px 0;border-bottom:1px solid var(--brd);cursor:pointer;transition:.15s}
 .doc-item:last-child{border-bottom:none}
-.doc-item:active{background:var(--emerald-xlight);margin:0 -18px;padding:10px 18px;border-radius:10px}
-.doc-chk{width:23px;height:23px;border-radius:7px;border:2px solid var(--border);flex-shrink:0;margin-top:1px;transition:.2s;display:flex;align-items:center;justify-content:center}
-.doc-chk.on{background:var(--emerald);border-color:var(--emerald);box-shadow:0 3px 10px rgba(11,94,82,.25)}
-.ck-mark{display:none;color:#fff;font-size:13px;font-weight:900}
-.doc-chk.on .ck-mark{display:block}
+.doc-item:active{background:var(--emxl);margin:0 -18px;padding:11px 18px;border-radius:12px}
+.doc-chk{width:24px;height:24px;border-radius:8px;border:2px solid var(--brd);flex-shrink:0;margin-top:2px;transition:.25s;display:flex;align-items:center;justify-content:center}
+.doc-chk.on{background:linear-gradient(135deg,var(--em),var(--em3));border-color:transparent;box-shadow:0 4px 12px rgba(11,94,82,.28)}
+.ck{display:none;color:#fff;font-size:13px;font-weight:900}
+.doc-chk.on .ck{display:block}
 .doc-txt{font-size:13.5px;color:var(--text);font-weight:600}
-.doc-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.doc-sub{font-size:11.5px;color:var(--muted);margin-top:2px}
 
-/* ── CHAT ── */
+/* CHAT */
 .chat-wrap{display:flex;flex-direction:column;height:calc(100dvh - 150px);min-height:360px;padding:0 14px}
 .quick-qs{display:flex;flex-wrap:wrap;gap:7px;padding:12px 0 8px}
-.qq{
-  background:var(--white);border:1.5px solid var(--border);
-  color:var(--text-mid);font-size:12px;padding:7px 13px;border-radius:20px;
-  cursor:pointer;font-weight:600;transition:.17s;
-  font-family:'Cairo',sans-serif;box-shadow:var(--shadow-sm);
-}
+.qq{background:var(--white);border:1.5px solid var(--brd);color:var(--textm);font-size:12.5px;padding:8px 14px;border-radius:22px;cursor:pointer;font-weight:700;transition:.2s;font-family:'Cairo',sans-serif;box-shadow:var(--sh1)}
 body.en .qq{font-family:'Nunito',sans-serif}
-.qq:active{background:var(--emerald);color:#fff;border-color:var(--emerald)}
-.chat-msgs{flex:1;overflow-y:auto;padding:4px 0;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
+.qq:hover{border-color:var(--em);color:var(--em);background:var(--emxl)}
+.qq:active{background:var(--em);color:#fff;border-color:var(--em);transform:scale(.95)}
+.chat-msgs{flex:1;overflow-y:auto;padding:4px 0;display:flex;flex-direction:column;gap:11px;scroll-behavior:smooth}
 .chat-msgs::-webkit-scrollbar{width:3px}
-.chat-msgs::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
-.msg-wrap{animation:fadeUp .22s ease}
-.msg-lbl{font-size:10.5px;font-weight:700;color:var(--muted);margin-bottom:3px}
-.msg-lbl.bot-l{color:var(--emerald)}
-.msg{max-width:88%;padding:11px 14px;border-radius:18px;font-size:13.5px;line-height:1.7}
-.msg.bot{background:var(--white);border:1.5px solid var(--border);border-end-start-radius:4px;box-shadow:var(--shadow-sm)}
-body.en .msg.bot{border-end-start-radius:18px;border-end-end-radius:4px}
-.msg.user{background:linear-gradient(135deg,var(--emerald),var(--emerald-mid));color:#fff;border-end-end-radius:4px;align-self:flex-end}
-.typing-row{display:flex;gap:5px;align-items:center;padding:3px 0}
+.chat-msgs::-webkit-scrollbar-thumb{background:var(--brd);border-radius:3px}
+.mwrap{animation:fadeUp .22s ease}
+.mlbl{font-size:10.5px;font-weight:700;color:var(--muted);margin-bottom:4px}
+.mlbl.bot{color:var(--em)}
+.msg{max-width:90%;padding:12px 15px;border-radius:20px;font-size:13.5px;line-height:1.75}
+.msg.bot-m{background:var(--white);border:1.5px solid var(--brd);border-end-start-radius:4px;box-shadow:var(--sh1)}
+body.en .msg.bot-m{border-end-start-radius:20px;border-end-end-radius:4px}
+.msg.user-m{background:linear-gradient(135deg,var(--em),var(--em2));color:#fff;border-end-end-radius:4px;align-self:flex-end}
+.tdots{display:flex;gap:5px;align-items:center;padding:4px 0}
 .td{width:8px;height:8px;background:var(--muted);border-radius:50%;animation:boing .8s infinite}
 .td:nth-child(2){animation-delay:.15s}.td:nth-child(3){animation-delay:.3s}
-.chat-input-row{display:flex;gap:8px;padding:10px 0 8px;border-top:1.5px solid var(--border);margin-top:6px}
-.chat-in{
-  flex:1;padding:11px 14px;border:2px solid var(--border);border-radius:14px;
-  font-size:14px;color:var(--text);background:var(--cream);
-  resize:none;font-family:'Cairo',sans-serif;transition:.2s;
-}
+.chat-inp-row{display:flex;gap:9px;padding:10px 0 9px;border-top:1.5px solid var(--brd);margin-top:7px}
+.chat-in{flex:1;padding:12px 15px;border:2px solid var(--brd);border-radius:15px;font-size:14px;color:var(--text);background:var(--cream);resize:none;font-family:'Cairo',sans-serif;transition:.2s}
 body.en .chat-in{font-family:'Nunito',sans-serif;direction:ltr}
-.chat-in:focus{outline:none;border-color:var(--emerald-bright);background:#fff}
-.send-btn{
-  width:44px;height:44px;border-radius:14px;
-  background:linear-gradient(135deg,var(--emerald),var(--emerald-mid));
-  color:#fff;border:none;cursor:pointer;font-size:18px;
-  flex-shrink:0;display:flex;align-items:center;justify-content:center;
-  transition:.18s;box-shadow:0 4px 14px rgba(11,94,82,.3);
-}
-.send-btn:active{transform:scale(.9)}
+.chat-in:focus{outline:none;border-color:var(--em3);background:#fff;box-shadow:0 0 0 3px rgba(18,160,141,.1)}
+.send-btn{width:46px;height:46px;border-radius:15px;background:linear-gradient(135deg,var(--em),var(--em3));color:#fff;border:none;cursor:pointer;font-size:18px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.2s;box-shadow:0 6px 18px rgba(11,94,82,.33)}
+.send-btn:active{transform:scale(.88)}
 
-/* ── QUEUE ── */
-.queue-hero{
-  background:linear-gradient(135deg,var(--gold) 0%,var(--gold-bright) 100%);
-  margin:16px;border-radius:var(--rXL);padding:24px;text-align:center;
-  box-shadow:0 8px 30px rgba(184,134,11,.25);position:relative;overflow:hidden;
-}
-.queue-hero::before{content:'';position:absolute;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.08);top:-40px;right:-40px}
-.queue-serving-lbl{font-size:12px;color:rgba(255,255,255,.8);margin-bottom:4px;position:relative;z-index:1}
-.queue-num{font-size:60px;font-weight:900;color:#fff;font-family:'Nunito',sans-serif;line-height:1;position:relative;z-index:1}
-.ticket-btn{
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  width:calc(100% - 32px);margin:0 16px;
-  padding:16px;background:linear-gradient(135deg,var(--gold),var(--gold-bright));
-  color:#fff;border:none;border-radius:16px;
-  font-size:16px;font-weight:800;cursor:pointer;
-  font-family:'Cairo',sans-serif;
-  box-shadow:0 6px 24px rgba(184,134,11,.3);transition:.18s;
-}
+/* QUEUE */
+.q-hero{background:linear-gradient(135deg,#7a5800,var(--gold),var(--gold2));background-size:200% 200%;animation:grad 5s ease infinite;margin:16px;border-radius:var(--rXL);padding:26px;text-align:center;box-shadow:0 10px 40px rgba(184,134,11,.28);position:relative;overflow:hidden}
+.q-hero::before{content:'';position:absolute;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.1);top:-50px;right:-50px}
+.q-slbl{font-size:12px;color:rgba(255,255,255,.85);margin-bottom:5px;position:relative;z-index:1}
+.q-num{font-size:72px;font-weight:900;color:#fff;font-family:'Nunito',sans-serif;line-height:1;position:relative;z-index:1;text-shadow:0 4px 16px rgba(0,0,0,.15)}
+
+/* Admin Call Panel */
+.q-admin-panel{margin:0 16px 14px;background:linear-gradient(135deg,#fff8e1,#fff);border-radius:var(--rL);padding:18px;border:2px solid rgba(245,200,67,.4);box-shadow:var(--sh1)}
+.q-admin-title{font-size:13px;font-weight:700;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.q-call-row{display:flex;gap:8px;align-items:center}
+.q-call-inp{flex:1;padding:12px 14px;border:2px solid rgba(245,200,67,.5);border-radius:13px;font-size:20px;font-weight:800;text-align:center;font-family:'Nunito',sans-serif;background:#fff;color:var(--text);transition:.2s}
+.q-call-inp:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(245,200,67,.2)}
+.q-call-btn{padding:12px 20px;background:linear-gradient(135deg,#7a5800,var(--gold));color:#fff;border:none;border-radius:13px;font-size:14px;font-weight:800;cursor:pointer;font-family:'Cairo',sans-serif;box-shadow:0 4px 16px rgba(184,134,11,.3);white-space:nowrap;transition:.2s}
+body.en .q-call-btn{font-family:'Nunito',sans-serif}
+.q-call-btn:active{transform:scale(.95)}
+.q-admin-hint{font-size:11px;color:var(--muted);margin-top:8px}
+.q-locked-msg{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted);font-weight:600}
+
+.ticket-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:calc(100% - 32px);margin:0 16px;padding:17px;background:linear-gradient(135deg,#7a5800,var(--gold),var(--gold2));color:#fff;border:none;border-radius:18px;font-size:16px;font-weight:900;cursor:pointer;font-family:'Cairo',sans-serif;box-shadow:0 8px 30px rgba(184,134,11,.33);transition:.2s}
 body.en .ticket-btn{font-family:'Nunito',sans-serif}
-.ticket-btn:active{transform:scale(.97)}
-.ticket-result{margin:14px 16px 0;border-radius:var(--rXL);overflow:hidden;animation:popIn .38s cubic-bezier(.34,1.56,.64,1)}
-.ticket-top{background:linear-gradient(135deg,var(--gold),var(--gold-bright));padding:22px;text-align:center;color:#fff}
-.ticket-num-big{font-size:64px;font-weight:900;font-family:'Nunito',sans-serif;line-height:1}
-.ticket-bottom{background:var(--white);padding:16px;border:1px solid var(--border);border-top:0}
-.print-btn{width:100%;padding:11px;border:2px solid var(--emerald-light);border-radius:12px;background:var(--emerald-xlight);color:var(--emerald);font-size:13px;font-weight:700;cursor:pointer;font-family:'Cairo',sans-serif;transition:.18s}
+.ticket-btn:active{transform:scale(.96)}
+.tkt-result{margin:14px 16px 0;border-radius:var(--rXL);overflow:hidden;animation:popIn .4s cubic-bezier(.34,1.56,.64,1);box-shadow:var(--sh3)}
+.tkt-top{background:linear-gradient(135deg,#7a5800,var(--gold),var(--gold2));padding:26px;text-align:center;color:#fff}
+.tkt-num{font-size:76px;font-weight:900;font-family:'Nunito',sans-serif;line-height:1;text-shadow:0 4px 20px rgba(0,0,0,.14)}
+.tkt-bot{background:var(--white);padding:17px;border:1px solid var(--brd);border-top:0}
+.print-btn{width:100%;padding:12px;border:2px solid var(--eml);border-radius:13px;background:var(--emxl);color:var(--em);font-size:13.5px;font-weight:700;cursor:pointer;font-family:'Cairo',sans-serif;transition:.18s}
 body.en .print-btn{font-family:'Nunito',sans-serif}
-.info-row{display:flex;align-items:flex-start;gap:9px;padding:9px 0;font-size:13px;color:var(--text-mid);border-bottom:1px dashed var(--border)}
+.print-btn:active{background:var(--em);color:#fff}
+.info-row{display:flex;align-items:flex-start;gap:10px;padding:10px 0;font-size:13.5px;color:var(--textm);border-bottom:1px dashed var(--brd)}
 .info-row:last-child{border-bottom:none}
-.info-icon{font-size:17px;flex-shrink:0;width:22px;text-align:center;margin-top:1px}
 
-/* ── ADMIN MODAL ── */
-.admin-code-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
-.admin-code-box{background:#fff;border-radius:22px;width:100%;max-width:320px;padding:26px;text-align:center;box-shadow:0 24px 70px rgba(0,0,0,.3);animation:popIn .3s ease}
-.admin-code-icon{font-size:36px;margin-bottom:10px}
-.admin-code-title{font-size:17px;font-weight:800;color:var(--text);margin-bottom:5px}
-.admin-code-sub{font-size:12.5px;color:var(--muted);margin-bottom:18px}
-.code-input{width:100%;padding:13px;border:2px solid var(--border);border-radius:12px;font-size:22px;text-align:center;letter-spacing:8px;font-family:'Nunito',sans-serif;transition:.2s;margin-bottom:8px}
-.code-input:focus{outline:none;border-color:var(--emerald-bright);box-shadow:0 0 0 3px rgba(18,160,141,.1)}
-.code-err{font-size:11.5px;color:#e53935;display:none;margin-bottom:8px}
+/* NOTIFICATION BANNER */
+.notif{position:fixed;top:72px;left:16px;right:16px;z-index:9000;background:linear-gradient(135deg,#7a5800,var(--gold));color:#fff;border-radius:18px;padding:16px 18px;box-shadow:0 12px 40px rgba(184,134,11,.45);display:flex;align-items:flex-start;gap:12px;animation:notifIn .45s cubic-bezier(.34,1.56,.64,1);cursor:pointer}
+.notif-ic{font-size:32px;flex-shrink:0;animation:ring 1.2s ease infinite}
+.notif-body{flex:1}
+.notif-title{font-size:15px;font-weight:900;margin-bottom:3px}
+.notif-sub{font-size:12.5px;opacity:.9;line-height:1.5}
+
+/* ADMIN MODAL */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px)}
+.abox{background:#fff;border-radius:24px;width:100%;max-width:340px;padding:28px;text-align:center;box-shadow:0 28px 80px rgba(0,0,0,.33);animation:popIn .32s cubic-bezier(.34,1.56,.64,1)}
+.abox-icon{font-size:40px;margin-bottom:12px}
+.abox-title{font-size:18px;font-weight:800;color:var(--text);margin-bottom:6px}
+.abox-sub{font-size:12.5px;color:var(--muted);margin-bottom:20px}
+.code-inp{width:100%;padding:14px;border:2px solid var(--brd);border-radius:13px;font-size:24px;text-align:center;letter-spacing:10px;font-family:'Nunito',sans-serif;transition:.2s;margin-bottom:10px}
+.code-inp:focus{outline:none;border-color:var(--em3);box-shadow:0 0 0 4px rgba(18,160,141,.1)}
+.code-err{font-size:12px;color:#e53935;display:none;margin-bottom:10px;font-weight:600}
 .code-err.show{display:block}
-.code-btns{display:flex;gap:8px}
-.code-cancel{flex:1;padding:11px;border:2px solid var(--border);border-radius:11px;background:#fff;font-size:14px;cursor:pointer;font-family:'Cairo',sans-serif;color:var(--muted)}
+.code-btns{display:flex;gap:9px}
+.code-cancel{flex:1;padding:12px;border:2px solid var(--brd);border-radius:12px;background:#fff;font-size:14px;cursor:pointer;font-family:'Cairo',sans-serif;color:var(--muted)}
 body.en .code-cancel{font-family:'Nunito',sans-serif}
-.code-go{flex:2;padding:11px;border:none;border-radius:11px;background:var(--emerald);color:#fff;font-size:14px;font-weight:800;cursor:pointer;font-family:'Cairo',sans-serif}
+.code-go{flex:2;padding:12px;border:none;border-radius:12px;background:linear-gradient(135deg,var(--em),var(--em2));color:#fff;font-size:14px;font-weight:800;cursor:pointer;font-family:'Cairo',sans-serif}
 body.en .code-go{font-family:'Nunito',sans-serif}
+.code-go:active{transform:scale(.96)}
+
+/* TOAST */
+.toast{position:fixed;top:80px;left:50%;transform:translateX(-50%) translateY(-20px);background:var(--em);color:#fff;padding:11px 22px;border-radius:22px;font-size:13px;font-weight:700;z-index:9999;box-shadow:0 8px 30px rgba(11,94,82,.4);opacity:0;transition:.35s;pointer-events:none;font-family:'Cairo',sans-serif;white-space:nowrap}
+body.en .toast{font-family:'Nunito',sans-serif}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.gold-t{background:linear-gradient(135deg,#7a5800,var(--gold))}
+.ldot{display:inline-block;width:8px;height:8px;border-radius:50%;background:currentColor;animation:pulse .9s ease-in-out infinite}
+.ldot:nth-child(2){animation-delay:.2s}.ldot:nth-child(3){animation-delay:.4s}
 </style>
 </head>
 <body class="ar">
 
-<!-- ═══════════════════════════════════════
-     GATE SCREEN
-═══════════════════════════════════════ -->
+<!-- GATE -->
 <div id="gate">
-  <div class="gate-blob gate-blob-1"></div>
-  <div class="gate-blob gate-blob-2"></div>
-  <div class="gate-blob gate-blob-3"></div>
-
-  <div class="gate-header">
-    <div class="gate-lang-row">
-      <button class="g-lang-btn on" onclick="gateLang('ar')">عربي</button>
-      <button class="g-lang-btn" onclick="gateLang('en')">English</button>
+  <div class="g-stars" id="g-stars"></div>
+  <div class="g-blob g-blob1"></div><div class="g-blob g-blob2"></div>
+  <div class="ghdr">
+    <div class="glang">
+      <button class="glbtn on" onclick="gateLang('ar')">عربي</button>
+      <button class="glbtn" onclick="gateLang('en')">English</button>
     </div>
   </div>
-
-  <div class="gate-hero">
-    <div class="gate-logo-wrap">
-      <!-- Kids Gate Logo SVG -->
-      <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="4" y="28" width="48" height="24" rx="3" fill="#f5c843" opacity=".9"/>
-        <rect x="10" y="18" width="8" height="34" rx="2" fill="#fff" opacity=".95"/>
-        <rect x="38" y="18" width="8" height="34" rx="2" fill="#fff" opacity=".95"/>
-        <rect x="4" y="24" width="48" height="6" rx="2" fill="#f5c843"/>
-        <path d="M14 18 L28 6 L42 18" fill="#fff" opacity=".9"/>
-        <rect x="22" y="34" width="12" height="18" rx="6" fill="#0b5e52" opacity=".85"/>
-        <circle cx="28" cy="25" r="4" fill="#0b5e52" opacity=".7"/>
-        <rect x="8" y="14" width="4" height="8" rx="2" fill="#fff" opacity=".7"/>
-        <rect x="44" y="14" width="4" height="8" rx="2" fill="#fff" opacity=".7"/>
-      </svg>
+  <div class="g-hero">
+    <div class="g-logo">
+      <!-- ضع رابط شعارك هنا بدل LOGO_URL_HERE -->
+      <img src="LOGO_URL_HERE" alt="Kids Gate" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=g-logo-fb>🏫</span>'">
     </div>
-    <div class="gate-school-name">Kids Gate</div>
-    <div class="gate-tagline" id="gt-sub">روضة أطفال وطفولة مبكرة<br>مساعد القبول الذكي</div>
-    <span class="gate-pill" id="gt-pill">✦ العام الدراسي 2026 – 2027</span>
+    <div class="g-name">Kids Gate</div>
+    <div class="g-tag" id="gt-sub">روضة أطفال وطفولة مبكرة<br>مساعد القبول الذكي</div>
+    <span class="g-pill"><span>✦</span><span id="gt-pill">العام الدراسي 2026 – 2027</span></span>
   </div>
-
-  <div class="gate-form-wrap">
-    <div class="gate-form-handle"></div>
-    <div class="gate-form-title" id="gf-title">أهلاً بك 👋</div>
-    <div class="gate-form-sub" id="gf-sub">سجّل بياناتك للمتابعة. سنتواصل معك إذا احتجت مساعدة.</div>
-
-    <div class="field">
-      <label class="field-label" id="fl-name"><span>👤</span><span id="fl-name-t">اسم ولي الأمر</span></label>
-      <input class="field-input" type="text" id="inp-name" placeholder="مثال: محمد عبدالله">
-      <div class="field-err" id="err-name">الرجاء إدخال الاسم</div>
+  <div class="g-form">
+    <div class="g-handle"></div>
+    <div class="g-ftitle" id="gf-title">أهلاً بك 👋</div>
+    <div class="g-fsub" id="gf-sub">سجّل بياناتك للمتابعة.</div>
+    <div class="fld">
+      <label class="flbl"><span>👤</span><span id="fl-name-t">اسم ولي الأمر</span></label>
+      <input class="finp" type="text" id="inp-name" placeholder="مثال: محمد عبدالله">
+      <div class="ferr" id="err-name">الرجاء إدخال الاسم</div>
     </div>
-    <div class="field">
-      <label class="field-label" id="fl-phone"><span>📱</span><span id="fl-phone-t">رقم الجوال</span></label>
-      <input class="field-input" type="tel" id="inp-phone" placeholder="05XXXXXXXX" maxlength="13">
-      <div class="field-err" id="err-phone">الرجاء إدخال رقم جوال صحيح</div>
+    <div class="fld">
+      <label class="flbl"><span>📱</span><span id="fl-phone-t">رقم الجوال</span></label>
+      <input class="finp" type="tel" id="inp-phone" placeholder="05XXXXXXXX" maxlength="13">
+      <div class="ferr" id="err-phone">الرجاء إدخال رقم جوال صحيح</div>
     </div>
-    <div class="field">
-      <label class="field-label"><span>👶</span><span id="fl-child-t">اسم الطفل</span> <span style="font-size:11px;color:var(--muted);font-weight:400" id="fl-opt">(اختياري)</span></label>
-      <input class="field-input" type="text" id="inp-child" placeholder="اسم الطفل">
+    <div class="fld">
+      <label class="flbl"><span>👶</span><span id="fl-child-t">اسم الطفل</span><span style="font-size:11px;color:var(--muted);font-weight:400;margin-right:4px" id="fl-opt">(اختياري)</span></label>
+      <input class="finp" type="text" id="inp-child" placeholder="اسم الطفل">
     </div>
-
-    <button class="gate-btn" id="gate-btn" onclick="submitGate()">
-      <span id="gate-btn-txt">متابعة</span><span>←</span>
+    <button class="gbtn" id="gate-btn" onclick="submitGate()">
+      <span id="gbtn-txt">متابعة</span><span id="gbtn-arr">←</span>
     </button>
-    <div class="privacy" id="priv-txt">🔒 بياناتك محفوظة لدى إدارة Kids Gate فقط</div>
+    <div class="g-priv" id="priv-txt">🔒 بياناتك محفوظة لدى إدارة Kids Gate فقط</div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     MAIN APP
-═══════════════════════════════════════ -->
+<!-- APP -->
 <div id="app">
   <div class="hdr">
-    <div class="hdr-left">
-      <svg class="hdr-logo" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="4" y="28" width="48" height="24" rx="3" fill="#f5c843" opacity=".9"/>
-        <rect x="10" y="18" width="8" height="34" rx="2" fill="#fff" opacity=".95"/>
-        <rect x="38" y="18" width="8" height="34" rx="2" fill="#fff" opacity=".95"/>
-        <rect x="4" y="24" width="48" height="6" rx="2" fill="#f5c843"/>
-        <path d="M14 18 L28 6 L42 18" fill="#fff" opacity=".9"/>
-        <rect x="22" y="34" width="12" height="18" rx="6" fill="#0b5e52" opacity=".85"/>
-        <circle cx="28" cy="25" r="4" fill="#0b5e52" opacity=".7"/>
-      </svg>
+    <div class="hdr-l">
+      <div class="hdr-logo">
+        <img src="LOGO_URL_HERE" alt="Kids Gate" onerror="this.parentNode.innerHTML='🏫'" style="width:32px;height:32px;object-fit:contain">
+      </div>
       <div>
-        <div class="hdr-text-title" id="h-title">مساعد القبول الذكي</div>
-        <div class="hdr-text-sub">Kids Gate • 2026–2027</div>
+        <div class="hdr-tt" id="h-title">مساعد القبول الذكي</div>
+        <div class="hdr-ts">Kids Gate • 2026–2027</div>
       </div>
     </div>
-    <div class="hdr-right">
-      <div class="lang-sw">
-        <button class="on" onclick="setLang('ar')">عربي</button>
-        <button onclick="setLang('en')">EN</button>
-      </div>
-      <div class="user-tag" id="user-tag" onclick="openAdminCode()">👤 —</div>
+    <div class="hdr-r">
+      <div class="lsw"><button class="on" onclick="setLang('ar')">عربي</button><button onclick="setLang('en')">EN</button></div>
+      <div class="utag" id="utag" onclick="openAdmin()">👤 —</div>
     </div>
   </div>
 
   <!-- HOME -->
   <div class="pg on" id="pg-home">
-    <div class="home-hero">
-      <div class="home-hero-blob1"></div><div class="home-hero-blob2"></div>
-      <div class="home-hero-greeting" id="hero-greet">أهلاً،</div>
-      <div class="home-hero-name" id="hero-name">تفضل باستكشاف معلومات القبول</div>
-      <div class="home-hero-sub" id="hero-sub">كل ما تحتاجه عن المراحل والرسوم والأوراق في مكان واحد</div>
-      <span class="home-hero-pill"><span>✦</span><span>2026 – 2027</span></span>
+    <div class="h-hero">
+      <div class="h-orb h-orb1"></div><div class="h-orb h-orb2"></div>
+      <div class="h-greet" id="h-greet">أهلاً،</div>
+      <div class="h-name" id="h-name">تفضل باستكشاف معلومات القبول</div>
+      <div class="h-sub" id="h-sub">كل ما تحتاجه عن المراحل والرسوم والأوراق في مكان واحد</div>
+      <span class="h-pill"><span>✦</span><span>2026 – 2027</span></span>
     </div>
-
-    <div class="home-stats">
-      <div class="stat-card"><span class="stat-num">4</span><span class="stat-lbl" id="sl1">مراحل</span></div>
-      <div class="stat-card"><span class="stat-num">100%</span><span class="stat-lbl" id="sl2">مجاني</span></div>
-      <div class="stat-card"><span class="stat-num">24/7</span><span class="stat-lbl" id="sl3">مساعد ذكي</span></div>
+    <div class="h-grid">
+      <div class="hg" onclick="switchPg('age')"><div class="hg-ic teal">🎂</div><span class="hg-lbl" id="hg1l">تحديد المرحلة</span><span class="hg-sub" id="hg1s">أدخل تاريخ الميلاد</span></div>
+      <div class="hg" onclick="switchPg('docs')"><div class="hg-ic gold">📋</div><span class="hg-lbl" id="hg2l">الأوراق المطلوبة</span><span class="hg-sub" id="hg2s">قائمة التحقق</span></div>
+      <div class="hg" onclick="switchPg('chat')"><div class="hg-ic blue">🤖</div><span class="hg-lbl" id="hg3l">مساعد ذكي</span><span class="hg-sub" id="hg3s">اسأل أي سؤال</span></div>
+      <div class="hg" onclick="switchPg('queue')"><div class="hg-ic pink">🎫</div><span class="hg-lbl" id="hg4l">رقم الانتظار</span><span class="hg-sub" id="hg4s">احجز دورك</span></div>
     </div>
-
-    <div class="home-section-title" id="hs-title">الخدمات المتاحة</div>
-    <div class="home-grid">
-      <div class="hg-card" onclick="switchPg('age')">
-        <div class="hg-icon-wrap teal">🎂</div>
-        <span class="hg-label" id="hg1l">تحديد المرحلة</span>
-        <span class="hg-sub" id="hg1s">أدخل تاريخ الميلاد</span>
-      </div>
-      <div class="hg-card" onclick="switchPg('docs')">
-        <div class="hg-icon-wrap gold">📋</div>
-        <span class="hg-label" id="hg2l">الأوراق المطلوبة</span>
-        <span class="hg-sub" id="hg2s">قائمة التحقق</span>
-      </div>
-      <div class="hg-card" onclick="switchPg('chat')">
-        <div class="hg-icon-wrap blue">🤖</div>
-        <span class="hg-label" id="hg3l">مساعد ذكي</span>
-        <span class="hg-sub" id="hg3s">اسأل أي سؤال</span>
-      </div>
-      <div class="hg-card" onclick="switchPg('queue')">
-        <div class="hg-icon-wrap pink">🎫</div>
-        <span class="hg-label" id="hg4l">رقم الانتظار</span>
-        <span class="hg-sub" id="hg4s">احجز دورك</span>
-      </div>
-    </div>
-
     <div class="hours-card">
       <div class="hours-title" id="hours-title">⏰ أوقات الاستقبال</div>
-      <div class="hours-row"><span class="hours-icon">📅</span><span id="hr1">الأحد – الخميس</span></div>
-      <div class="hours-row"><span class="hours-icon">🕗</span><span id="hr2">7:30 صباحاً – 3:00 مساءً</span></div>
-      <div class="hours-row"><span class="hours-icon">📍</span><span id="hr3">مبنى الإدارة – الدور الأول</span></div>
+      <div class="hours-row"><span style="font-size:16px;width:22px;text-align:center">📅</span><span id="hr1">الأحد – الخميس</span></div>
+      <div class="hours-row"><span style="font-size:16px;width:22px;text-align:center">🕗</span><span id="hr2">7:30 صباحاً – 3:00 مساءً</span></div>
+      <div class="hours-row"><span style="font-size:16px;width:22px;text-align:center">📍</span><span id="hr3">مبنى الإدارة – الدور الأول</span></div>
     </div>
   </div>
 
   <!-- AGE & FEES -->
   <div class="pg" id="pg-age">
-    <div class="pg-header">
+    <div class="pg-hdr">
       <div class="pg-title" id="age-title">تحديد المرحلة والرسوم</div>
       <div class="pg-sub" id="age-sub">أدخل تاريخ ميلاد طفلك</div>
     </div>
     <div class="date-wrap">
       <label id="dob-lbl">📅 تاريخ ميلاد الطفل</label>
-      <input type="date" id="dob" max="2023-12-31" min="2018-01-01" onchange="calcGrade()">
+      <input type="date" id="dob" max="2023-08-24" min="2018-01-01" onchange="calcGrade()">
     </div>
     <div id="result-area"></div>
   </div>
 
   <!-- DOCS -->
   <div class="pg" id="pg-docs">
-    <div class="pg-header">
+    <div class="pg-hdr">
       <div class="pg-title" id="docs-title">الأوراق المطلوبة</div>
       <div class="pg-sub" id="docs-sub">اضغط على كل وثيقة عند تجهيزها</div>
     </div>
@@ -562,14 +402,11 @@ body.en .code-go{font-family:'Nunito',sans-serif}
       <button class="nat-btn" id="nat-ns" onclick="setNat('nonsaudi')">🌍 <span id="nat-ns-t">غير سعودي</span></button>
     </div>
     <div class="prog-wrap">
-      <div class="prog-info">
-        <span class="prog-txt" id="prog-txt">0 من 0</span>
-        <span class="prog-pct" id="prog-pct">0%</span>
-      </div>
+      <div class="prog-info"><span class="prog-txt" id="prog-txt">0 من 0</span><span class="prog-pct" id="prog-pct">0%</span></div>
       <div class="prog-bar"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
       <div class="prog-hint" id="prog-hint">اضغط على كل وثيقة لتأكيد تجهيزها</div>
     </div>
-    <div class="section-card" id="doc-list"></div>
+    <div class="sc" id="doc-list"></div>
   </div>
 
   <!-- CHAT -->
@@ -578,17 +415,17 @@ body.en .code-go{font-family:'Nunito',sans-serif}
       <div class="quick-qs" id="quick-qs">
         <button class="qq" onclick="sendQ(this)" id="qq1">كم الرسوم؟</button>
         <button class="qq" onclick="sendQ(this)" id="qq2">الأوراق المطلوبة؟</button>
-        <button class="qq" onclick="sendQ(this)" id="qq3">كيف يتم التقسيط؟</button>
-        <button class="qq" onclick="sendQ(this)" id="qq4">هل يوجد خصومات؟</button>
-        <button class="qq" onclick="sendQ(this)" id="qq5">ما مواد المنهج؟</button>
+        <button class="qq" onclick="sendQ(this)" id="qq3">هل يوجد خصومات؟</button>
+        <button class="qq" onclick="sendQ(this)" id="qq4">ما مواد المنهج؟</button>
+        <button class="qq" onclick="sendQ(this)" id="qq5">ما مراحل الروضة؟</button>
       </div>
       <div class="chat-msgs" id="chat-msgs">
-        <div class="msg-wrap">
-          <div class="msg-lbl bot-l" id="bot-lbl">🤖 مساعد Kids Gate</div>
-          <div class="msg bot" id="welcome-msg">مرحباً! 👋 أنا مساعدك الذكي لروضة Kids Gate.<br>يمكنني الإجابة على كل أسئلتك حول القبول للعام 2026–2027.</div>
+        <div class="mwrap">
+          <div class="mlbl bot" id="bot-lbl">🤖 مساعد Kids Gate</div>
+          <div class="msg bot-m" id="welcome-msg">مرحباً! 👋 أنا مساعدك الذكي لروضة Kids Gate.<br>يمكنني الإجابة على كل أسئلتك حول القبول للعام 2026–2027.</div>
         </div>
       </div>
-      <div class="chat-input-row">
+      <div class="chat-inp-row">
         <button class="send-btn" onclick="sendMsg()">➤</button>
         <textarea class="chat-in" id="chat-input" rows="1" placeholder="اكتب سؤالك هنا..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg()}"></textarea>
       </div>
@@ -597,23 +434,37 @@ body.en .code-go{font-family:'Nunito',sans-serif}
 
   <!-- QUEUE -->
   <div class="pg" id="pg-queue">
-    <div class="queue-hero">
-      <div class="queue-serving-lbl" id="q-lbl">الرقم الحالي قيد الخدمة</div>
-      <div class="queue-num" id="queue-cur">—</div>
+    <div class="q-hero">
+      <div class="q-slbl" id="q-lbl">الرقم الحالي قيد الخدمة</div>
+      <div class="q-num" id="queue-cur">—</div>
     </div>
+
+    <div id="q-admin-zone" style="padding:0">
+      <div class="q-admin-panel" id="q-admin-panel" style="display:none">
+        <div class="q-admin-title">📢 <span id="q-admin-title-txt">نداء رقم الانتظار</span></div>
+        <div class="q-call-row">
+          <input class="q-call-inp" type="number" id="q-call-num" placeholder="22" min="1" max="999">
+          <button class="q-call-btn" id="q-call-btn" onclick="callTicket()">📢 نداء</button>
+        </div>
+        <div class="q-admin-hint" id="q-admin-hint">أدخل رقم الانتظار ثم اضغط نداء</div>
+      </div>
+      <div class="q-admin-panel" id="q-admin-locked" style="background:var(--emxl);border-color:var(--eml)">
+        <div class="q-locked-msg">🔒 <span id="q-lock-txt">لوحة النداء متاحة للإدارة فقط — اضغط على اسمك أعلاه</span></div>
+      </div>
+    </div>
+
     <div style="height:14px"></div>
-    <button class="ticket-btn" onclick="takeTicket()"><span>🎫</span><span id="ticket-lbl">استلام رقم انتظار</span></button>
+    <button class="ticket-btn" id="ticket-main-btn" onclick="takeTicket()"><span>🎫</span><span id="ticket-lbl">استلام رقم انتظار</span></button>
     <div id="ticket-area"></div>
-    <div class="section-card" style="margin-top:14px">
-      <div class="section-card-title" id="q-info-title">ℹ️ تعليمات الانتظار</div>
-      <div class="info-row"><span class="info-icon">📢</span><span id="qi1">ستُناديك موظفة القبول بالاسم والرقم</span></div>
-      <div class="info-row"><span class="info-icon">🪑</span><span id="qi2">يُرجى التواجد في منطقة الانتظار</span></div>
-      <div class="info-row"><span class="info-icon">🤖</span><span id="qi3">يمكنك استخدام المساعد الذكي أثناء الانتظار</span></div>
-      <div class="info-row"><span class="info-icon">⏱</span><span id="qi4">متوسط وقت الانتظار: <strong style="color:var(--emerald)">10–15 دقيقة</strong></span></div>
+    <div class="sc" style="margin-top:14px">
+      <div class="sc-title" id="q-info-title">ℹ️ تعليمات الانتظار</div>
+      <div class="info-row"><span style="font-size:18px;width:24px;text-align:center;flex-shrink:0;margin-top:1px">📢</span><span id="qi1">ستُناديك موظفة القبول بالاسم والرقم</span></div>
+      <div class="info-row"><span style="font-size:18px;width:24px;text-align:center;flex-shrink:0;margin-top:1px">🪑</span><span id="qi2">يُرجى التواجد في منطقة الانتظار</span></div>
+      <div class="info-row"><span style="font-size:18px;width:24px;text-align:center;flex-shrink:0;margin-top:1px">🤖</span><span id="qi3">يمكنك استخدام المساعد الذكي أثناء الانتظار</span></div>
+      <div class="info-row"><span style="font-size:18px;width:24px;text-align:center;flex-shrink:0;margin-top:1px">⏱</span><span id="qi4">متوسط وقت الانتظار: <strong style="color:var(--em)">10–15 دقيقة</strong></span></div>
     </div>
   </div>
 
-  <!-- BOTTOM NAV -->
   <nav class="bnav">
     <button class="bnav-btn on" onclick="switchPg('home')" id="nav-home"><span class="bi">🏠</span><span class="bl" id="nl-home">الرئيسية</span></button>
     <button class="bnav-btn" onclick="switchPg('age')" id="nav-age"><span class="bi">🎂</span><span class="bl" id="nl-age">المرحلة</span></button>
@@ -622,31 +473,85 @@ body.en .code-go{font-family:'Nunito',sans-serif}
   </nav>
 </div>
 
-<script>
-/* ══════════════════════════════════════════
-   CONFIG
-══════════════════════════════════════════ */
-const SHEET_URL='https://script.google.com/macros/s/AKfycbxuItkXcDCIoitbkBc_B5xzzubxhUkVzsiKYbye2NMEflwsgdwDfbdZjIYBCK8bN0kOdA/exec';
-const ADMIN_CODE='9878';
+<div class="toast" id="toast"></div>
 
-/* ══════════════════════════════════════════
+<script>
+/* ═══════════════════════════════════════════
+   CONFIG — عدّلي هنا فقط
+═══════════════════════════════════════════ */
+const ADMIN_CODE = '9878';
+
+// Google Sheets Web App URL
+// اتبعي الخطوات في التعليق أسفله لإنشاء الرابط
+// بعدها استبدلي GOOGLE_SCRIPT_URL_HERE بالرابط
+const SHEET_URL = 'GOOGLE_SCRIPT_URL_HERE';
+
+/*
+خطوات ربط Google Sheets (مرة واحدة فقط):
+1. افتحي sheets.google.com ← جديد
+2. Extensions ← Apps Script
+3. احذفي الكود الموجود والصقي هذا:
+
+function doPost(e) {
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var data = JSON.parse(e.postData.contents);
+    if(sheet.getLastRow() === 0) {
+      sheet.appendRow(['الاسم','الجوال','اسم الطفل','الوقت','اللغة','التاريخ']);
+    }
+    sheet.appendRow([data.name, data.phone, data.child, data.time, data.lang, data.date]);
+    return ContentService.createTextOutput(JSON.stringify({status:'ok'}))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch(err) {
+    return ContentService.createTextOutput(JSON.stringify({status:'error',msg:err.toString()}))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function doGet(e) {
+  return ContentService.createTextOutput('Kids Gate Sheet OK');
+}
+
+4. Deploy ← New Deployment
+5. Type: Web app
+6. Execute as: Me
+7. Who has access: Anyone
+8. Deploy ← انسخي الرابط
+*/
+
+/* ═══════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════ */
+let lang = 'ar';
+let currentUser = null;
+let isAdmin = false;
+let myTicket = null;
+let ticketN = parseInt(localStorage.getItem('kg_t') || '0');
+let lastCalledN = parseInt(localStorage.getItem('kg_cur') || '0');
+
+/* STARS */
+(function(){
+  const c = document.getElementById('g-stars');
+  for(let i=0;i<30;i++){
+    const s=document.createElement('div');s.className='gstar';
+    s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${Math.random()*3+1.5}px;height:${Math.random()*3+1.5}px;opacity:${Math.random()*.4+.1};animation-delay:${Math.random()*3}s;animation-duration:${Math.random()*2+1.5}s`;
+    c.appendChild(s);
+  }
+})();
+
+/* ═══════════════════════════════════════════
    TRANSLATIONS
-══════════════════════════════════════════ */
-let lang='ar';
-const T={
+═══════════════════════════════════════════ */
+const T = {
   ar:{
-    hTitle:'مساعد القبول الذكي',
-    gtSub:'روضة أطفال وطفولة مبكرة<br>مساعد القبول الذكي',gtPill:'✦ العام الدراسي 2026 – 2027',
-    gfTitle:'أهلاً بك 👋',gfSub:'سجّل بياناتك للمتابعة. سنتواصل معك إذا احتجت مساعدة.',
+    hTitle:'مساعد القبول الذكي',gtSub:'روضة أطفال وطفولة مبكرة<br>مساعد القبول الذكي',gtPill:'العام الدراسي 2026 – 2027',
+    gfTitle:'أهلاً بك 👋',gfSub:'سجّل بياناتك للمتابعة.',
     flName:'اسم ولي الأمر',flPhone:'رقم الجوال',flChild:'اسم الطفل',flOpt:'(اختياري)',
-    gateBtnTxt:'متابعة',errName:'الرجاء إدخال الاسم',errPhone:'الرجاء إدخال رقم جوال صحيح',
+    gbtnTxt:'متابعة',errName:'الرجاء إدخال الاسم',errPhone:'الرجاء إدخال رقم جوال صحيح',
     privTxt:'🔒 بياناتك محفوظة لدى إدارة Kids Gate فقط',
-    heroGreet:'أهلاً،',heroSub:'كل ما تحتاجه عن المراحل والرسوم والأوراق في مكان واحد',
-    sl1:'مراحل',sl2:'مجاني',sl3:'مساعد ذكي',hsTitle:'الخدمات المتاحة',
-    hg1l:'تحديد المرحلة',hg1s:'أدخل تاريخ الميلاد',
-    hg2l:'الأوراق المطلوبة',hg2s:'قائمة التحقق',
-    hg3l:'مساعد ذكي',hg3s:'اسأل أي سؤال',
-    hg4l:'رقم الانتظار',hg4s:'احجز دورك',
+    hGreet:'أهلاً،',hSub:'كل ما تحتاجه عن المراحل والرسوم والأوراق في مكان واحد',
+    hg1l:'تحديد المرحلة',hg1s:'أدخل تاريخ الميلاد',hg2l:'الأوراق المطلوبة',hg2s:'قائمة التحقق',
+    hg3l:'مساعد ذكي',hg3s:'اسأل أي سؤال',hg4l:'رقم الانتظار',hg4s:'احجز دورك',
     hoursTitle:'⏰ أوقات الاستقبال',hr1:'الأحد – الخميس',hr2:'7:30 صباحاً – 3:00 مساءً',hr3:'مبنى الإدارة – الدور الأول',
     ageTitle:'تحديد المرحلة والرسوم',ageSub:'أدخل تاريخ ميلاد طفلك',dobLbl:'📅 تاريخ ميلاد الطفل',
     docsTitle:'الأوراق المطلوبة',docsSub:'اضغط على كل وثيقة عند تجهيزها',
@@ -654,130 +559,160 @@ const T={
     botLbl:'🤖 مساعد Kids Gate',
     welcomeMsg:'مرحباً! 👋 أنا مساعدك الذكي لروضة Kids Gate.<br>يمكنني الإجابة على كل أسئلتك حول القبول للعام 2026–2027.',
     chatPh:'اكتب سؤالك هنا...',
-    qq1:'كم الرسوم؟',qq2:'الأوراق المطلوبة؟',qq3:'كيف يتم التقسيط؟',qq4:'هل يوجد خصومات؟',qq5:'ما مواد المنهج؟',
+    qq1:'كم الرسوم؟',qq2:'الأوراق المطلوبة؟',qq3:'هل يوجد خصومات؟',qq4:'ما مواد المنهج؟',qq5:'ما مراحل الروضة؟',
     qLbl:'الرقم الحالي قيد الخدمة',ticketLbl:'استلام رقم انتظار',
+    qAdminTitle:'نداء رقم الانتظار',qAdminHint:'أدخل رقم الانتظار ثم اضغط نداء',qCallBtn:'📢 نداء',
+    qLockTxt:'لوحة النداء متاحة للإدارة فقط — اضغط على اسمك أعلاه',
     qInfoTitle:'ℹ️ تعليمات الانتظار',
     qi1:'ستُناديك موظفة القبول بالاسم والرقم',qi2:'يُرجى التواجد في منطقة الانتظار',
-    qi3:'يمكنك استخدام المساعد الذكي أثناء الانتظار',qi4:'متوسط وقت الانتظار: <strong style="color:var(--emerald)">10–15 دقيقة</strong>',
+    qi3:'يمكنك استخدام المساعد الذكي أثناء الانتظار',qi4:'متوسط وقت الانتظار: <strong style="color:var(--em)">10–15 دقيقة</strong>',
     nlHome:'الرئيسية',nlAge:'المرحلة',nlDocs:'الأوراق',nlChat:'مساعد',
-    cur:'ريال',feeBreak:'تفصيل المدفوعات',
+    cur:'ريال',feeBreak:'تفاصيل الرسوم',
     feeAssess:'رسوم التقييم',feeReg:'رسوم التسجيل',feeInst1:'القسط الأول',feeInst2:'القسط الثاني',
-    yearTotal:'الإجمالي السنوي',base:'أصلي',vat:'ضريبة',
+    yearTotal:'الإجمالي السنوي',base:'قبل الضريبة',vat:'ضريبة 15%',
     discTitle:'🏷️ خصومات متاحة — اضغط لحساب السعر بعد الخصم',
-    discSave:'وفّرت',discAfterLbl:'السعر بعد الخصم',
-    sylTitle:'📚 المنهج الدراسي',
-    warnCond:'⚠️ مواليد 25 أغسطس – 22 نوفمبر 2020 يُقبلون في KG II بشرط إتمام المرحلة.',
-    errRange:'⚠️ تاريخ الميلاد خارج النطاق المقبول. يرجى التواصل مع موظفة القبول.',
+    discSave:'وفّرت',discAfterLbl:'السعر بعد الخصم',sylTitle:'📚 المنهج الدراسي',
+    warnCond:'⚠️ مواليد 25 أغسطس – 22 نوفمبر 2020 يُقبلون في KG II بشرط إتمام المرحلة السابقة.',
+    errRange:'⚠️ تاريخ الميلاد خارج النطاق المقبول للعام 2026–2027. يرجى التواصل مع موظفة القبول.',
     ticketYour:'رقمك في الانتظار',ticketWait:'📍 يُرجى الانتظار في الصالة',printBtn:'🖨️ طباعة',
     youLbl:'أنت',gradeOf:'مرحلة طفلك',
-    adminTitle:'لوحة الإدارة',adminSub:'أدخل كود الإدارة للمتابعة',
-    adminEnter:'دخول',adminCancel:'إلغاء',adminWrong:'كود خاطئ، حاول مرة أخرى',
+    adminTitle:'لوحة الإدارة',adminSub:'أدخل كود الإدارة للمتابعة',adminEnter:'دخول',adminCancel:'إلغاء',adminWrong:'كود خاطئ، حاول مرة أخرى',
     namePh:'مثال: محمد عبدالله',phonePh:'05XXXXXXXX',childPh:'اسم الطفل',
+    toastSaved:'تم التسجيل بنجاح ✓',
+    notifTitle:'🔔 جاء دورك!',notifSub:'رقم {n} — توجّه الآن إلى موظفة القبول',
+    alreadyTicket:'لديك رقم انتظار بالفعل',
   },
   en:{
-    hTitle:'Smart Admission Assistant',
-    gtSub:'Kindergarten & Early Childhood<br>Smart Admission Assistant',gtPill:'✦ Academic Year 2026 – 2027',
-    gfTitle:'Welcome 👋',gfSub:'Enter your details to continue. We may follow up if you need assistance.',
+    hTitle:'Smart Admission Assistant',gtSub:'Kindergarten & Early Childhood<br>Smart Admission Assistant',gtPill:'Academic Year 2026 – 2027',
+    gfTitle:'Welcome 👋',gfSub:'Enter your details to continue.',
     flName:'Guardian name',flPhone:'Mobile number',flChild:"Child's name",flOpt:'(optional)',
-    gateBtnTxt:'Continue',errName:'Please enter your name',errPhone:'Please enter a valid mobile number',
-    privTxt:"🔒 Your details are kept with Kids Gate's management only",
-    heroGreet:'Welcome,',heroSub:'Everything you need about grades, fees and documents in one place',
-    sl1:'Grades',sl2:'Free',sl3:'AI Assistant',hsTitle:'Services',
-    hg1l:'Find Grade',hg1s:'Enter date of birth',
-    hg2l:'Required Documents',hg2s:'Checklist',
-    hg3l:'AI Assistant',hg3s:'Ask any question',
-    hg4l:'Queue Number',hg4s:'Take your place',
-    hoursTitle:'⏰ Reception Hours',hr1:'Sunday – Thursday',hr2:'7:30 AM – 3:00 PM',hr3:'Administration Building, First Floor',
+    gbtnTxt:'Continue',errName:'Please enter your name',errPhone:'Please enter a valid number',
+    privTxt:"🔒 Your details are stored with Kids Gate's management only",
+    hGreet:'Welcome,',hSub:'Everything about grades, fees and documents in one place',
+    hg1l:'Find Grade',hg1s:'Enter date of birth',hg2l:'Required Documents',hg2s:'Checklist',
+    hg3l:'AI Assistant',hg3s:'Ask any question',hg4l:'Queue Number',hg4s:'Take your place',
+    hoursTitle:'⏰ Reception Hours',hr1:'Sunday – Thursday',hr2:'7:30 AM – 3:00 PM',hr3:'Administration Building, 1st Floor',
     ageTitle:'Grade Placement & Fees',ageSub:"Enter your child's date of birth",dobLbl:"📅 Child's Date of Birth",
-    docsTitle:'Required Documents',docsSub:'Tap each document once you have it ready',
+    docsTitle:'Required Documents',docsSub:'Tap each document once ready',
     natSa:'Saudi',natNs:'Non-Saudi',progHint:'Tap each document to confirm it is ready',
     botLbl:'🤖 Kids Gate Assistant',
     welcomeMsg:"Hello! 👋 I'm the Kids Gate smart assistant.<br>Ask me anything about admissions for 2026–2027.",
     chatPh:'Type your question here...',
-    qq1:'What are the fees?',qq2:'Documents needed?',qq3:'Payment options?',qq4:'Any discounts?',qq5:'What is the curriculum?',
+    qq1:'What are the fees?',qq2:'Documents needed?',qq3:'Any discounts?',qq4:'What is the curriculum?',qq5:'What grades are available?',
     qLbl:'Currently serving',ticketLbl:'Get a Queue Number',
+    qAdminTitle:'Call Queue Number',qAdminHint:"Enter ticket number and press Call",qCallBtn:'📢 Call',
+    qLockTxt:'Admin-only call panel — tap your name above to log in',
     qInfoTitle:'ℹ️ Waiting Instructions',
     qi1:'The admissions officer will call your name and number',qi2:'Please remain in the waiting area',
-    qi3:'You may use the AI assistant while waiting',qi4:'Average wait time: <strong style="color:var(--emerald)">10–15 minutes</strong>',
+    qi3:'You may use the AI assistant while waiting',qi4:'Average wait time: <strong style="color:var(--em)">10–15 minutes</strong>',
     nlHome:'Home',nlAge:'Grade',nlDocs:'Documents',nlChat:'Assistant',
-    cur:'SAR',feeBreak:'Payment Breakdown',
+    cur:'SAR',feeBreak:'Fee Breakdown',
     feeAssess:'Assessment Fee',feeReg:'Registration Fee',feeInst1:'1st Instalment',feeInst2:'2nd Instalment',
-    yearTotal:'Annual total',base:'base',vat:'VAT',
+    yearTotal:'Annual Total',base:'before VAT',vat:'VAT 15%',
     discTitle:'🏷️ Discounts — tap to calculate discounted price',
-    discSave:'You save',discAfterLbl:'Price after discount',
-    sylTitle:'📚 Curriculum',
-    warnCond:'⚠️ Children born 25 Aug – 22 Nov 2020 are eligible for KG II subject to completion.',
+    discSave:'You save',discAfterLbl:'Price after discount',sylTitle:'📚 Curriculum',
+    warnCond:'⚠️ Children born 25 Aug – 22 Nov 2020 are eligible for KG II subject to prior level completion.',
     errRange:'⚠️ Date of birth is outside the accepted range for 2026–2027. Please speak with the admissions officer.',
     ticketYour:'Your queue number',ticketWait:'📍 Please wait in the reception area',printBtn:'🖨️ Print',
     youLbl:'You',gradeOf:"Your child's grade",
-    adminTitle:'Admin Panel',adminSub:'Enter the admin code to continue',
-    adminEnter:'Enter',adminCancel:'Cancel',adminWrong:'Wrong code, try again',
+    adminTitle:'Admin Panel',adminSub:'Enter the admin code to continue',adminEnter:'Enter',adminCancel:'Cancel',adminWrong:'Wrong code, try again',
     namePh:'e.g. Mohammed Abdullah',phonePh:'+966 5X XXX XXXX',childPh:"Child's name",
+    toastSaved:'Registered successfully ✓',
+    notifTitle:'🔔 Your turn!',notifSub:'Number {n} — please go to the admissions officer now',
+    alreadyTicket:'You already have a queue number',
   }
 };
-function t(k){return(T[lang]||T.ar)[k]||k}
+const t = k=>(T[lang]||T.ar)[k]||k;
 
 function applyLang(){
-  const ids={
-    'h-title':'hTitle','gt-sub':'gtSub','gt-pill':'gtPill',
-    'gf-title':'gfTitle','gf-sub':'gfSub','fl-name-t':'flName','fl-phone-t':'flPhone','fl-child-t':'flChild',
-    'fl-opt':'flOpt','gate-btn-txt':'gateBtnTxt','err-name':'errName','err-phone':'errPhone','priv-txt':'privTxt',
-    'hero-greet':'heroGreet','hero-sub':'heroSub',
-    'sl1':'sl1','sl2':'sl2','sl3':'sl3','hs-title':'hsTitle',
+  const map={
+    'h-title':'hTitle','gt-sub':'gtSub','gt-pill':'gtPill','gf-title':'gfTitle','gf-sub':'gfSub',
+    'fl-name-t':'flName','fl-phone-t':'flPhone','fl-child-t':'flChild','fl-opt':'flOpt',
+    'gbtn-txt':'gbtnTxt','err-name':'errName','err-phone':'errPhone','priv-txt':'privTxt',
+    'h-greet':'hGreet','h-sub':'hSub',
     'hg1l':'hg1l','hg1s':'hg1s','hg2l':'hg2l','hg2s':'hg2s','hg3l':'hg3l','hg3s':'hg3s','hg4l':'hg4l','hg4s':'hg4s',
     'hours-title':'hoursTitle','hr1':'hr1','hr2':'hr2','hr3':'hr3',
     'age-title':'ageTitle','age-sub':'ageSub','dob-lbl':'dobLbl',
     'docs-title':'docsTitle','docs-sub':'docsSub','nat-sa-t':'natSa','nat-ns-t':'natNs','prog-hint':'progHint',
     'bot-lbl':'botLbl','welcome-msg':'welcomeMsg',
     'qq1':'qq1','qq2':'qq2','qq3':'qq3','qq4':'qq4','qq5':'qq5',
-    'q-lbl':'qLbl','ticket-lbl':'ticketLbl','q-info-title':'qInfoTitle',
-    'qi1':'qi1','qi2':'qi2','qi3':'qi3','qi4':'qi4',
+    'q-lbl':'qLbl','ticket-lbl':'ticketLbl',
+    'q-admin-title-txt':'qAdminTitle','q-admin-hint':'qAdminHint','q-call-btn':'qCallBtn','q-lock-txt':'qLockTxt',
+    'q-info-title':'qInfoTitle','qi1':'qi1','qi2':'qi2','qi3':'qi3','qi4':'qi4',
     'nl-home':'nlHome','nl-age':'nlAge','nl-docs':'nlDocs','nl-chat':'nlChat',
   };
-  for(const [id,k] of Object.entries(ids)){const el=document.getElementById(id);if(el)el.innerHTML=t(k);}
+  for(const[id,k]of Object.entries(map)){const el=document.getElementById(id);if(el)el.innerHTML=t(k);}
   const ci=document.getElementById('chat-input');if(ci){ci.placeholder=t('chatPh');ci.dir=lang==='ar'?'rtl':'ltr';}
-  const inp=document.getElementById('inp-name');if(inp){inp.placeholder=t('namePh');inp.dir=lang==='ar'?'rtl':'ltr';}
-  const inpc=document.getElementById('inp-child');if(inpc){inpc.placeholder=t('childPh');inpc.dir=lang==='ar'?'rtl':'ltr';}
-  const inpp=document.getElementById('inp-phone');if(inpp)inpp.placeholder=t('phonePh');
-  if(currentUser){
-    const el=document.getElementById('hero-name');
-    if(el)el.textContent=currentUser.name+' 👋';
-  }
+  const n=document.getElementById('inp-name');if(n){n.placeholder=t('namePh');n.dir=lang==='ar'?'rtl':'ltr';}
+  const ch=document.getElementById('inp-child');if(ch){ch.placeholder=t('childPh');ch.dir=lang==='ar'?'rtl':'ltr';}
+  const p=document.getElementById('inp-phone');if(p)p.placeholder=t('phonePh');
+  if(currentUser){const el=document.getElementById('h-name');if(el)el.textContent=currentUser.name+' 👋';}
+  // Update queue display
+  const qc=document.getElementById('queue-cur');
+  if(qc&&lastCalledN>0)qc.textContent=lastCalledN;
 }
 
 function setLang(l){
   lang=l;
   document.getElementById('html-root').lang=l==='ar'?'ar':'en';
   document.getElementById('html-root').dir=l==='ar'?'rtl':'ltr';
-  document.body.className=l==='ar'?'ar':'en';
-  document.querySelectorAll('.lang-sw button').forEach(b=>b.classList.toggle('on',b.textContent.trim()===(l==='ar'?'عربي':'EN')));
-  applyLang();renderDocs();
-  if(currentGrade)renderResult(currentGrade,condFlag);
+  document.body.className=l;
+  document.querySelectorAll('.lsw button').forEach(b=>b.classList.toggle('on',b.textContent.trim()===(l==='ar'?'عربي':'EN')));
+  applyLang();renderDocs();if(currentGrade)renderResult(currentGrade,condFlag);
 }
-
 function gateLang(l){
   lang=l;
   document.getElementById('html-root').lang=l==='ar'?'ar':'en';
   document.getElementById('html-root').dir=l==='ar'?'rtl':'ltr';
-  document.body.className=l==='ar'?'ar':'en';
-  document.querySelectorAll('.g-lang-btn').forEach(b=>b.classList.toggle('on',b.textContent.trim()===(l==='ar'?'عربي':'English')));
+  document.body.className=l;
+  document.querySelectorAll('.glbtn').forEach(b=>b.classList.toggle('on',b.textContent.trim()===(l==='ar'?'عربي':'English')));
   applyLang();
 }
 
-/* ══════════════════════════════════════════
-   REGISTRATION + SAVE
-══════════════════════════════════════════ */
-let currentUser=null;
-
-async function saveGuardian(data){
-  try{const arr=JSON.parse(localStorage.getItem('kg_g')||'[]');arr.push(data);localStorage.setItem('kg_g',JSON.stringify(arr));}catch(e){}
-  if(SHEET_URL&&SHEET_URL!=='YOUR_APPS_SCRIPT_URL_HERE'){
-    try{await fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});}
-    catch(e){console.log('Sheet sync failed');}
-  }
+/* ═══════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════ */
+function showToast(msg,gold=false,dur=2800){
+  const el=document.getElementById('toast');
+  el.textContent=msg;el.className='toast'+(gold?' gold-t':'');
+  void el.offsetWidth;el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),dur);
 }
 
-function submitGate(){
+/* ═══════════════════════════════════════════
+   GOOGLE SHEETS SAVE
+═══════════════════════════════════════════ */
+async function sheetSave(data){
+  saveLocal(data);
+  if(SHEET_URL==='GOOGLE_SCRIPT_URL_HERE'){
+    console.log('Google Sheets غير مربوط بعد — البيانات محفوظة محلياً');
+    return;
+  }
+  try{
+    await fetch(SHEET_URL,{
+      method:'POST',
+      mode:'no-cors',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(data)
+    });
+  }catch(e){console.warn('Sheet save error:',e);}
+}
+
+function saveLocal(d){
+  try{
+    const a=JSON.parse(localStorage.getItem('kg_g')||'[]');
+    a.unshift(d);
+    localStorage.setItem('kg_g',JSON.stringify(a));
+  }catch(e){}
+}
+function getLocal(){
+  try{return JSON.parse(localStorage.getItem('kg_g')||'[]');}catch(e){return [];}
+}
+
+/* ═══════════════════════════════════════════
+   GATE SUBMIT
+═══════════════════════════════════════════ */
+async function submitGate(){
   const name=document.getElementById('inp-name').value.trim();
   const phone=document.getElementById('inp-phone').value.trim();
   const child=document.getElementById('inp-child').value.trim();
@@ -787,112 +722,240 @@ function submitGate(){
   if(!name){document.getElementById('inp-name').classList.add('bad');document.getElementById('err-name').classList.add('show');ok=false;}
   if(!phone||phone.replace(/\D/g,'').length<9){document.getElementById('inp-phone').classList.add('bad');document.getElementById('err-phone').classList.add('show');ok=false;}
   if(!ok)return;
-  const btn=document.getElementById('gate-btn');btn.disabled=true;btn.innerHTML='<span style="animation:spin 1s linear infinite;display:inline-block">⏳</span>';
-  const entry={name,phone,child:child||'—',time:new Date().toLocaleString('ar-SA'),ts:Date.now(),lang};
-  saveGuardian(entry).then(()=>{currentUser={name,phone,child};openApp();});
+  const btn=document.getElementById('gate-btn');btn.disabled=true;
+  document.getElementById('gbtn-txt').innerHTML='<span class=ldot></span><span class=ldot></span><span class=ldot></span>';
+  document.getElementById('gbtn-arr').textContent='';
+  const entry={
+    name,phone,child:child||'—',
+    time:new Date().toLocaleString('ar-SA'),
+    ts:Date.now(),lang,
+    date:new Date().toISOString().split('T')[0]
+  };
+  await sheetSave(entry);
+  currentUser={name,phone,child};
+  openApp();
 }
 
 function openApp(){
   document.getElementById('gate').classList.add('gone');
   document.getElementById('app').classList.add('on');
-  document.getElementById('user-tag').textContent='👤 '+currentUser.name.split(' ')[0];
+  document.getElementById('utag').textContent='👤 '+currentUser.name.split(' ')[0];
   const wm=document.getElementById('welcome-msg');
-  if(wm)wm.innerHTML=lang==='ar'?`أهلاً ${currentUser.name}! 👋<br>يمكنني الإجابة على كل أسئلتك حول القبول للعام 2026–2027.`:`Hello ${currentUser.name}! 👋<br>Ask me anything about admissions for 2026–2027.`;
-  applyLang();
+  if(wm)wm.innerHTML=lang==='ar'
+    ?`أهلاً ${currentUser.name}! 👋<br>يمكنني الإجابة على كل أسئلتك حول القبول للعام 2026–2027.`
+    :`Hello ${currentUser.name}! 👋<br>Ask me anything about admissions for 2026–2027.`;
+  // Show current queue number if exists
+  if(lastCalledN>0)document.getElementById('queue-cur').textContent=lastCalledN;
+  applyLang();showToast(t('toastSaved'));
+  startCallWatcher();
 }
 
-/* ══════════════════════════════════════════
-   NAVIGATION
-══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════ */
 const PGS=['home','age','docs','chat','queue'];
 function switchPg(n){
   PGS.forEach(p=>{document.getElementById('pg-'+p)?.classList.remove('on');document.getElementById('nav-'+p)?.classList.remove('on');});
-  document.getElementById('pg-'+n)?.classList.add('on');
-  document.getElementById('nav-'+n)?.classList.add('on');
+  document.getElementById('pg-'+n)?.classList.add('on');document.getElementById('nav-'+n)?.classList.add('on');
   window.scrollTo(0,0);
 }
 
-/* ══════════════════════════════════════════
-   GRADE + FEE DATA
-══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════
+   GRADES DATA — من الـ PDF مباشرة
+═══════════════════════════════════════════ */
 const GRADES=[
-  {id:'prekg',ar:'ما قبل الروضة (Pre-KG)',en:'Pre-Kindergarten',grad:'linear-gradient(140deg,#c47d0a,#9a6008)',start:new Date('2022-08-25'),end:new Date('2023-08-24'),fees:{assess:250,reg:500,inst:7450,full:14900},sylAr:['إمساك القلم','الإجابة عند السؤال','التعبير عن المشاعر','تتبع الخطوط','المهارات الحركية والفنية'],sylEn:['Pencil gripping','Responding when asked','Expressing emotions','Tracing lines','Fine motor skills & art']},
-  {id:'kg1',ar:'الروضة الأولى (KG I)',en:'Kindergarten I',grad:'linear-gradient(140deg,#0b5e52,#0d7a6a)',start:new Date('2021-08-25'),end:new Date('2022-08-24'),fees:{assess:250,reg:500,inst:8450,full:16900},sylAr:['التعرف على الحروف والأرقام','العد شفهياً من 1 إلى 10','معرفة الألوان الأساسية'],sylEn:['Identifying letters and numbers','Oral counting 1–10','Primary colours identification']},
-  {id:'kg2',ar:'الروضة الثانية (KG II)',en:'Kindergarten II',grad:'linear-gradient(140deg,#1a5fa0,#1874c2)',start:new Date('2020-08-25'),end:new Date('2021-08-24'),fees:{assess:250,reg:500,inst:8450,full:16900},sylAr:['كتابة الحروف Aa–Zz','كتابة الأرقام 1–30','جمع الأرقام ذات الرقم الواحد','أصوات الحروف','الحروف العربية أ–ي (للعرب)'],sylEn:['Writing alphabet Aa–Zz','Writing numbers 1–30','Single-digit addition','Phonics sounds','Arabic alphabet Alif–Ya (for Arab students)']},
-  {id:'g1',ar:'الصف الأول الابتدائي',en:'Grade 1',grad:'linear-gradient(140deg,#5e2d91,#7c3fba)',start:null,end:new Date('2020-08-24'),fees:{assess:250,reg:500,inst:8950,full:17900},sylAr:['إنجليزي: قراءة وفهم، كلمات 3 حروف، is/am/are','رياضيات: أرقام 1–100، جمع وطرح، أشكال','عربي: الحروف أ–ي مع الحركات (للعرب)'],sylEn:['English: Reading comprehension, 3-letter words, is/am/are','Maths: Numbers 1–100, addition & subtraction, shapes','Arabic: Letters Alif–Ya with vowels (for Arab students)']},
+  {
+    id:'prekg',ar:'ما قبل الروضة (Pre-KG)',en:'Pre-Kindergarten',
+    grad:'linear-gradient(140deg,#7a5800,#c47d0a)',
+    start:new Date('2022-08-25'),end:new Date('2023-08-24'),
+    fees:{assess:250,reg:500,inst:7450,full:14900},
+    sylAr:['إمساك القلم','الاجابة عند السؤال','معرفة كيفية التعبير عن المشاعر','تتبع الخطوط','المهارات الحركية والفنية'],
+    sylEn:['Pencil gripping','Know how to respond when asked','Know how to express emotions','Tracing lines','Fine motor skills / Art']
+  },
+  {
+    id:'kg1',ar:'الروضة الأولى (KG I)',en:'Kindergarten I',
+    grad:'linear-gradient(140deg,#053e36,#0b5e52)',
+    start:new Date('2021-08-25'),end:new Date('2022-08-24'),
+    fees:{assess:250,reg:500,inst:8450,full:16900},
+    sylAr:['التعرف على الحروف والأرقام','العد من 1 إلى 10 (شفوي)','معرفة الألوان الأساسية'],
+    sylEn:['Identifying letters and numbers','Counting 1-10 (Oral)','Primary Colors identification']
+  },
+  {
+    id:'kg2',ar:'الروضة الثانية (KG II)',en:'Kindergarten II',
+    grad:'linear-gradient(140deg,#1a4fa0,#1874c2)',
+    start:new Date('2020-08-25'),end:new Date('2021-08-24'),
+    fees:{assess:250,reg:500,inst:8450,full:16900},
+    sylAr:['كتابة الحروف الأبجدية Aa-Zz','كتابة الأرقام من 1 إلى 30','جمع الأرقام ذات الرقم الواحد','أصوات الحروف (Phonics)','(للعرب) معرفة الأحرف العربية من أ – ي','(للعرب) تمييز الحرف الأول من بداية كل كلمة'],
+    sylEn:['Writing alphabet Aa-Zz','Writing Numbers 1-30','Single Digit Addition','Phonics Sound','(For Arab students) Writing Arabic alphabet أ–ي','(For Arab students) Distinguish the first letter of each word']
+  },
+  {
+    id:'g1',ar:'الصف الأول الابتدائي',en:'Grade 1',
+    grad:'linear-gradient(140deg,#4a2080,#7c3fba)',
+    start:null,end:new Date('2020-08-24'),
+    fees:{assess:250,reg:500,inst:8950,full:17900},
+    sylAr:['إنجليزي: قراءة قطعة وفهمها، كلمات 3 حروف، is/am/are، المفرد والجمع، هذا/تلك/هؤلاء/أولئك','رياضيات: أرقام 1-100، أسماء الأرقام 1-50، ما قبل وبعد وبين، الأشكال، جمع وطرح','عربي (للعرب): كتابة الأحرف أ-ي بالحركات، ربط الصورة بالحرف المناسب'],
+    sylEn:['English: Reading comprehension, 3-letter words, is/am/are, singular/plural, This/That/These/Those','Math: Numbers 1-100, number names 1-50, before/after/between, shapes, addition/subtraction','Arabic (Arab students): Writing أ-ي with vowels, connecting picture to letter']
+  },
 ];
-const DISCS=[{key:'early',pct:10,ar:'دفع مبكر (سنة كاملة)',en:'Early payment (full year)'},{key:'second',pct:5,ar:'الطفل الثاني',en:'2nd child'},{key:'third',pct:7.5,ar:'الطفل الثالث',en:'3rd child'},{key:'fourth',pct:10,ar:'الطفل الرابع',en:'4th child'}];
+
+const DISCS=[
+  {key:'early', pct:10, ar:'دفع مبكر (سنة كاملة)',   en:'Early full-year payment'},
+  {key:'second',pct:5,  ar:'الطفل الثاني',             en:'2nd child'},
+  {key:'third', pct:7.5,ar:'الطفل الثالث',             en:'3rd child'},
+  {key:'fourth',pct:10, ar:'الطفل الرابع',             en:'4th child'},
+];
+
 const condS=new Date('2020-08-25'),condE=new Date('2020-11-22');
 let currentGrade=null,selDisc=null,condFlag=false;
-const vat=n=>Math.round(n*.15*100)/100;
+const vat=n=>+(n*0.15).toFixed(2);
 const fmt=n=>Number(n).toLocaleString('en',{minimumFractionDigits:2,maximumFractionDigits:2});
 
 function calcGrade(){
   const v=document.getElementById('dob').value;if(!v)return;
   const dob=new Date(v),area=document.getElementById('result-area');
   let g=null;
-  for(const gr of GRADES){if(gr.start&&dob>=gr.start&&dob<=gr.end){g=gr;break;}if(!gr.start&&dob<=gr.end){g=gr;break;}}
+  for(const gr of GRADES){
+    if(gr.start&&dob>=gr.start&&dob<=gr.end){g=gr;break;}
+    if(!gr.start&&dob<=gr.end){g=gr;break;}
+  }
   if(!g){area.innerHTML=`<div class="err-box">${t('errRange')}</div>`;return;}
   condFlag=g.id==='kg2'&&dob>=condS&&dob<=condE;
   currentGrade=g;selDisc=null;renderResult(g,condFlag);
 }
 
+/* ═══════════════════════════════════════════
+   RENDER FEES — نص طبيعي بدون جداول HTML
+═══════════════════════════════════════════ */
 function renderResult(g,cond){
-  const f=g.fees,V={assess:vat(f.assess),reg:vat(f.reg),inst:vat(f.inst),full:vat(f.full)};
+  const f=g.fees;
+  const cur=t('cur'),base=t('base'),vaT=t('vat');
+
+  // حساب الإجمالي مع ضريبة
+  const assessWithVat=f.assess+vat(f.assess);
+  const regWithVat=f.reg+vat(f.reg);
+  const inst1WithVat=f.inst+vat(f.inst);
+  const inst2WithVat=f.inst+vat(f.inst);
+  const totalWithVat=f.full+vat(f.full);
+
   const disc=DISCS.find(d=>d.key===selDisc);
   let discHtml='';
   if(disc){
-    const tot=f.full+V.full,save=Math.round(tot*disc.pct)/100,final=Math.round((tot-save)*100)/100;
-    discHtml=`<div class="disc-after"><div class="disc-save-lbl">${t('discSave')}: <strong style="font-family:Nunito,sans-serif">${fmt(save)} ${t('cur')}</strong></div><div class="disc-final-price">${fmt(final)} <span style="font-size:14px">${t('cur')}</span></div><div class="disc-label">${t('discAfterLbl')} • ${disc.pct}% off</div></div>`;
+    const save=Math.round(totalWithVat*disc.pct)/100;
+    const final=+(totalWithVat-save).toFixed(2);
+    discHtml=`<div class="disc-after">
+      <div class="da-save">${t('discSave')}: <strong style="font-family:Nunito,sans-serif">${fmt(save)} ${cur}</strong></div>
+      <div class="da-price">${fmt(final)} <span style="font-size:14px">${cur}</span></div>
+      <div class="da-lbl">${t('discAfterLbl')} — خصم ${disc.pct}%</div>
+    </div>`;
   }
+
   const syl=(lang==='ar'?g.sylAr:g.sylEn).map(s=>`<div class="syl-item"><div class="syl-dot"></div><span>${s}</span></div>`).join('');
-  const chips=DISCS.map(d=>`<div class="dc${selDisc===d.key?' on':''}" onclick="pickDisc('${d.key}')"><span class="dc-pct">${d.pct}%</span><span class="dc-name">${lang==='ar'?d.ar:d.en}</span></div>`).join('');
-  const condNote=cond?`<div class="warn-box">${t('warnCond')}</div>`:'';
-  const cur=t('cur'),b=t('base'),va=t('vat');
+  const chips=DISCS.map(d=>`<div class="dc${selDisc===d.key?' on':''}" onclick="pickDisc('${d.key}')">
+    <span class="dc-pct">${d.pct}%</span>
+    <span class="dc-name">${lang==='ar'?d.ar:d.en}</span>
+  </div>`).join('');
+
+  // دالة مساعدة لكل سطر رسوم
+  function fLine(name,baseAmt){
+    const v=vat(baseAmt);
+    const total=baseAmt+v;
+    return `<div class="fee-line">
+      <span class="fee-line-name">${name}</span>
+      <div class="fee-line-val">
+        <span class="fee-line-main">${fmt(total)} ${cur}</span>
+        <span class="fee-line-sub">${base}: ${fmt(baseAmt)} + ${vaT}: ${fmt(v)}</span>
+      </div>
+    </div>`;
+  }
 
   document.getElementById('result-area').innerHTML=`
   <div class="res-card">
     <div class="res-head" style="background:${g.grad}">
-      <div class="res-head-label">✅ ${t('gradeOf')}</div>
+      <div class="res-lbl">✅ ${t('gradeOf')}</div>
       <div class="res-grade">${lang==='ar'?g.ar:g.en}</div>
       <div class="res-year">2026 – 2027</div>
     </div>
     <div class="res-body">
-      ${condNote}
-      <div class="fee-sec-lbl" style="margin-top:4px">${t('feeBreak')}</div>
-      ${fR(t('feeAssess'),f.assess,V.assess,cur,b,va)}
-      ${fR(t('feeReg'),f.reg,V.reg,cur,b,va)}
-      ${fR(t('feeInst1'),f.inst,V.inst,cur,b,va)}
-      ${fR(t('feeInst2'),f.inst,V.inst,cur,b,va)}
+      ${cond?`<div class="warn-box">${t('warnCond')}</div>`:''}
+      <div class="fee-section">
+        <div class="fee-section-title">${t('feeBreak')}</div>
+        ${fLine(t('feeAssess'),f.assess)}
+        ${fLine(t('feeReg'),f.reg)}
+        ${fLine(t('feeInst1'),f.inst)}
+        ${fLine(t('feeInst2'),f.inst)}
+      </div>
       <div class="total-band">
-        <div class="total-band-lbl">${t('yearTotal')}</div>
-        <div class="total-band-breakdown">${b}: ${fmt(f.full)} ${cur} + ${va} 15%: ${fmt(V.full)} ${cur}</div>
-        <div class="total-band-main">${fmt(f.full+V.full)} <span class="total-band-cur">${cur}</span></div>
+        <div class="tb-lbl">${t('yearTotal')} (${vaT} مشمولة)</div>
+        <div class="tb-brk">${base}: ${fmt(f.full)} ${cur} + ${vaT}: ${fmt(vat(f.full))} ${cur}</div>
+        <div class="tb-main">${fmt(totalWithVat)} <span class="tb-cur">${cur}</span></div>
       </div>
       ${discHtml}
-      <div style="font-size:12.5px;font-weight:700;color:var(--text);margin:14px 0 9px">${t('discTitle')}</div>
+      <div style="font-size:13px;font-weight:700;color:var(--text);margin:14px 0 10px">${t('discTitle')}</div>
       <div class="disc-grid">${chips}</div>
       <div class="syl-box"><div class="syl-title">${t('sylTitle')}</div>${syl}</div>
     </div>
   </div>`;
 }
-function fR(lbl,base,v,cur,b,va){
-  return `<div class="fee-row"><span class="fee-label">${lbl}</span><div class="fee-right"><span class="fee-total-price">${fmt(base+v)} ${cur}</span><div class="fee-detail"><span class="fee-base-tag">${b}: ${fmt(base)}</span><span class="fee-vat-tag">+ ${va}: ${fmt(v)}</span></div></div></div>`;
-}
+
 function pickDisc(k){selDisc=selDisc===k?null:k;if(currentGrade)renderResult(currentGrade,condFlag);}
 
-/* ══════════════════════════════════════════
-   DOCUMENTS
-══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════
+   DOCS
+═══════════════════════════════════════════ */
 const DOCS={
-  saudi:{ar:[{t:'بطاقة العائلة',s:'أصل + نسخة'},{t:'كرت تطعيم الطالب',s:'محدّثة ومختومة'},{t:'شهادة ميلاد الطالب',s:'مصدّقة ومختومة'},{t:'شهادة آخر مرحلة دراسية',s:'معتمدة ومختومة (إن وُجدت)'},{t:'الكشف الطبي / اللياقة البدنية',s:'من مستشفى أو مركز معتمد'},{t:'8 صور شخصية',s:'خلفية بيضاء، حديثة'}],en:[{t:'Family Card',s:'Original + copy'},{t:"Student's Immunisation Card",s:'Up-to-date and stamped'},{t:"Student's Birth Certificate",s:'Certified and stamped'},{t:'Previous academic report',s:'If applicable, stamped'},{t:'Physical fitness certificate',s:'From an accredited centre'},{t:'8 personal photographs',s:'White background, recent'}]},
-  nonsaudi:{ar:[{t:'إقامة الطالب المجددة',s:'سارية المفعول'},{t:'إقامة الأب المجددة',s:'سارية المفعول'},{t:'إقامة الأم المجددة',s:'سارية المفعول'},{t:'جواز سفر الطالب',s:'صفحة البيانات الشخصية'},{t:'جواز سفر الأب',s:'صفحة البيانات الشخصية'},{t:'جواز سفر الأم',s:'صفحة البيانات الشخصية'},{t:'كرت تطعيم الطالب',s:'محدّثة ومختومة'},{t:'شهادة ميلاد الطالب',s:'مصدّقة ومختومة'},{t:'شهادة آخر مرحلة دراسية',s:'معتمدة ومختومة (إن وُجدت)'},{t:'الكشف الطبي / اللياقة البدنية',s:'من مستشفى أو مركز معتمد'},{t:'8 صور شخصية',s:'خلفية بيضاء، حديثة'}],en:[{t:"Student's renewed Iqama",s:'Must be valid'},{t:"Father's renewed Iqama",s:'Must be valid'},{t:"Mother's renewed Iqama",s:'Must be valid'},{t:"Student's passport",s:'Personal data page'},{t:"Father's passport",s:'Personal data page'},{t:"Mother's passport",s:'Personal data page'},{t:"Student's Immunisation Card",s:'Up-to-date and stamped'},{t:"Student's Birth Certificate",s:'Certified and stamped'},{t:'Previous academic report',s:'If applicable, stamped'},{t:'Physical fitness certificate',s:'From an accredited centre'},{t:'8 personal photographs',s:'White background, recent'}]}
+  saudi:{
+    ar:[
+      {t:'بطاقة العائلة',s:'أصل + نسخة'},
+      {t:'كرت تطعيم الطالب',s:'محدّثة ومختومة'},
+      {t:'شهادة ميلاد الطالب',s:'مصدّقة ومختومة'},
+      {t:'شهادة آخر مرحلة دراسية',s:'معتمدة ومختومة (إن وُجدت)'},
+      {t:'الكشف الطبي / اللياقة البدنية',s:'من مستشفى أو مركز معتمد'},
+      {t:'8 صور شخصية',s:'خلفية بيضاء، حديثة'},
+    ],
+    en:[
+      {t:'Family Card',s:'Original + copy'},
+      {t:"Student's Immunisation Card",s:'Up-to-date and stamped'},
+      {t:"Student's Birth Certificate",s:'Certified and stamped'},
+      {t:'Previous academic report',s:'If applicable, stamped'},
+      {t:'Physical fitness certificate',s:'From an accredited centre'},
+      {t:'8 personal photographs',s:'White background, recent'},
+    ]
+  },
+  nonsaudi:{
+    ar:[
+      {t:'إقامة الطالب المجددة',s:'سارية المفعول'},
+      {t:'إقامة الأب المجددة',s:'سارية المفعول'},
+      {t:'إقامة الأم المجددة',s:'سارية المفعول'},
+      {t:'جواز سفر الطالب',s:'صفحة البيانات الشخصية'},
+      {t:'جواز سفر الأب',s:'صفحة البيانات الشخصية'},
+      {t:'جواز سفر الأم',s:'صفحة البيانات الشخصية'},
+      {t:'كرت تطعيم الطالب',s:'محدّثة ومختومة'},
+      {t:'شهادة ميلاد الطالب',s:'مصدّقة ومختومة'},
+      {t:'شهادة آخر مرحلة دراسية',s:'معتمدة ومختومة (إن وُجدت)'},
+      {t:'الكشف الطبي / اللياقة البدنية',s:'من مستشفى أو مركز معتمد'},
+      {t:'8 صور شخصية',s:'خلفية بيضاء، حديثة'},
+    ],
+    en:[
+      {t:"Student's renewed Iqama",s:'Must be valid'},
+      {t:"Father's renewed Iqama",s:'Must be valid'},
+      {t:"Mother's renewed Iqama",s:'Must be valid'},
+      {t:"Student's passport",s:'Personal data page'},
+      {t:"Father's passport",s:'Personal data page'},
+      {t:"Mother's passport",s:'Personal data page'},
+      {t:"Student's Immunisation Card",s:'Up-to-date and stamped'},
+      {t:"Student's Birth Certificate",s:'Certified and stamped'},
+      {t:'Previous academic report',s:'If applicable, stamped'},
+      {t:'Physical fitness certificate',s:'From an accredited centre'},
+      {t:'8 personal photographs',s:'White background, recent'},
+    ]
+  }
 };
-let curNat='saudi',checked={saudi:new Set(),nonsaudi:new Set()};
+let curNat='saudi';
+const checked={saudi:new Set(),nonsaudi:new Set()};
 function setNat(n){curNat=n;document.getElementById('nat-sa').classList.toggle('on',n==='saudi');document.getElementById('nat-ns').classList.toggle('on',n==='nonsaudi');renderDocs();}
 function renderDocs(){
   const docs=DOCS[curNat][lang==='ar'?'ar':'en'],ck=checked[curNat];
-  document.getElementById('doc-list').innerHTML=docs.map((d,i)=>`<div class="doc-item" onclick="togDoc(${i})"><div class="doc-chk${ck.has(i)?' on':''}"><span class="ck-mark">✓</span></div><div><div class="doc-txt">${d.t}</div><div class="doc-sub">${d.s}</div></div></div>`).join('');
+  document.getElementById('doc-list').innerHTML=docs.map((d,i)=>`<div class="doc-item" onclick="togDoc(${i})"><div class="doc-chk${ck.has(i)?' on':''}"><span class="ck">✓</span></div><div><div class="doc-txt">${d.t}</div><div class="doc-sub">${d.s}</div></div></div>`).join('');
   const n=ck.size,tot=docs.length,pct=tot?Math.round(n/tot*100):0;
   document.getElementById('prog-fill').style.width=pct+'%';
   document.getElementById('prog-txt').textContent=lang==='ar'?`${n} من ${tot} وثيقة جاهزة`:`${n} of ${tot} documents ready`;
@@ -901,165 +964,346 @@ function renderDocs(){
 function togDoc(i){const ck=checked[curNat];ck.has(i)?ck.delete(i):ck.add(i);renderDocs();}
 renderDocs();
 
-/* ══════════════════════════════════════════
-   TICKET
-══════════════════════════════════════════ */
-let ticketN=parseInt(localStorage.getItem('kg_t')||'0');
+/* ═══════════════════════════════════════════
+   QUEUE — نظام الأرقام
+═══════════════════════════════════════════ */
 function takeTicket(){
-  ticketN++;localStorage.setItem('kg_t',ticketN);
-  document.getElementById('queue-cur').textContent=Math.max(1,ticketN-1);
+  // منع أخذ أكثر من رقم واحد
+  if(myTicket){
+    showToast(t('alreadyTicket')+': '+myTicket,true);
+    // اعرض الرقم الموجود مرة ثانية
+    showExistingTicket();
+    return;
+  }
+  ticketN++;
+  localStorage.setItem('kg_t',ticketN);
+  myTicket=ticketN;
+
   const time=new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
-  document.getElementById('ticket-area').innerHTML=`
-    <div class="ticket-result">
-      <div class="ticket-top">
-        <div style="font-size:13px;opacity:.82;margin-bottom:8px">${t('ticketYour')}</div>
-        <div class="ticket-num-big">${ticketN}</div>
-        <div style="font-size:12px;opacity:.72;margin-top:8px">${t('ticketWait')}</div>
-        <div style="font-size:11px;opacity:.6;margin-top:4px;font-family:Nunito,sans-serif">${time}</div>
-      </div>
-      <div class="ticket-bottom">
-        <button class="print-btn" onclick="window.print()">${t('printBtn')}</button>
-      </div>
-    </div>`;
+  showTicketCard(myTicket,time);
+  showToast(lang==='ar'?`رقمك هو ${myTicket} 🎫`:`Your number is ${myTicket} 🎫`,true);
 }
 
-/* ══════════════════════════════════════════
-   ADMIN
-══════════════════════════════════════════ */
-function openAdminCode(){
-  document.getElementById('admin-code-overlay')?.remove();
-  const isAr=lang==='ar';
-  const o=document.createElement('div');
-  o.className='admin-code-overlay';
-  o.id='admin-code-overlay';
-  o.innerHTML=`
-    <div class="admin-code-box">
-      <div class="admin-code-icon">🔐</div>
-      <div class="admin-code-title">${t('adminTitle')}</div>
-      <div class="admin-code-sub">${t('adminSub')}</div>
-      <input class="code-input" type="password" id="code-inp" maxlength="10" placeholder="••••" onkeydown="if(event.key==='Enter')checkCode()">
-      <div class="code-err" id="code-err">${t('adminWrong')}</div>
-      <div class="code-btns">
-        <button class="code-cancel" onclick="document.getElementById('admin-code-overlay').remove()">${t('adminCancel')}</button>
-        <button class="code-go" onclick="checkCode()">${t('adminEnter')}</button>
-      </div>
-    </div>`;
+function showExistingTicket(){
+  const time=new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+  showTicketCard(myTicket,time);
+}
+
+function showTicketCard(num,time){
+  document.getElementById('ticket-area').innerHTML=`
+  <div class="tkt-result">
+    <div class="tkt-top">
+      <div style="font-size:13px;opacity:.85;margin-bottom:10px">${t('ticketYour')}</div>
+      <div class="tkt-num">${num}</div>
+      <div style="font-size:13px;opacity:.78;margin-top:12px">${t('ticketWait')}</div>
+      <div style="font-size:12px;opacity:.6;margin-top:5px;font-family:Nunito,sans-serif">${time}</div>
+    </div>
+    <div class="tkt-bot">
+      <button class="print-btn" onclick="window.print()">${t('printBtn')}</button>
+    </div>
+  </div>`;
+  // خبّي زر "استلام رقم" بعد الأخذ
+  const btn=document.getElementById('ticket-main-btn');
+  if(btn)btn.style.opacity='0.4';
+}
+
+/* ═══════════════════════════════════════════
+   ADMIN CALL — نداء الرقم
+   يعمل بين الأجهزة عبر localStorage polling
+   لو عندك Supabase، يصير realtime بدل polling
+═══════════════════════════════════════════ */
+function callTicket(){
+  const numEl=document.getElementById('q-call-num');
+  const num=parseInt(numEl.value);
+  if(!num||num<1){
+    showToast(lang==='ar'?'أدخل رقماً صحيحاً':'Enter a valid number');
+    return;
+  }
+
+  // احفظ النداء في localStorage
+  const calls=JSON.parse(localStorage.getItem('kg_calls')||'[]');
+  const callEntry={num,ts:Date.now()};
+  calls.push(callEntry);
+  // احتفظ بآخر 50 نداء فقط
+  if(calls.length>50)calls.splice(0,calls.length-50);
+  localStorage.setItem('kg_calls',JSON.stringify(calls));
+
+  // حدّث الرقم الحالي
+  lastCalledN=num;
+  localStorage.setItem('kg_cur',num);
+  document.getElementById('queue-cur').textContent=num;
+
+  numEl.value='';
+  showNotif(num);
+  showToast(lang==='ar'?`تم نداء الرقم ${num} 📢`:`Called number ${num} 📢`,true);
+}
+
+/* ═══════════════════════════════════════════
+   NOTIFICATION BANNER
+═══════════════════════════════════════════ */
+function showNotif(num){
+  document.querySelector('.notif')?.remove();
+  const nb=document.createElement('div');nb.className='notif';
+  nb.innerHTML=`
+    <div class="notif-ic">🔔</div>
+    <div class="notif-body">
+      <div class="notif-title">${t('notifTitle')}</div>
+      <div class="notif-sub">${t('notifSub').replace('{n}',num)}</div>
+    </div>
+    <div style="font-size:24px;opacity:.7;flex-shrink:0;align-self:center;cursor:pointer" onclick="this.parentNode.remove()">×</div>`;
+  nb.onclick=e=>{if(e.target===nb||e.target.textContent==='×')nb.remove();};
+  document.body.appendChild(nb);
+  // اهتزاز الجهاز
+  try{navigator.vibrate&&navigator.vibrate([400,150,400,150,400]);}catch(e){}
+  // صوت تنبيه بسيط
+  try{
+    const ctx=new (window.AudioContext||window.webkitAudioContext)();
+    [523,659,784].forEach((f,i)=>{
+      const o=ctx.createOscillator(),g=ctx.createGain();
+      o.connect(g);g.connect(ctx.destination);
+      o.frequency.value=f;g.gain.setValueAtTime(.3,ctx.currentTime+i*.2);
+      g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+i*.2+.18);
+      o.start(ctx.currentTime+i*.2);o.stop(ctx.currentTime+i*.2+.2);
+    });
+  }catch(e){}
+  setTimeout(()=>nb?.remove(),12000);
+}
+
+/* ═══════════════════════════════════════════
+   CALL WATCHER
+   كل 2 ثانية يتحقق إذا نودي على رقمه
+═══════════════════════════════════════════ */
+let lastWatchedTs=Date.now();
+function startCallWatcher(){
+  setInterval(()=>{
+    // حدّث الرقم المعروض
+    const cur=parseInt(localStorage.getItem('kg_cur')||'0');
+    if(cur>0){
+      lastCalledN=cur;
+      const el=document.getElementById('queue-cur');
+      if(el&&el.textContent!==String(cur))el.textContent=cur;
+    }
+    // تحقق إذا نودي على رقم هذا المستخدم
+    if(!myTicket)return;
+    const calls=JSON.parse(localStorage.getItem('kg_calls')||'[]');
+    const fresh=calls.filter(c=>c.num===myTicket&&c.ts>lastWatchedTs&&c.ts>Date.now()-120000);
+    if(fresh.length&&!document.querySelector('.notif')){
+      showNotif(myTicket);
+      lastWatchedTs=Date.now();
+      // انتقل لصفحة الانتظار تلقائياً
+      switchPg('queue');
+    }
+  },2000);
+}
+
+/* ═══════════════════════════════════════════
+   ADMIN PANEL
+═══════════════════════════════════════════ */
+function openAdmin(){
+  document.getElementById('admin-overlay')?.remove();
+  const o=document.createElement('div');o.className='overlay';o.id='admin-overlay';
+  o.innerHTML=`<div class="abox">
+    <div class="abox-icon">🔐</div>
+    <div class="abox-title">${t('adminTitle')}</div>
+    <div class="abox-sub">${t('adminSub')}</div>
+    <input class="code-inp" type="password" id="code-inp" maxlength="10" placeholder="••••" onkeydown="if(event.key==='Enter')checkCode()">
+    <div class="code-err" id="code-err">${t('adminWrong')}</div>
+    <div class="code-btns">
+      <button class="code-cancel" onclick="document.getElementById('admin-overlay').remove()">${t('adminCancel')}</button>
+      <button class="code-go" onclick="checkCode()">${t('adminEnter')}</button>
+    </div>
+  </div>`;
   document.body.appendChild(o);
-  setTimeout(()=>document.getElementById('code-inp')?.focus(),100);
+  setTimeout(()=>document.getElementById('code-inp')?.focus(),120);
 }
 
 async function checkCode(){
   const v=document.getElementById('code-inp').value;
   const e=document.getElementById('code-err');
-  if(v===ADMIN_CODE){document.getElementById('admin-code-overlay').remove();await showAdmin();}
-  else{e.classList.add('show');document.getElementById('code-inp').value='';document.getElementById('code-inp').style.borderColor='#e53935';setTimeout(()=>{e.classList.remove('show');document.getElementById('code-inp').style.borderColor='';},2000);}
+  if(v===ADMIN_CODE){
+    document.getElementById('admin-overlay').remove();
+    isAdmin=true;
+    document.getElementById('q-admin-panel').style.display='block';
+    document.getElementById('q-admin-locked').style.display='none';
+    await showAdminDashboard();
+  }else{
+    e.classList.add('show');
+    document.getElementById('code-inp').value='';
+    document.getElementById('code-inp').style.borderColor='#e53935';
+    setTimeout(()=>{e.classList.remove('show');document.getElementById('code-inp').style.borderColor='';},2200);
+  }
 }
 
-async function showAdmin(){
-  let guardians=[];
-  try{guardians=JSON.parse(localStorage.getItem('kg_g')||'[]');}catch(e){}
-  guardians.sort((a,b)=>b.ts-a.ts);
+async function showAdminDashboard(){
+  const guardians=getLocal();
   const today=guardians.filter(g=>g.ts>Date.now()-86400000).length;
+  const rows=guardians.length
+    ?guardians.map((g,i)=>`<tr style="background:${i%2===0?'#fff':'#f9fcfb'}">
+        <td style="padding:10px 11px;font-weight:700;color:#0f1f1c">${g.name||'—'}</td>
+        <td style="padding:10px 11px;font-family:Nunito,sans-serif;direction:ltr;color:#2d4a45">${g.phone||'—'}</td>
+        <td style="padding:10px 11px;color:#2d4a45">${g.child||'—'}</td>
+        <td style="padding:9px 8px;font-size:11px;color:#6b8c85">${g.time||g.date||'—'}</td>
+      </tr>`).join('')
+    :`<tr><td colspan="4" style="text-align:center;padding:28px;color:#6b8c85">${lang==='ar'?'لا يوجد بيانات بعد':'No data yet'}</td></tr>`;
 
-  const rows=guardians.length?guardians.map(g=>`
-    <tr>
-      <td style="padding:9px 10px;font-weight:700;color:#0f1f1c">${g.name}</td>
-      <td style="padding:9px 10px;font-family:Nunito,sans-serif;direction:ltr;color:#2d4a45">${g.phone}</td>
-      <td style="padding:9px 10px;color:#6b8c85">${g.child}</td>
-      <td style="padding:9px 8px;font-size:11px;color:#6b8c85">${g.time}</td>
-    </tr>`).join('')
-    :`<tr><td colspan="4" style="text-align:center;padding:24px;color:#6b8c85">${lang==='ar'?'لا يوجد بيانات بعد':'No data yet'}</td></tr>`;
-
-  const csv='Name,Phone,Child,Time\n'+guardians.map(g=>`"${g.name}","${g.phone}","${g.child}","${g.time}"`).join('\n');
-  const url=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  const csv='Name,Phone,Child,Time\n'+guardians.map(g=>`"${g.name}","${g.phone}","${g.child}","${g.time||g.date}"`).join('\n');
+  const url=URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'}));
 
   const m=document.createElement('div');
-  m.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:99998;display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;padding:16px;backdrop-filter:blur(4px)';
-  m.innerHTML=`
-    <div style="background:#fff;border-radius:22px;width:100%;max-width:560px;overflow:hidden;margin:auto;box-shadow:0 24px 80px rgba(0,0,0,.3)">
-      <div style="background:linear-gradient(135deg,#0b5e52,#0d7a6a);padding:18px 20px;color:#fff;display:flex;justify-content:space-between;align-items:flex-start">
-        <div>
-          <div style="font-size:17px;font-weight:800;margin-bottom:3px">📊 ${lang==='ar'?'لوحة إدارة القبول':'Admission Dashboard'}</div>
-          <div style="font-size:12px;opacity:.75">${lang==='ar'?'إجمالي أولياء الأمور':'Total guardians'}: ${guardians.length}</div>
-        </div>
-        <button onclick="this.closest('div[style*=fixed]').remove()" style="background:rgba(255,255,255,.15);border:none;color:#fff;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center">×</button>
+  m.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99998;display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;padding:16px;backdrop-filter:blur(6px)';
+  m.innerHTML=`<div style="background:#fff;border-radius:24px;width:100%;max-width:620px;overflow:hidden;margin:auto;box-shadow:0 28px 80px rgba(0,0,0,.32);animation:popIn .32s cubic-bezier(.34,1.56,.64,1)">
+    <div style="background:linear-gradient(135deg,#053e36,#0b5e52,#0d7a6a);padding:20px 22px;color:#fff;display:flex;justify-content:space-between;align-items:flex-start">
+      <div>
+        <div style="font-size:18px;font-weight:900;margin-bottom:4px">📊 ${lang==='ar'?'لوحة إدارة القبول':'Admission Dashboard'}</div>
+        <div style="font-size:12px;opacity:.74">Kids Gate • 2026–2027</div>
       </div>
-      <div style="padding:16px">
-        <div style="display:flex;gap:10px;margin-bottom:14px">
-          <div style="flex:1;background:#eef7f5;border-radius:14px;padding:14px;text-align:center;border:1.5px solid #c8deda">
-            <div style="font-size:30px;font-weight:900;color:#0b5e52;font-family:Nunito,sans-serif">${guardians.length}</div>
-            <div style="font-size:11px;color:#6b8c85;margin-top:2px">${lang==='ar'?'إجمالي الزيارات':'Total visits'}</div>
-          </div>
-          <div style="flex:1;background:#fdf3d0;border-radius:14px;padding:14px;text-align:center;border:1.5px solid #f5c843">
-            <div style="font-size:30px;font-weight:900;color:#b8860b;font-family:Nunito,sans-serif">${today}</div>
-            <div style="font-size:11px;color:#6b8c85;margin-top:2px">${lang==='ar'?'آخر 24 ساعة':'Last 24 hours'}</div>
-          </div>
+      <button onclick="this.closest('[style*=fixed]').remove()" style="background:rgba(255,255,255,.15);border:none;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0">×</button>
+    </div>
+    <div style="padding:18px">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px;margin-bottom:16px">
+        <div style="background:linear-gradient(135deg,#eef7f5,#fff);border-radius:15px;padding:15px;text-align:center;border:1.5px solid #c8deda">
+          <div style="font-size:32px;font-weight:900;color:#0b5e52;font-family:Nunito,sans-serif">${guardians.length}</div>
+          <div style="font-size:11px;color:#6b8c85;margin-top:3px">${lang==='ar'?'إجمالي المسجلين':'Total registered'}</div>
         </div>
-        <a href="${url}" download="kids_gate_guardians.csv" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#b8860b,#d4a017);color:#fff;border-radius:12px;padding:11px;font-weight:700;font-size:13px;margin-bottom:14px;text-decoration:none;box-shadow:0 4px 14px rgba(184,134,11,.25)">⬇️ ${lang==='ar'?'تصدير CSV':'Export CSV'}</a>
-        <div style="overflow-x:auto;border-radius:12px;border:1.5px solid #c8deda">
-          <table style="width:100%;border-collapse:collapse;font-size:12.5px">
-            <thead><tr style="background:#eef7f5;border-bottom:1.5px solid #c8deda">
-              <th style="padding:9px 10px;text-align:right;color:#0b5e52;font-weight:700">${lang==='ar'?'الاسم':'Name'}</th>
-              <th style="padding:9px 10px;text-align:right;color:#0b5e52;font-weight:700">${lang==='ar'?'الجوال':'Mobile'}</th>
-              <th style="padding:9px 10px;text-align:right;color:#0b5e52;font-weight:700">${lang==='ar'?'الطفل':'Child'}</th>
-              <th style="padding:9px 8px;text-align:right;color:#0b5e52;font-weight:700">${lang==='ar'?'الوقت':'Time'}</th>
-            </tr></thead>
-            <tbody style="border-collapse:collapse">${rows}</tbody>
-          </table>
+        <div style="background:linear-gradient(135deg,#fdf3d0,#fff);border-radius:15px;padding:15px;text-align:center;border:1.5px solid rgba(245,200,67,.45)">
+          <div style="font-size:32px;font-weight:900;color:#b8860b;font-family:Nunito,sans-serif">${today}</div>
+          <div style="font-size:11px;color:#6b8c85;margin-top:3px">${lang==='ar'?'آخر 24 ساعة':'Last 24 hours'}</div>
+        </div>
+        <div style="background:linear-gradient(135deg,#fdecea,#fff);border-radius:15px;padding:15px;text-align:center;border:1.5px solid rgba(192,57,43,.18)">
+          <div style="font-size:32px;font-weight:900;color:#c0392b;font-family:Nunito,sans-serif">${ticketN}</div>
+          <div style="font-size:11px;color:#6b8c85;margin-top:3px">${lang==='ar'?'أرقام انتظار':'Queue tickets'}</div>
         </div>
       </div>
-    </div>`;
+      <a href="${url}" download="kids_gate_${new Date().toISOString().split('T')[0]}.csv" style="display:flex;align-items:center;justify-content:center;gap:9px;background:linear-gradient(135deg,#7a5800,#b8860b,#d4a017);color:#fff;border-radius:14px;padding:13px;font-weight:800;font-size:14px;margin-bottom:16px;text-decoration:none">
+        ⬇️ ${lang==='ar'?'تصدير CSV (يفتح في Excel)':'Export CSV (opens in Excel)'}
+      </a>
+      <div style="overflow-x:auto;border-radius:14px;border:1.5px solid #c8deda">
+        <table style="width:100%;border-collapse:collapse;font-size:12.5px">
+          <thead><tr style="background:#eef7f5;border-bottom:2px solid #c8deda">
+            <th style="padding:11px;text-align:right;color:#0b5e52;font-weight:800">${lang==='ar'?'اسم ولي الأمر':'Guardian'}</th>
+            <th style="padding:11px;text-align:right;color:#0b5e52;font-weight:800">${lang==='ar'?'الجوال':'Mobile'}</th>
+            <th style="padding:11px;text-align:right;color:#0b5e52;font-weight:800">${lang==='ar'?'الطفل':'Child'}</th>
+            <th style="padding:10px 9px;text-align:right;color:#0b5e52;font-weight:800">${lang==='ar'?'الوقت':'Time'}</th>
+          </tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+    </div>
+  </div>`;
   document.body.appendChild(m);
 }
 
-/* ══════════════════════════════════════════
+/* ═══════════════════════════════════════════
    AI CHAT
-══════════════════════════════════════════ */
-const SYS=`You are a friendly admissions assistant for Kids Gate Kindergarten in Jeddah, Saudi Arabia (2026–2027). Always reply in the same language the user writes in. Be warm, concise, and well-structured. Use clear formatting when listing fees or documents. Never mention Claude or Anthropic.
+   السيستم برومبت معزّز — بدون جداول نهائياً
+═══════════════════════════════════════════ */
+const SYS=`أنت مساعد قبول ودود ومحترف لروضة Kids Gate في جدة، المملكة العربية السعودية، للعام الدراسي 2026–2027.
 
-FEES (base / with 15% VAT):
-Pre-KG: Assessment 250/287.50, Registration 500/575, Instalment 7,450/8,567.50, Full year 14,900/17,135 SAR
-KG I: Assessment 250/287.50, Registration 500/575, Instalment 8,450/9,717.50, Full year 16,900/19,435 SAR
-KG II: Same as KG I
-Grade 1: Assessment 250/287.50, Registration 500/575, Instalment 8,950/10,292.50, Full year 17,900/20,585 SAR
+قواعد صارمة جداً:
+1. أجب دائماً بنفس لغة السؤال (عربي أو إنجليزي).
+2. ممنوع منعاً باتاً استخدام جداول HTML أو markdown. اكتب كل شيء كنص عادي وجمل طبيعية.
+3. ممنوع استخدام | أو --- أو أي تنسيق جدول.
+4. اكتب الأرقام بشكل طبيعي في الجملة، مثال: "رسوم التقييم 287.50 ريال شاملة الضريبة".
+5. كن موجزاً ودافئاً. لا تطوّل إلا إذا طُلب.
+6. لا تذكر Claude أو Anthropic أبداً.
+7. عند ذكر أي مبلغ، اذكر دائماً أنه شامل ضريبة القيمة المضافة 15%.
 
-DISCOUNTS: 10% early full-year | 5% 2nd child | 7.5% 3rd child | 10% 4th child
+═══ الرسوم (ريال سعودي، جميع المبالغ شاملة ضريبة 15%) ═══
+ما قبل الروضة (Pre-KG): رسوم تقييم 287.50 | تسجيل 575 | كل قسط 8,567.50 | إجمالي السنة 17,135
+الروضة الأولى (KG I): رسوم تقييم 287.50 | تسجيل 575 | كل قسط 9,717.50 | إجمالي السنة 19,435
+الروضة الثانية (KG II): نفس KG I — رسوم تقييم 287.50 | تسجيل 575 | كل قسط 9,717.50 | إجمالي السنة 19,435
+الصف الأول: رسوم تقييم 287.50 | تسجيل 575 | كل قسط 10,292.50 | إجمالي السنة 20,585
 
-AGE (2026-2027): Pre-KG: 25 Aug 2022–24 Aug 2023 | KG I: 25 Aug 2021–24 Aug 2022 | KG II: 25 Aug 2020–24 Aug 2021 | Grade 1: on/before 24 Aug 2020
+═══ الخصومات ═══
+10% للدفع المبكر (سنة كاملة) | 5% للطفل الثاني | 7.5% للطفل الثالث | 10% للطفل الرابع
+الخصم يُحسب على الإجمالي السنوي شامل الضريبة.
 
-DOCUMENTS:
-Saudi: Family Card, immunisation card, birth cert, previous report (if any), physical fitness cert, 8 photos
-Non-Saudi: Renewed Iqama x3 (student+father+mother), passports x3, immunisation card, birth cert, previous report (if any), physical fitness cert, 8 photos
+═══ أعمار القبول 2026-2027 ═══
+Pre-KG: مواليد 25 أغسطس 2022 – 24 أغسطس 2023
+KG I: مواليد 25 أغسطس 2021 – 24 أغسطس 2022
+KG II: مواليد 25 أغسطس 2020 – 24 أغسطس 2021
+الصف الأول: مواليد 24 أغسطس 2020 أو قبله
+ملاحظة: مواليد 25 أغسطس – 22 نوفمبر 2020 يُقبلون في KG II بشرط إتمام المرحلة السابقة.
 
-Always show fees as: base price + VAT amount = total.`;
+═══ المنهج ═══
+Pre-KG (شفوي): إمساك القلم، الاجابة عند السؤال، التعبير عن المشاعر، تتبع الخطوط، مهارات حركية وفنية.
+KG I (شفوي): التعرف على الحروف والأرقام، العد 1-10، الألوان الأساسية.
+KG II: كتابة Aa-Zz، أرقام 1-30، جمع أحادي الرقم، phonics. للعرب: أحرف عربية أ-ي، تمييز الحرف الأول.
+الصف الأول — إنجليزي: قراءة وفهم، كلمات 3 حروف، is/am/are، مفرد وجمع. رياضيات: 1-100، جمع وطرح. عربي (للعرب): كتابة أ-ي بالحركات، ربط صورة بحرف.
+
+═══ الأوراق المطلوبة ═══
+للسعوديين: بطاقة العائلة (أصل+نسخة) + كرت تطعيم + شهادة ميلاد + آخر تقرير دراسي (إن وجد) + كشف طبي + 8 صور.
+لغير السعوديين: كل ما سبق + إقامة مجددة×3 (طالب/أب/أم) + جواز سفر×3.
+
+═══ أوقات العمل ═══
+الأحد – الخميس، 7:30 صباحاً – 3:00 مساءً، مبنى الإدارة الدور الأول.
+
+مثال على الرد الصحيح عند السؤال عن الرسوم:
+"رسوم الروضة الأولى للعام 2026-2027 هي كالتالي: رسوم التقييم 287.50 ريال، رسوم التسجيل 575 ريال، والقسط الأول والثاني كل منهما 9,717.50 ريال. أما الإجمالي السنوي فهو 19,435 ريال، وجميع المبالغ شاملة ضريبة القيمة المضافة 15%."
+
+هذا هو الأسلوب الصحيح — نص طبيعي، لا جداول.`;
 
 let history=[],botBusy=false;
+
 function addMsg(html,role){
   const box=document.getElementById('chat-msgs');
-  const w=document.createElement('div');w.className='msg-wrap';
-  const isAr=lang==='ar';
-  if(role==='bot'){w.innerHTML=`<div class="msg-lbl bot-l">${t('botLbl')}</div><div class="msg bot">${html}</div>`;}
-  else{w.innerHTML=`<div class="msg-lbl" style="${isAr?'':'text-align:right'}">${t('youLbl')}</div><div class="msg user">${html}</div>`;}
+  const w=document.createElement('div');w.className='mwrap';
+  if(role==='bot'){
+    w.innerHTML=`<div class="mlbl bot">${t('botLbl')}</div><div class="msg bot-m">${html}</div>`;
+  }else{
+    w.innerHTML=`<div class="mlbl" style="${lang==='ar'?'':'text-align:right'}">${t('youLbl')}</div><div class="msg user-m">${html}</div>`;
+  }
   box.appendChild(w);box.scrollTop=box.scrollHeight;
 }
-function showTyping(){const b=document.getElementById('chat-msgs');const d=document.createElement('div');d.id='typing';d.className='msg-wrap';d.innerHTML=`<div class="msg-lbl bot-l">${t('botLbl')}</div><div class="msg bot" style="padding:12px 14px"><div class="typing-row"><div class="td"></div><div class="td"></div><div class="td"></div></div></div>`;b.appendChild(d);b.scrollTop=b.scrollHeight;}
+
+function showTyping(){
+  const b=document.getElementById('chat-msgs');
+  const d=document.createElement('div');d.id='typing';d.className='mwrap';
+  d.innerHTML=`<div class="mlbl bot">${t('botLbl')}</div><div class="msg bot-m" style="padding:13px 16px"><div class="tdots"><div class="td"></div><div class="td"></div><div class="td"></div></div></div>`;
+  b.appendChild(d);b.scrollTop=b.scrollHeight;
+}
 function hideTyping(){document.getElementById('typing')?.remove();}
+
 async function sendMsg(){
   if(botBusy)return;
-  const inp=document.getElementById('chat-input');const txt=inp.value.trim();if(!txt)return;
-  inp.value='';addMsg(txt,'user');history.push({role:'user',content:txt});
+  const inp=document.getElementById('chat-input');
+  const txt=inp.value.trim();if(!txt)return;
+  inp.value='';addMsg(txt,'user');
+  history.push({role:'user',content:txt});
   document.getElementById('quick-qs').style.display='none';
   botBusy=true;showTyping();
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:700,system:SYS,messages:history})});
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:700,
+        system:SYS,
+        messages:history
+      })
+    });
     const data=await res.json();hideTyping();
     const reply=data.content?.map(c=>c.text||'').join('')||'—';
     history.push({role:'assistant',content:reply});
-    addMsg(reply.replace(/\n/g,'<br>'),'bot');
-  }catch(e){hideTyping();addMsg(lang==='ar'?'عذراً، خطأ في الاتصال. يرجى التحدث مع موظفة القبول.':'Sorry, connection error. Please speak with our admissions officer.','bot');}
+    // تنظيف أي جداول markdown تسللت
+    const clean=reply
+      .replace(/\|[^\n]+\|/g,'')
+      .replace(/[-]{3,}/g,'')
+      .replace(/\n{3,}/g,'\n\n')
+      .trim();
+    addMsg(clean.replace(/\n/g,'<br>'),'bot');
+  }catch(e){
+    hideTyping();
+    addMsg(lang==='ar'?'عذراً، خطأ في الاتصال. يرجى التحدث مع موظفة القبول.':'Sorry, connection error. Please speak with our admissions officer.','bot');
+  }
   botBusy=false;
 }
+
 function sendQ(btn){document.getElementById('chat-input').value=btn.textContent;sendMsg();}
+
+/* init */
+applyLang();
 </script>
 </body>
 </html>
