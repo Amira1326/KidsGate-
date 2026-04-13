@@ -41,7 +41,20 @@ body.en{font-family:'Nunito',sans-serif;direction:ltr}
 .g-lang-btn{background:none;border:none;padding:6px 16px;font-size:12px;font-weight:700;color:rgba(255,255,255,.75);cursor:pointer;border-radius:24px;transition:.2s;font-family:'Nunito',sans-serif}
 .g-lang-btn.on{background:rgba(255,255,255,.92);color:var(--emerald)}
 .gate-hero{flex:0 0 auto;padding:28px 24px 0;text-align:center;position:relative;z-index:1;animation:fadeUp .7s .1s both ease}
-.gate-logo-wrap{display:inline-flex;align-items:center;justify-content:center;width:180px;height:80px;background:rgba(255,255,255,.95);border-radius:16px;padding:6px;box-shadow:0 8px 32px rgba(0,0,0,.25);margin-bottom:16px;animation:float 4s ease-in-out infinite}
+
+/* 🖼️ LOGO CONTAINER - استبدل الرابط أدناه برابط شعار مدرستك */
+.gate-logo-wrap{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:180px;height:80px;background:rgba(255,255,255,.95);
+  border-radius:16px;padding:6px;box-shadow:0 8px 32px rgba(0,0,0,.25);
+  margin-bottom:16px;animation:float 4s ease-in-out infinite;  overflow:hidden;
+}
+.gate-logo-wrap img{
+  width:100%;height:100%;object-fit:contain;
+  transition:transform .3s ease;
+}
+.gate-logo-wrap:hover img{transform:scale(1.05);}
+
 .gate-tagline{font-size:13.5px;color:rgba(255,255,255,.78);line-height:1.65}
 .gate-pill{display:inline-block;background:rgba(245,200,67,.22);border:1.5px solid rgba(245,200,67,.5);color:var(--gold-shine);font-size:11px;font-weight:700;padding:4px 16px;border-radius:20px;margin-top:10px;font-family:'Nunito',sans-serif;letter-spacing:.5px}
 .gate-form-wrap{flex:1;margin-top:28px;background:var(--white);border-radius:32px 32px 0 0;padding:28px 22px 40px;box-shadow:0 -12px 50px rgba(0,0,0,.2);position:relative;z-index:1;animation:slideDown .5s .3s both ease}
@@ -83,8 +96,7 @@ body.en .gate-btn{font-family:'Nunito',sans-serif}
 .bnav-btn{background:none;border:none;padding:10px 4px 7px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:.18s;position:relative}
 .bnav-btn .bi{font-size:20px;transition:.2s}
 .bnav-btn .bl{font-size:10px;color:var(--muted);font-weight:600;transition:.18s;font-family:'Cairo',sans-serif}
-body.en .bnav-btn .bl{font-family:'Nunito',sans-serif}
-.bnav-btn.on .bl{color:var(--emerald);font-weight:800}
+body.en .bnav-btn .bl{font-family:'Nunito',sans-serif}.bnav-btn.on .bl{color:var(--emerald);font-weight:800}
 .bnav-btn.on .bi{transform:scale(1.15)}
 .bnav-btn::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:3px;background:var(--emerald);border-radius:3px 3px 0 0;transition:.2s}
 .bnav-btn.on::after{width:32px}
@@ -133,14 +145,13 @@ input[type=date]:focus{outline:none;border-color:var(--emerald-bright);box-shado
 
 /* RESULT */
 .res-card{border-radius:var(--rXL);overflow:hidden;box-shadow:var(--shadow-lg);animation:popIn .38s cubic-bezier(.34,1.56,.64,1);margin:14px 16px}
-.res-head{padding:22px 20px 18px;color:#fff;text-align:center;position:relative;overflow:hidden}
-.res-head::before{content:'';position:absolute;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.07);top:-60px;right:-60px}
+.res-head{padding:22px 20px 18px;color:#fff;text-align:center;position:relative;overflow:hidden}.res-head::before{content:'';position:absolute;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.07);top:-60px;right:-60px}
 .res-head-label{font-size:12px;opacity:.82;margin-bottom:5px;display:flex;align-items:center;justify-content:center;gap:5px}
 .res-grade{font-size:24px;font-weight:900;position:relative;z-index:1}
 .res-year{font-size:11.5px;opacity:.75;margin-top:4px;font-family:'Nunito',sans-serif;position:relative;z-index:1}
 .res-body{background:var(--white);padding:18px}
 
-/* FEE ROWS - base big, vat small below */
+/* FEE ROWS */
 .fee-row{padding:11px 0;border-bottom:1px dashed var(--border)}
 .fee-row:last-child{border-bottom:none}
 .fee-row-top{display:flex;justify-content:space-between;align-items:baseline}
@@ -183,7 +194,6 @@ input[type=date]:focus{outline:none;border-color:var(--emerald-bright);box-shado
 .syl-dot{width:6px;height:6px;border-radius:50%;background:var(--emerald-bright);flex-shrink:0;margin-top:5px}
 .warn-box{background:#fffde7;border:2px solid #ffe082;border-radius:12px;padding:11px 13px;font-size:12px;color:#7a5c00;line-height:1.7;margin-top:10px}
 .err-box{background:#ffebee;border:2px solid #ef9a9a;border-radius:12px;padding:11px 13px;font-size:13px;color:#c62828;margin:14px 16px}
-
 /* DOCS */
 .nat-toggle{display:grid;grid-template-columns:1fr 1fr;background:var(--emerald-xlight);border-radius:14px;padding:4px;margin:0 16px 14px;border:2px solid var(--emerald-light)}
 .nat-btn{background:none;border:none;padding:10px;border-radius:11px;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;transition:.18s;font-family:'Cairo',sans-serif}
@@ -233,7 +243,6 @@ body.en .qq{font-family:'Nunito',sans-serif}
 .qq:nth-child(1){animation-delay:.04s}.qq:nth-child(2){animation-delay:.09s}.qq:nth-child(3){animation-delay:.14s}.qq:nth-child(4){animation-delay:.19s}
 .qq:hover{background:var(--emerald);color:#fff;border-color:var(--emerald);transform:translateY(-2px)}
 .qq:active{transform:scale(.94)}
-
 .chat-input-row{display:flex;gap:8px;padding:10px 13px 14px;background:var(--white);border-top:1px solid var(--border);flex-shrink:0}
 .chat-in{flex:1;padding:11px 14px;border:1.5px solid var(--border);border-radius:14px;font-size:14px;color:var(--text);background:var(--cream);resize:none;font-family:'Cairo',sans-serif;transition:.2s}
 body.en .chat-in{font-family:'Nunito',sans-serif;direction:ltr}
@@ -283,8 +292,7 @@ body.en .chat-in{font-family:'Nunito',sans-serif;direction:ltr}
 .a-syl-gname{font-size:12px;font-weight:900;color:var(--emerald);margin-bottom:5px}
 .a-syl-items{font-size:12px;color:var(--text-mid);line-height:1.7}
 
-/* QUEUE */
-.queue-hero{background:linear-gradient(135deg,var(--gold) 0%,var(--gold-bright) 100%);margin:16px;border-radius:var(--rXL);padding:24px;text-align:center;box-shadow:0 8px 30px rgba(184,134,11,.25);position:relative;overflow:hidden}
+/* QUEUE */.queue-hero{background:linear-gradient(135deg,var(--gold) 0%,var(--gold-bright) 100%);margin:16px;border-radius:var(--rXL);padding:24px;text-align:center;box-shadow:0 8px 30px rgba(184,134,11,.25);position:relative;overflow:hidden}
 .queue-hero::before{content:'';position:absolute;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.08);top:-40px;right:-40px}
 .queue-serving-lbl{font-size:12px;color:rgba(255,255,255,.8);margin-bottom:4px;position:relative;z-index:1}
 .queue-num{font-size:60px;font-weight:900;color:#fff;font-family:'Nunito',sans-serif;line-height:1;position:relative;z-index:1}
@@ -333,8 +341,7 @@ body.ar .notif-close{left:auto;right:12px}
 .admin-code-icon{font-size:36px;margin-bottom:10px}
 .admin-code-title{font-size:17px;font-weight:800;color:var(--text);margin-bottom:5px}
 .admin-code-sub{font-size:12.5px;color:var(--muted);margin-bottom:18px}
-.code-input{width:100%;padding:13px;border:2px solid var(--border);border-radius:12px;font-size:22px;text-align:center;letter-spacing:8px;font-family:'Nunito',sans-serif;transition:.2s;margin-bottom:8px}
-.code-input:focus{outline:none;border-color:var(--emerald-bright);box-shadow:0 0 0 3px rgba(18,160,141,.1)}
+.code-input{width:100%;padding:13px;border:2px solid var(--border);border-radius:12px;font-size:22px;text-align:center;letter-spacing:8px;font-family:'Nunito',sans-serif;transition:.2s;margin-bottom:8px}.code-input:focus{outline:none;border-color:var(--emerald-bright);box-shadow:0 0 0 3px rgba(18,160,141,.1)}
 .code-err{font-size:11.5px;color:#e53935;display:none;margin-bottom:8px}
 .code-err.show{display:block}
 .code-btns{display:flex;gap:8px}
@@ -365,8 +372,12 @@ body.en .code-go{font-family:'Nunito',sans-serif}
     </div>
   </div>
   <div class="gate-hero">
+    <!-- 🖼️ LOGO SECTION - استبدل الرابط أدناه برابط شعار مدرستك -->
     <div class="gate-logo-wrap">
-      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' rx='16' fill='%230b5e52'/%3E%3Ctext x='40' y='52' text-anchor='middle' font-size='40' fill='white'%3E🏫%3C/text%3E%3C/svg%3E" style="width:100%;height:100%;object-fit:contain">
+  <img src="https://drive.google.com/uc?export=view&id=1w3S7Bvg0rKHRP-DVJ54pQ_c09-oQW05Q" 
+       alt="Kids Gate Logo" 
+       onerror="this.src='data:image/svg+xml,%3Csvg...'"
+       style="width:100%;height:100%;object-fit:contain">
     </div>
     <div style="font-family:sans-serif;font-size:26px;font-weight:900;color:#fff;margin-bottom:6px">Kids Gate</div>
     <div class="gate-tagline" id="gt-sub">روضة أطفال وطفولة مبكرة<br>مساعد القبول الذكي</div>
@@ -382,8 +393,7 @@ body.en .code-go{font-family:'Nunito',sans-serif}
       <div class="field-err" id="err-name">الرجاء إدخال الاسم</div>
     </div>
     <div class="field">
-      <label class="field-label"><span>📱</span><span id="fl-phone-t">رقم الجوال</span></label>
-      <input class="field-input" type="tel" id="inp-phone" placeholder="05XXXXXXXX" maxlength="13">
+      <label class="field-label"><span>📱</span><span id="fl-phone-t">رقم الجوال</span></label>      <input class="field-input" type="tel" id="inp-phone" placeholder="05XXXXXXXX" maxlength="13">
       <div class="field-err" id="err-phone">الرجاء إدخال رقم جوال صحيح</div>
     </div>
     <div class="field">
@@ -432,8 +442,7 @@ body.en .code-go{font-family:'Nunito',sans-serif}
         <span class="hg-label" id="hg1l">تحديد المرحلة</span>
         <span class="hg-sub" id="hg1s">أدخل تاريخ الميلاد</span>
       </div>
-      <div class="hg-card" onclick="switchPg('docs')">
-        <div class="hg-icon-wrap gold">📋</div>
+      <div class="hg-card" onclick="switchPg('docs')">        <div class="hg-icon-wrap gold">📋</div>
         <span class="hg-label" id="hg2l">الأوراق المطلوبة</span>
         <span class="hg-sub" id="hg2s">قائمة التحقق</span>
       </div>
@@ -482,8 +491,7 @@ body.en .code-go{font-family:'Nunito',sans-serif}
     <div class="prog-wrap">
       <div class="prog-info">
         <span class="prog-txt" id="prog-txt">0 من 0</span>
-        <span class="prog-pct" id="prog-pct">0%</span>
-      </div>
+        <span class="prog-pct" id="prog-pct">0%</span>      </div>
       <div class="prog-bar"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
       <div class="prog-hint" id="prog-hint">اضغط على كل وثيقة لتأكيد تجهيزها</div>
     </div>
@@ -532,8 +540,7 @@ body.en .code-go{font-family:'Nunito',sans-serif}
       <div class="call-grid" id="call-grid"></div>
       <div class="call-custom-row">
         <input class="call-input" type="number" id="call-input" min="1" max="999" placeholder="أدخل رقماً">
-        <button class="call-go-btn" onclick="callNumber()" id="call-go">نداء</button>
-      </div>
+        <button class="call-go-btn" onclick="callNumber()" id="call-go">نداء</button>      </div>
       <div class="called-badge" id="called-badge">
         <div class="called-num" id="called-num">—</div>
         <div class="called-txt" id="called-txt">تم نداء هذا الرقم</div>
@@ -557,239 +564,315 @@ body.en .code-go{font-family:'Nunito',sans-serif}
 </div>
 
 <script>
-const ADMIN_CODE='9878';
-let lang='ar';
+// ⚙️ CONFIGURATION
+const ADMIN_CODE = '9878';
+let lang = 'ar';
 
-const T={
-  ar:{
-    hTitle:'مساعد القبول الذكي',gtSub:'روضة أطفال وطفولة مبكرة<br>مساعد القبول الذكي',gtPill:'✦ العام الدراسي 2026 – 2027',
-    gfTitle:'أهلاً بك 👋',gfSub:'سجّل بياناتك للمتابعة',flName:'اسم ولي الأمر',flPhone:'رقم الجوال',flChild:'اسم الطفل',flOpt:'(اختياري)',
-    gateBtnTxt:'متابعة',errName:'الرجاء إدخال الاسم',errPhone:'الرجاء إدخال رقم جوال صحيح',
-    privTxt:'🔒 بياناتك محفوظة لدى إدارة Kids Gate فقط',
-    heroGreet:'أهلاً،',heroSub:'كل ما تحتاجه عن المراحل والرسوم والأوراق في مكان واحد',
-    hsTitle:'الخدمات المتاحة',hg1l:'تحديد المرحلة',hg1s:'أدخل تاريخ الميلاد',hg2l:'الأوراق المطلوبة',hg2s:'قائمة التحقق',
-    hg3l:'مساعد ذكي',hg3s:'اسأل أي سؤال',hg4l:'رقم الانتظار',hg4s:'احجز دورك',
-    hoursTitle:'⏰ أوقات الاستقبال',hr1:'الأحد – الخميس',hr2:'7:30 صباحاً – 3:00 مساءً',hr3:'مبنى الإدارة – الدور الأول',
-    ageTitle:'تحديد المرحلة والرسوم',ageSub:'أدخل تاريخ ميلاد طفلك',dobLbl:'📅 تاريخ ميلاد الطفل',
-    docsTitle:'الأوراق المطلوبة',docsSub:'اضغط على كل وثيقة عند تجهيزها',natSa:'سعودي',natNs:'غير سعودي',progHint:'اضغط على كل وثيقة لتأكيد تجهيزها',
-    botLbl:'🤖 مساعد Kids Gate',welcomeMsg:'مرحباً! 👋 أنا مساعدك الذكي لروضة Kids Gate.<br>اختر سؤالاً أو اكتب ما تريد معرفته.',
-    chatPh:'اكتب سؤالك هنا...',chipsLbl:'أسئلة شائعة',
-    qq1:'💰 كم الرسوم؟',qq2:'📋 الأوراق المطلوبة؟',qq4:'🏷️ هل يوجد خصومات؟',qq5:'📚 ما مواد المنهج؟',
-    qLbl:'الرقم الحالي قيد الخدمة',ticketLbl:'استلام رقم انتظار',
-    qInfoTitle:'ℹ️ تعليمات الانتظار',
-    qi1:'ستُناديك موظفة القبول بالاسم والرقم',qi2:'يُرجى التواجد في منطقة الانتظار',
-    qi3:'يمكنك استخدام المساعد الذكي أثناء الانتظار',qi4:'متوسط وقت الانتظار: <strong style="color:var(--emerald)">10–15 دقيقة</strong>',
-    nlHome:'الرئيسية',nlAge:'المرحلة',nlDocs:'الأوراق',nlChat:'مساعد',
-    cur:'ريال',feeBreak:'تفاصيل الرسوم',feeAssess:'رسوم التقييم',feeReg:'رسوم التسجيل',feeInst1:'القسط الأول',feeInst2:'القسط الثاني',
-    yearTotal:'الإجمالي السنوي',vatLabel:'ضريبة 15%',totalLabel:'الإجمالي شاملة الضريبة',
-    discTitle:'🏷️ خصومات متاحة — اضغط لحساب السعر بعد الخصم',
-    discSave:'وفّرت',discAfterLbl:'السعر بعد الخصم',
-    sylTitle:'📚 المنهج الدراسي',
-    warnCond:'⚠️ مواليد 25 أغسطس – 22 نوفمبر 2020 يُقبلون في KG II بشرط إتمام المرحلة.',
-    errRange:'⚠️ تاريخ الميلاد خارج النطاق المقبول. يرجى التواصل مع موظفة القبول.',
-    ticketYour:'رقمك في الانتظار',ticketWait:'📍 يُرجى الانتظار في الصالة',printBtn:'🖨️ طباعة',
-    youLbl:'أنت',gradeOf:'مرحلة طفلك',
-    adminTitle:'لوحة الإدارة',adminSub:'أدخل كود الإدارة للمتابعة',adminEnter:'دخول',adminCancel:'إلغاء',adminWrong:'كود خاطئ، حاول مرة أخرى',
-    callTitle:'📢 نداء رقم',callGo:'نداء',calledTxt:'تم نداء هذا الرقم بنجاح',
-    notifTitle:'نداء رقم',notifSub:'يُرجى التوجه إلى مكتب القبول',
-    noKnow:'يُرجى التواصل مع موظفة القبول مباشرة للإجابة على هذا السؤال 😊',
+// 🖼️ LOGO SETUP - ضع رابط شعار مدرستك هنا
+const SCHOOL_LOGO_URL = 'YOUR_LOGO_URL_HERE'; // مثال: 'images/logo.png' أو 'https://yoursite.com/logo.png'
+
+// 🌍 TRANSLATIONS
+const T = {
+  ar: {
+    hTitle: 'مساعد القبول الذكي', gtSub: 'روضة أطفال وطفولة مبكرة<br>مساعد القبول الذكي', gtPill: '✦ العام الدراسي 2026 – 2027',
+    gfTitle: 'أهلاً بك 👋', gfSub: 'سجّل بياناتك للمتابعة', flName: 'اسم ولي الأمر', flPhone: 'رقم الجوال', flChild: 'اسم الطفل', flOpt: '(اختياري)',
+    gateBtnTxt: 'متابعة', errName: 'الرجاء إدخال الاسم', errPhone: 'الرجاء إدخال رقم جوال صحيح',
+    privTxt: '🔒 بياناتك محفوظة لدى إدارة Kids Gate فقط',
+    heroGreet: 'أهلاً،', heroSub: 'كل ما تحتاجه عن المراحل والرسوم والأوراق في مكان واحد',
+    hsTitle: 'الخدمات المتاحة', hg1l: 'تحديد المرحلة', hg1s: 'أدخل تاريخ الميلاد', hg2l: 'الأوراق المطلوبة', hg2s: 'قائمة التحقق',
+    hg3l: 'مساعد ذكي', hg3s: 'اسأل أي سؤال', hg4l: 'رقم الانتظار', hg4s: 'احجز دورك',
+    hoursTitle: '⏰ أوقات الاستقبال', hr1: 'الأحد – الخميس', hr2: '7:30 صباحاً – 3:00 مساءً', hr3: 'مبنى الإدارة – الدور الأول',
+    ageTitle: 'تحديد المرحلة والرسوم', ageSub: 'أدخل تاريخ ميلاد طفلك', dobLbl: '📅 تاريخ ميلاد الطفل',
+    docsTitle: 'الأوراق المطلوبة', docsSub: 'اضغط على كل وثيقة عند تجهيزها', natSa: 'سعودي', natNs: 'غير سعودي', progHint: 'اضغط على كل وثيقة لتأكيد تجهيزها',
+    botLbl: '🤖 مساعد Kids Gate', welcomeMsg: 'مرحباً! 👋 أنا مساعدك الذكي لروضة Kids Gate.<br>اختر سؤالاً أو اكتب ما تريد معرفته.',
+    chatPh: 'اكتب سؤالك هنا...', chipsLbl: 'أسئلة شائعة',
+    qq1: '💰 كم الرسوم؟', qq2: '📋 الأوراق المطلوبة؟', qq4: '🏷️ هل يوجد خصومات؟', qq5: '📚 ما مواد المنهج؟',
+    qLbl: 'الرقم الحالي قيد الخدمة', ticketLbl: 'استلام رقم انتظار',
+    qInfoTitle: 'ℹ️ تعليمات الانتظار',
+    qi1: 'ستُناديك موظفة القبول بالاسم والرقم', qi2: 'يُرجى التواجد في منطقة الانتظار',    qi3: 'يمكنك استخدام المساعد الذكي أثناء الانتظار', qi4: 'متوسط وقت الانتظار: <strong style="color:var(--emerald)">10–15 دقيقة</strong>',
+    nlHome: 'الرئيسية', nlAge: 'المرحلة', nlDocs: 'الأوراق', nlChat: 'مساعد',
+    cur: 'ريال', feeBreak: 'تفاصيل الرسوم', feeAssess: 'رسوم التقييم', feeReg: 'رسوم التسجيل', feeInst1: 'القسط الأول', feeInst2: 'القسط الثاني',
+    yearTotal: 'الإجمالي السنوي', vatLabel: 'ضريبة 15%', totalLabel: 'الإجمالي شاملة الضريبة',
+    discTitle: '🏷️ خصومات متاحة — اضغط لحساب السعر بعد الخصم',
+    discSave: 'وفّرت', discAfterLbl: 'السعر بعد الخصم',
+    sylTitle: '📚 المنهج الدراسي',
+    warnCond: '⚠️ مواليد 25 أغسطس – 22 نوفمبر 2020 يُقبلون في KG II بشرط إتمام المرحلة.',
+    errRange: '⚠️ تاريخ الميلاد خارج النطاق المقبول. يرجى التواصل مع موظفة القبول.',
+    ticketYour: 'رقمك في الانتظار', ticketWait: '📍 يُرجى الانتظار في الصالة', printBtn: '🖨️ طباعة',
+    youLbl: 'أنت', gradeOf: 'مرحلة طفلك',
+    adminTitle: 'لوحة الإدارة', adminSub: 'أدخل كود الإدارة للمتابعة', adminEnter: 'دخول', adminCancel: 'إلغاء', adminWrong: 'كود خاطئ، حاول مرة أخرى',
+    callTitle: '📢 نداء رقم', callGo: 'نداء', calledTxt: 'تم نداء هذا الرقم بنجاح',
+    notifTitle: 'نداء رقم', notifSub: 'يُرجى التوجه إلى مكتب القبول',
+    noKnow: 'يُرجى التواصل مع موظفة القبول مباشرة للإجابة على هذا السؤال 😊',
   },
-  en:{
-    hTitle:'Smart Admission Assistant',gtSub:'Kindergarten & Early Childhood<br>Smart Admission Assistant',gtPill:'✦ Academic Year 2026 – 2027',
-    gfTitle:'Welcome 👋',gfSub:'Enter your details to continue',flName:'Guardian name',flPhone:'Mobile number',flChild:"Child's name",flOpt:'(optional)',
-    gateBtnTxt:'Continue',errName:'Please enter your name',errPhone:'Please enter a valid mobile number',
-    privTxt:"🔒 Your details are kept with Kids Gate's management only",
-    heroGreet:'Welcome,',heroSub:'Everything you need about grades, fees and documents in one place',
-    hsTitle:'Services',hg1l:'Find Grade',hg1s:'Enter date of birth',hg2l:'Required Documents',hg2s:'Checklist',
-    hg3l:'AI Assistant',hg3s:'Ask any question',hg4l:'Queue Number',hg4s:'Take your place',
-    hoursTitle:'⏰ Reception Hours',hr1:'Sunday – Thursday',hr2:'7:30 AM – 3:00 PM',hr3:'Administration Building, First Floor',
-    ageTitle:'Grade Placement & Fees',ageSub:"Enter your child's date of birth",dobLbl:"📅 Child's Date of Birth",
-    docsTitle:'Required Documents',docsSub:'Tap each document once you have it ready',natSa:'Saudi',natNs:'Non-Saudi',progHint:'Tap each document to confirm it is ready',
-    botLbl:'🤖 Kids Gate Assistant',welcomeMsg:"Hello! 👋 I'm the Kids Gate smart assistant.<br>Pick a question or type anything you need.",
-    chatPh:'Type your question here...',chipsLbl:'Common questions',
-    qq1:'💰 What are the fees?',qq2:'📋 Documents needed?',qq4:'🏷️ Any discounts?',qq5:'📚 What is the curriculum?',
-    qLbl:'Currently serving',ticketLbl:'Get a Queue Number',
-    qInfoTitle:'ℹ️ Waiting Instructions',
-    qi1:'The admissions officer will call your name and number',qi2:'Please remain in the waiting area',
-    qi3:'You may use the AI assistant while waiting',qi4:'Average wait time: <strong style="color:var(--emerald)">10–15 minutes</strong>',
-    nlHome:'Home',nlAge:'Grade',nlDocs:'Documents',nlChat:'Assistant',
-    cur:'SAR',feeBreak:'Fee Details',feeAssess:'Assessment Fee',feeReg:'Registration Fee',feeInst1:'1st Instalment',feeInst2:'2nd Instalment',
-    yearTotal:'Annual total',vatLabel:'VAT 15%',totalLabel:'Total incl. VAT',
-    discTitle:'🏷️ Discounts — tap to calculate discounted price',
-    discSave:'You save',discAfterLbl:'Price after discount',
-    sylTitle:'📚 Curriculum',
-    warnCond:'⚠️ Children born 25 Aug – 22 Nov 2020 are eligible for KG II subject to completion.',
-    errRange:'⚠️ Date of birth is outside the accepted range for 2026–2027. Please speak with the admissions officer.',
-    ticketYour:'Your queue number',ticketWait:'📍 Please wait in the reception area',printBtn:'🖨️ Print',
-    youLbl:'You',gradeOf:"Your child's grade",
-    adminTitle:'Admin Panel',adminSub:'Enter the admin code to continue',adminEnter:'Enter',adminCancel:'Cancel',adminWrong:'Wrong code, try again',
-    callTitle:'📢 Call Number',callGo:'Call',calledTxt:'Number called successfully',
-    notifTitle:'Calling number',notifSub:'Please proceed to the admissions office',
-    noKnow:'Please speak with our admissions officer directly for this question 😊',
+  en: {
+    hTitle: 'Smart Admission Assistant', gtSub: 'Kindergarten & Early Childhood<br>Smart Admission Assistant', gtPill: '✦ Academic Year 2026 – 2027',
+    gfTitle: 'Welcome 👋', gfSub: 'Enter your details to continue', flName: 'Guardian name', flPhone: 'Mobile number', flChild: "Child's name", flOpt: '(optional)',
+    gateBtnTxt: 'Continue', errName: 'Please enter your name', errPhone: 'Please enter a valid mobile number',
+    privTxt: "🔒 Your details are kept with Kids Gate's management only",
+    heroGreet: 'Welcome,', heroSub: 'Everything you need about grades, fees and documents in one place',
+    hsTitle: 'Services', hg1l: 'Find Grade', hg1s: 'Enter date of birth', hg2l: 'Required Documents', hg2s: 'Checklist',
+    hg3l: 'AI Assistant', hg3s: 'Ask any question', hg4l: 'Queue Number', hg4s: 'Take your place',
+    hoursTitle: '⏰ Reception Hours', hr1: 'Sunday – Thursday', hr2: '7:30 AM – 3:00 PM', hr3: 'Administration Building, First Floor',
+    ageTitle: 'Grade Placement & Fees', ageSub: "Enter your child's date of birth", dobLbl: "📅 Child's Date of Birth",
+    docsTitle: 'Required Documents', docsSub: 'Tap each document once you have it ready', natSa: 'Saudi', natNs: 'Non-Saudi', progHint: 'Tap each document to confirm it is ready',
+    botLbl: '🤖 Kids Gate Assistant', welcomeMsg: "Hello! 👋 I'm the Kids Gate smart assistant.<br>Pick a question or type anything you need.",
+    chatPh: 'Type your question here...', chipsLbl: 'Common questions',
+    qq1: '💰 What are the fees?', qq2: '📋 Documents needed?', qq4: '🏷️ Any discounts?', qq5: '📚 What is the curriculum?',
+    qLbl: 'Currently serving', ticketLbl: 'Get a Queue Number',
+    qInfoTitle: 'ℹ️ Waiting Instructions',
+    qi1: 'The admissions officer will call your name and number', qi2: 'Please remain in the waiting area',
+    qi3: 'You may use the AI assistant while waiting', qi4: 'Average wait time: <strong style="color:var(--emerald)">10–15 minutes</strong>',
+    nlHome: 'Home', nlAge: 'Grade', nlDocs: 'Documents', nlChat: 'Assistant',
+    cur: 'SAR', feeBreak: 'Fee Details', feeAssess: 'Assessment Fee', feeReg: 'Registration Fee', feeInst1: '1st Instalment', feeInst2: '2nd Instalment',
+    yearTotal: 'Annual total', vatLabel: 'VAT 15%', totalLabel: 'Total incl. VAT',
+    discTitle: '🏷️ Discounts — tap to calculate discounted price',
+    discSave: 'You save', discAfterLbl: 'Price after discount',
+    sylTitle: '📚 Curriculum',
+    warnCond: '⚠️ Children born 25 Aug – 22 Nov 2020 are eligible for KG II subject to completion.',
+    errRange: '⚠️ Date of birth is outside the accepted range for 2026–2027. Please speak with the admissions officer.',
+    ticketYour: 'Your queue number', ticketWait: '📍 Please wait in the reception area', printBtn: '🖨️ Print',
+    youLbl: 'You', gradeOf: "Your child's grade",
+    adminTitle: 'Admin Panel', adminSub: 'Enter the admin code to continue', adminEnter: 'Enter', adminCancel: 'Cancel', adminWrong: 'Wrong code, try again',
+    callTitle: '📢 Call Number', callGo: 'Call', calledTxt: 'Number called successfully',
+    notifTitle: 'Calling number', notifSub: 'Please proceed to the admissions office',
+    noKnow: 'Please speak with our admissions officer directly for this question 😊',
   }
-};
-function t(k){return(T[lang]||T.ar)[k]||k}
+};function t(k) { return (T[lang] || T.ar)[k] || k; }
 
-function applyLang(){
-  const ids={
-    'h-title':'hTitle','gt-sub':'gtSub','gt-pill':'gtPill','gf-title':'gfTitle','gf-sub':'gfSub',
-    'fl-name-t':'flName','fl-phone-t':'flPhone','fl-child-t':'flChild','fl-opt':'flOpt',
-    'gate-btn-txt':'gateBtnTxt','err-name':'errName','err-phone':'errPhone','priv-txt':'privTxt',
-    'hero-greet':'heroGreet','hero-sub':'heroSub','hs-title':'hsTitle',
-    'hg1l':'hg1l','hg1s':'hg1s','hg2l':'hg2l','hg2s':'hg2s','hg3l':'hg3l','hg3s':'hg3s','hg4l':'hg4l','hg4s':'hg4s',
-    'hours-title':'hoursTitle','hr1':'hr1','hr2':'hr2','hr3':'hr3',
-    'age-title':'ageTitle','age-sub':'ageSub','dob-lbl':'dobLbl',
-    'docs-title':'docsTitle','docs-sub':'docsSub','nat-sa-t':'natSa','nat-ns-t':'natNs','prog-hint':'progHint',
-    'bot-lbl':'botLbl','welcome-msg':'welcomeMsg','chips-lbl-txt':'chipsLbl',
-    'qq1':'qq1','qq2':'qq2','qq4':'qq4','qq5':'qq5',
-    'q-lbl':'qLbl','ticket-lbl':'ticketLbl','q-info-title':'qInfoTitle',
-    'qi1':'qi1','qi2':'qi2','qi3':'qi3','qi4':'qi4',
-    'nl-home':'nlHome','nl-age':'nlAge','nl-docs':'nlDocs','nl-chat':'nlChat',
-    'call-title':'callTitle','call-go':'callGo',
+function applyLang() {
+  const ids = {
+    'h-title': 'hTitle', 'gt-sub': 'gtSub', 'gt-pill': 'gtPill', 'gf-title': 'gfTitle', 'gf-sub': 'gfSub',
+    'fl-name-t': 'flName', 'fl-phone-t': 'flPhone', 'fl-child-t': 'flChild', 'fl-opt': 'flOpt',
+    'gate-btn-txt': 'gateBtnTxt', 'err-name': 'errName', 'err-phone': 'errPhone', 'priv-txt': 'privTxt',
+    'hero-greet': 'heroGreet', 'hero-sub': 'heroSub', 'hs-title': 'hsTitle',
+    'hg1l': 'hg1l', 'hg1s': 'hg1s', 'hg2l': 'hg2l', 'hg2s': 'hg2s', 'hg3l': 'hg3l', 'hg3s': 'hg3s', 'hg4l': 'hg4l', 'hg4s': 'hg4s',
+    'hours-title': 'hoursTitle', 'hr1': 'hr1', 'hr2': 'hr2', 'hr3': 'hr3',
+    'age-title': 'ageTitle', 'age-sub': 'ageSub', 'dob-lbl': 'dobLbl',
+    'docs-title': 'docsTitle', 'docs-sub': 'docsSub', 'nat-sa-t': 'natSa', 'nat-ns-t': 'natNs', 'prog-hint': 'progHint',
+    'bot-lbl': 'botLbl', 'welcome-msg': 'welcomeMsg', 'chips-lbl-txt': 'chipsLbl',
+    'qq1': 'qq1', 'qq2': 'qq2', 'qq4': 'qq4', 'qq5': 'qq5',
+    'q-lbl': 'qLbl', 'ticket-lbl': 'ticketLbl', 'q-info-title': 'qInfoTitle',
+    'qi1': 'qi1', 'qi2': 'qi2', 'qi3': 'qi3', 'qi4': 'qi4',
+    'nl-home': 'nlHome', 'nl-age': 'nlAge', 'nl-docs': 'nlDocs', 'nl-chat': 'nlChat',
+    'call-title': 'callTitle', 'call-go': 'callGo',
   };
-  for(const [id,k] of Object.entries(ids)){const el=document.getElementById(id);if(el)el.innerHTML=t(k);}
-  const ci=document.getElementById('chat-input');if(ci){ci.placeholder=t('chatPh');ci.dir=lang==='ar'?'rtl':'ltr';}
-  if(currentUser){const el=document.getElementById('hero-name');if(el)el.textContent=currentUser.name+' 👋';}
+  for (const [id, k] of Object.entries(ids)) { const el = document.getElementById(id); if (el) el.innerHTML = t(k); }
+  const ci = document.getElementById('chat-input'); if (ci) { ci.placeholder = t('chatPh'); ci.dir = lang === 'ar' ? 'rtl' : 'ltr'; }
+  if (currentUser) { const el = document.getElementById('hero-name'); if (el) el.textContent = currentUser.name + ' 👋'; }
   renderCallGrid();
 }
 
-function setLang(l){
-  lang=l;
-  document.getElementById('html-root').lang=l;
-  document.getElementById('html-root').dir=l==='ar'?'rtl':'ltr';
-  document.body.className=l==='ar'?'ar':'en';
-  document.querySelectorAll('.lang-sw button').forEach(b=>b.classList.toggle('on',b.textContent.trim()===(l==='ar'?'عربي':'EN')));
-  applyLang();renderDocs();
-  if(currentGrade)renderResult(currentGrade,condFlag);
+function setLang(l) {
+  lang = l;
+  document.getElementById('html-root').lang = l;
+  document.getElementById('html-root').dir = l === 'ar' ? 'rtl' : 'ltr';
+  document.body.className = l === 'ar' ? 'ar' : 'en';
+  document.querySelectorAll('.lang-sw button').forEach(b => b.classList.toggle('on', b.textContent.trim() === (l === 'ar' ? 'عربي' : 'EN')));
+  applyLang(); renderDocs();
+  if (currentGrade) renderResult(currentGrade, condFlag);
 }
-function gateLang(l){
-  lang=l;
-  document.getElementById('html-root').lang=l;
-  document.getElementById('html-root').dir=l==='ar'?'rtl':'ltr';
-  document.body.className=l==='ar'?'ar':'en';
-  document.querySelectorAll('.g-lang-btn').forEach(b=>b.classList.toggle('on',b.textContent.trim()===(l==='ar'?'عربي':'English')));
+function gateLang(l) {
+  lang = l;
+  document.getElementById('html-root').lang = l;
+  document.getElementById('html-root').dir = l === 'ar' ? 'rtl' : 'ltr';
+  document.body.className = l === 'ar' ? 'ar' : 'en';
+  document.querySelectorAll('.g-lang-btn').forEach(b => b.classList.toggle('on', b.textContent.trim() === (l === 'ar' ? 'عربي' : 'English')));
   applyLang();
 }
 
 /* REGISTRATION */
-let currentUser=null;
-function saveGuardian(data){try{const arr=JSON.parse(localStorage.getItem('kg_g')||'[]');arr.push(data);localStorage.setItem('kg_g',JSON.stringify(arr));}catch(e){}}
-function submitGate(){
-  const name=document.getElementById('inp-name').value.trim();
-  const phone=document.getElementById('inp-phone').value.trim();
-  const child=document.getElementById('inp-child').value.trim();
-  let ok=true;
-  ['inp-name','inp-phone'].forEach(id=>document.getElementById(id).classList.remove('bad'));
-  ['err-name','err-phone'].forEach(id=>document.getElementById(id).classList.remove('show'));
-  if(!name){document.getElementById('inp-name').classList.add('bad');document.getElementById('err-name').classList.add('show');ok=false;}
-  if(!phone||phone.replace(/\D/g,'').length<9){document.getElementById('inp-phone').classList.add('bad');document.getElementById('err-phone').classList.add('show');ok=false;}
-  if(!ok)return;
-  const btn=document.getElementById('gate-btn');btn.disabled=true;btn.innerHTML='<span style="animation:spin 1s linear infinite;display:inline-block">⏳</span>';
-  const entry={name,phone,child:child||'—',time:new Date().toLocaleString('ar-SA'),ts:Date.now(),lang};
-  saveGuardian(entry);currentUser={name,phone,child};openApp();
+let currentUser = null;
+function saveGuardian(data) { try { const arr = JSON.parse(localStorage.getItem('kg_g') || '[]'); arr.push(data); localStorage.setItem('kg_g', JSON.stringify(arr)); } catch (e) { } }
+function submitGate() {
+  const name = document.getElementById('inp-name').value.trim();
+  const phone = document.getElementById('inp-phone').value.trim();
+  const child = document.getElementById('inp-child').value.trim();  let ok = true;
+  ['inp-name', 'inp-phone'].forEach(id => document.getElementById(id).classList.remove('bad'));
+  ['err-name', 'err-phone'].forEach(id => document.getElementById(id).classList.remove('show'));
+  if (!name) { document.getElementById('inp-name').classList.add('bad'); document.getElementById('err-name').classList.add('show'); ok = false; }
+  if (!phone || phone.replace(/\D/g, '').length < 9) { document.getElementById('inp-phone').classList.add('bad'); document.getElementById('err-phone').classList.add('show'); ok = false; }
+  if (!ok) return;
+  const btn = document.getElementById('gate-btn'); btn.disabled = true; btn.innerHTML = '<span style="animation:spin 1s linear infinite;display:inline-block">⏳</span>';
+  const entry = { name, phone, child: child || '—', time: new Date().toLocaleString('ar-SA'), ts: Date.now(), lang };
+  saveGuardian(entry); currentUser = { name, phone, child }; openApp();
 }
-function openApp(){
+function openApp() {
   document.getElementById('gate').classList.add('gone');
   document.getElementById('app').classList.add('on');
-  document.getElementById('user-tag').textContent='👤 '+currentUser.name.split(' ')[0];
-  const wm=document.getElementById('welcome-msg');
-  if(wm)wm.innerHTML=lang==='ar'?`أهلاً ${currentUser.name}! 👋<br>اختر سؤالاً أو اكتب ما تريد معرفته.`:`Hello ${currentUser.name}! 👋<br>Pick a question or type anything you need.`;
+  document.getElementById('user-tag').textContent = '👤 ' + currentUser.name.split(' ')[0];
+  const wm = document.getElementById('welcome-msg');
+  if (wm) wm.innerHTML = lang === 'ar' ? `أهلاً ${currentUser.name}! 👋<br>اختر سؤالاً أو اكتب ما تريد معرفته.` : `Hello ${currentUser.name}! 👋<br>Pick a question or type anything you need.`;
   applyLang();
 }
 
 /* NAVIGATION */
-const PGS=['home','age','docs','chat','queue'];
-function switchPg(n){
-  PGS.forEach(p=>{document.getElementById('pg-'+p)?.classList.remove('on');document.getElementById('nav-'+p)?.classList.remove('on');});
-  document.getElementById('pg-'+n)?.classList.add('on');
-  document.getElementById('nav-'+n)?.classList.add('on');
-  window.scrollTo(0,0);
+const PGS = ['home', 'age', 'docs', 'chat', 'queue'];
+function switchPg(n) {
+  PGS.forEach(p => { document.getElementById('pg-' + p)?.classList.remove('on'); document.getElementById('nav-' + p)?.classList.remove('on'); });
+  document.getElementById('pg-' + n)?.classList.add('on');
+  document.getElementById('nav-' + n)?.classList.add('on');
+  window.scrollTo(0, 0);
 }
 
-/* GRADES DATA */
-const GRADES=[
-  {id:'prekg',ar:'ما قبل الروضة (Pre-KG)',en:'Pre-Kindergarten',grad:'linear-gradient(140deg,#c47d0a,#9a6008)',
-   start:new Date('2022-08-25'),end:new Date('2023-08-24'),
-   fees:{assess:250,reg:500,inst:7450,full:14900},
-   sylAr:['إمساك القلم','الإجابة عند السؤال','التعبير عن المشاعر','تتبع الخطوط','المهارات الحركية والفنية'],
-   sylEn:['Pencil gripping','Responding when asked','Expressing emotions','Tracing lines','Fine motor & art skills']},
-  {id:'kg1',ar:'الروضة الأولى (KG I)',en:'Kindergarten I',grad:'linear-gradient(140deg,#0b5e52,#0d7a6a)',
-   start:new Date('2021-08-25'),end:new Date('2022-08-24'),
-   fees:{assess:250,reg:500,inst:8450,full:16900},
-   sylAr:['التعرف على الحروف والأرقام','العد شفهياً من 1 إلى 10','معرفة الألوان الأساسية والأشكال','مهارات الاستماع والتواصل'],
-   sylEn:['Identifying letters and numbers','Oral counting 1–10','Primary colours & shapes','Listening & communication skills']},
-  {id:'kg2',ar:'الروضة الثانية (KG II)',en:'Kindergarten II',grad:'linear-gradient(140deg,#1a5fa0,#1874c2)',
-   start:new Date('2020-08-25'),end:new Date('2021-08-24'),
-   fees:{assess:250,reg:500,inst:8450,full:16900},
-   sylAr:['كتابة الحروف Aa–Zz','كتابة الأرقام 1–30','جمع الأرقام ذات الرقم الواحد','أصوات الحروف (Phonics)','الحروف العربية أ–ي'],
-   sylEn:['Writing alphabet Aa–Zz','Writing numbers 1–30','Single-digit addition','Phonics sounds','Arabic alphabet Alif–Ya']},
-  {id:'g1',ar:'الصف الأول الابتدائي',en:'Grade 1',grad:'linear-gradient(140deg,#5e2d91,#7c3fba)',
-   start:new Date('2019-08-25'),end:new Date('2020-08-24'),
-   fees:{assess:250,reg:500,inst:8950,full:17900},
-   sylAr:['إنجليزي: قراءة وفهم، كلمات 3 حروف، is/am/are','رياضيات: أرقام 1–100، جمع وطرح، أشكال هندسية','عربي: الحروف أ–ي مع الحركات','علوم: الكائنات الحية، الطقس، الحواس الخمس'],
-   sylEn:['English: Reading comprehension, 3-letter words, is/am/are','Maths: Numbers 1–100, addition & subtraction, shapes','Arabic: Letters Alif–Ya with vowels','Science: Living things, weather, five senses']},
-  {id:'g2',ar:'الصف الثاني الابتدائي',en:'Grade 2',grad:'linear-gradient(140deg,#8b1a1a,#b52525)',
-   start:new Date('2018-08-25'),end:new Date('2019-08-24'),
-   fees:{assess:250,reg:500,inst:8950,full:17900},
-   sylAr:['إنجليزي: جمل كاملة، قراءة قصص قصيرة، صفات وأفعال','رياضيات: الضرب والقسمة الأولية، الكسور البسيطة، القياس','عربي: قراءة وكتابة جمل، قواعد مبسطة','علوم: دورة الحياة، المادة وأشكالها، النظام الشمسي'],
-   sylEn:['English: Full sentences, short story reading, adjectives & verbs','Maths: Intro multiplication & division, simple fractions, measurement','Arabic: Sentence reading & writing, basic grammar','Science: Life cycles, states of matter, solar system']},
-  {id:'g3',ar:'الصف الثالث الابتدائي',en:'Grade 3',grad:'linear-gradient(140deg,#1a4a7a,#1e5e9e)',
-   start:new Date('2017-08-25'),end:new Date('2018-08-24'),
-   fees:{assess:250,reg:500,inst:8950,full:17900},
-   sylAr:['إنجليزي: فقرات وقراءة تحليلية، أزمنة متعددة، كتابة إبداعية','رياضيات: الضرب والقسمة المتقدمة، الأعداد حتى 10,000، الهندسة','عربي: نصوص أدبية، إعراب مبسط، تعبير كتابي','علوم: الطاقة والكهرباء، النظم البيئية، الإنسان والصحة'],
-   sylEn:['English: Paragraphs & analytical reading, multiple tenses, creative writing','Maths: Advanced multiplication & division, numbers to 10,000, geometry','Arabic: Literary texts, basic parsing, written expression','Science: Energy & electricity, ecosystems, human health']},
-];
-
-const DISCS=[
-  {key:'early',pct:10,ar:'دفع مبكر (سنة كاملة)',en:'Early payment (full year)'},
-  {key:'second',pct:5,ar:'الطفل الثاني',en:'2nd child'},
-  {key:'third',pct:7.5,ar:'الطفل الثالث',en:'3rd child'},
-  {key:'fourth',pct:10,ar:'الطفل الرابع',en:'4th child'}
-];
-const condS=new Date('2020-08-25'),condE=new Date('2020-11-22');
-let currentGrade=null,selDisc=null,condFlag=false;
-const vat=n=>Math.round(n*.15*100)/100;
-const fmt=n=>Number(n).toLocaleString('en',{minimumFractionDigits:2,maximumFractionDigits:2});
-
-function calcGrade(){
-  const v=document.getElementById('dob').value;if(!v)return;
-  const dob=new Date(v),area=document.getElementById('result-area');
-  let g=null;
-  for(const gr of GRADES){if(dob>=gr.start&&dob<=gr.end){g=gr;break;}}
-  if(!g){area.innerHTML=`<div class="err-box">${t('errRange')}</div>`;return;}
-  condFlag=g.id==='kg2'&&dob>=condS&&dob<=condE;
-  currentGrade=g;selDisc=null;renderResult(g,condFlag);
-}
-
-function renderResult(g,cond){
-  const f=g.fees;
-  const Va={assess:vat(f.assess),reg:vat(f.reg),inst:vat(f.inst),full:vat(f.full)};
-  const disc=DISCS.find(d=>d.key===selDisc);
-  const cur=t('cur');
-
-  let discHtml='';
-  if(disc){
-    const tot=f.full+Va.full,save=Math.round(tot*disc.pct)/100,final=Math.round((tot-save)*100)/100;
-    discHtml=`<div class="disc-after"><div class="disc-save-lbl">${t('discSave')}: <strong style="font-family:Nunito,sans-serif">${fmt(save)} ${cur}</strong></div><div class="disc-final-price">${fmt(final)} <span style="font-size:14px">${cur}</span></div><div class="disc-label">${t('discAfterLbl')} • ${disc.pct}% off</div></div>`;
+/* 📚 GRADES DATA - UPDATED WITH PDF SYLLABUS */
+const GRADES = [
+  {
+    id: 'prekg', ar: 'ما قبل الروضة (Pre-KG)', en: 'Pre-Kindergarten',
+    grad: 'linear-gradient(140deg,#c47d0a,#9a6008)',
+    start: new Date('2022-08-25'), end: new Date('2023-08-24'),
+    fees: { assess: 250, reg: 500, inst: 7450, full: 14900 },
+    sylAr: [
+      'إمساك القلم بشكل صحيح',
+      'كيفية الإجابة عند السؤال',
+      'التعبير عن المشاعر',
+      'تتبع الخطوط',
+      'المهارات الحركية والفنية'
+    ],
+    sylEn: [
+      'Pencil gripping',
+      'Responding when asked',
+      'Expressing emotions',
+      'Tracing lines',
+      'Fine motor skills / Art'
+    ]
+  },  {
+    id: 'kg1', ar: 'الروضة الأولى (KG I)', en: 'Kindergarten I',
+    grad: 'linear-gradient(140deg,#0b5e52,#0d7a6a)',
+    start: new Date('2021-08-25'), end: new Date('2022-08-24'),
+    fees: { assess: 250, reg: 500, inst: 8450, full: 16900 },
+    sylAr: [
+      'التعرف على الحروف والأرقام',
+      'العد شفهياً من 1 إلى 10',
+      'معرفة الألوان الأساسية'
+    ],
+    sylEn: [
+      'Identifying letters and numbers',
+      'Counting 1-10 (Oral)',
+      'Primary Colors identification'
+    ]
+  },
+  {
+    id: 'kg2', ar: 'الروضة الثانية (KG II)', en: 'Kindergarten II',
+    grad: 'linear-gradient(140deg,#1a5fa0,#1874c2)',
+    start: new Date('2020-08-25'), end: new Date('2021-08-24'),
+    fees: { assess: 250, reg: 500, inst: 8450, full: 16900 },
+    sylAr: [
+      'كتابة الحروف الإنجليزية Aa–Zz',
+      'كتابة الأرقام من 1 إلى 30',
+      'جمع الأرقام ذات الرقم الواحد',
+      'أصوات الحروف (Phonics)',
+      'كتابة الحروف العربية من أ إلى ي (للعرب)',
+      'تمييز الحرف الأول من كل كلمة عربية'
+    ],
+    sylEn: [
+      'Writing alphabet Aa-Zz',
+      'Writing Numbers 1-30',
+      'Single Digit Addition',
+      'Phonics Sound',
+      'Writing Arabic alphabet (ي-أ) - For Arab',
+      'Distinguish the first letter of each word in Arabic'
+    ]
+  },
+  {
+    id: 'g1', ar: 'الصف الأول الابتدائي', en: 'Grade 1',
+    grad: 'linear-gradient(140deg,#5e2d91,#7c3fba)',
+    start: new Date('2019-08-25'), end: new Date('2020-08-24'),
+    fees: { assess: 250, reg: 500, inst: 8950, full: 17900 },
+    sylAr: [
+      'إنجليزي: قراءة وفهم مبتدئ، كلمات 3 حروف، is/am/are، المفرد والجمع، هذا/تلك/هؤلاء',
+      'رياضيات: أرقام 1–100، أسماء الأرقام 1–50، ما قبل/بعد/بين، الأشكال، الجمع والطرح',
+      'عربي: كتابة الحروف أ–ي، قراءة الحروف مع الحركات القصيرة والطويلة، كتابة الحرف الأول من اسم الصورة مع التشكيل الصحيح، ربط الصورة بالحرف المناسب، إدخال أل الشمسية والقمرية، إدخال التنوين، قراءة الجملة بخط جميل مع التشكيل'
+    ],
+    sylEn: [
+      'English: Reading Comprehension (beginner), 3 letter words, is/am/are, Singular/Plural, This/That/These/Those',      'Math: Numbers 1-100, Number Names (1-50), Before/After/Between, Shapes, Addition/Subtraction',
+      'Arabic: Writing letters (ي-أ), Reading with short/long vowels, Writing first letter of picture name with correct vowels, Connecting picture to letter, Al-Shamsiya/Al-Qamariya, Tanween, Beautiful handwriting with diacritics'
+    ]
+  },
+  {
+    id: 'g2', ar: 'الصف الثاني الابتدائي', en: 'Grade 2',
+    grad: 'linear-gradient(140deg,#8b1a1a,#b52525)',
+    start: new Date('2018-08-25'), end: new Date('2019-08-24'),
+    fees: { assess: 250, reg: 500, inst: 8950, full: 17900 },
+    sylAr: [
+      'إنجليزي: أجزاء الكلام (اسم، ضمير، حرف جر، فعل)، علامات الترقيم، قراءة وفهم، كتابة فقرة (5 جمل)',
+      'رياضيات: الأرقام المفقودة، أسماء الأرقام 1-100، العد العكسي، الجمع والطرح، حل المسائل، الأشكال',
+      'عربي: كتابة مواضع الحروف في الكلمة، كتابة الحركات الطويلة، إكمال الحرف الناقص، تحديد المقطع الساكن، تحديد الحرف المشدد، تحليل الكلمات، إدخال أل وكتابة نوعها، إدخال التنوين، قراءة الجملة بخط جميل، قراءة النص بطلاقة مع استخراج الظواهر اللغوية'
+    ],
+    sylEn: [
+      'English: Parts of Speech (Nouns, pronouns, preposition, verbs), Punctuation, Reading comprehension, Paragraph writing (5 sentences)',
+      'Math: Missing numbers, Number names (1-100), Backward counting, Addition/Subtraction, Problem solving, Shapes',
+      'Arabic: Writing letter positions, Long vowels, Completing missing letters, Identifying silent syllables, Stressed letters, Word analysis, Al-Shamsiya/Qamariya, Tanween, Beautiful handwriting, Fluent reading with linguistic phenomena extraction'
+    ]
+  },
+  {
+    id: 'g3', ar: 'الصف الثالث الابتدائي', en: 'Grade 3',
+    grad: 'linear-gradient(140deg,#1a4a7a,#1e5e9e)',
+    start: new Date('2017-08-25'), end: new Date('2018-08-24'),
+    fees: { assess: 250, reg: 500, inst: 8950, full: 17900 },
+    sylAr: [
+      'إنجليزي: أجزاء الكلام، علامات الترقيم، قراءة وفهم، كتابة فقرة (8 جمل)',
+      'رياضيات: تكوين أعداد من 4 خانات، أكبر من/أصغر من/يساوي، جمع وطرح 3 خانات، الضرب، الأشكال',
+      'عربي: قراءة النص وفهمه والإجابة على الأسئلة، استخراج التراكيب اللغوية، الفرق بين المفرد والمثنى والجمع، الفرق بين الكلمة وضدها، تحويل الفعل المضارع إلى اسم ممدود، ترتيب الكلمات لتكوين جملة مفيدة، التعبير بأسلوب التوكيد، التعبير باسم الممدود'
+    ],
+    sylEn: [
+      'English: Parts of speech (Noun, preposition, verbs, pronouns), Punctuation, Reading Comprehension, Paragraph writing (8 sentences)',
+      'Math: Forming 4-digit numbers, Less/Greater/Equal to, 3-digit addition/subtraction, Multiplication, Shapes',
+      'Arabic: Reading comprehension & Q&A, Extracting linguistic structures, Singular/Dual/Plural, Antonyms, Converting present verb to extended noun, Sentence formation, Affirmative style expression, Extended noun expression'
+    ]
   }
-  const syl=(lang==='ar'?g.sylAr:g.sylEn).map(s=>`<div class="syl-item"><div class="syl-dot"></div><span>${s}</span></div>`).join('');
-  const chips=DISCS.map(d=>`<div class="dc${selDisc===d.key?' on':''}" onclick="pickDisc('${d.key}')"><span class="dc-pct">${d.pct}%</span><span class="dc-name">${lang==='ar'?d.ar:d.en}</span></div>`).join('');
-  const condNote=cond?`<div class="warn-box">${t('warnCond')}</div>`:'';
+];
 
-  document.getElementById('result-area').innerHTML=`
+/* 💰 DISCOUNTS */
+const DISCS = [
+  { key: 'early', pct: 10, ar: 'دفع مبكر (سنة كاملة)', en: 'Early payment (full year)' },
+  { key: 'second', pct: 5, ar: 'الطفل الثاني', en: '2nd child' },
+  { key: 'third', pct: 7.5, ar: 'الطفل الثالث', en: '3rd child' },
+  { key: 'fourth', pct: 10, ar: 'الطفل الرابع', en: '4th child' }
+];
+const condS = new Date('2020-08-25'), condE = new Date('2020-11-22');
+let currentGrade = null, selDisc = null, condFlag = false;
+const vat = n => Math.round(n * .15 * 100) / 100;
+const fmt = n => Number(n).toLocaleString('en', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+function calcGrade() {
+  const v = document.getElementById('dob').value; if (!v) return;
+  const dob = new Date(v), area = document.getElementById('result-area');
+  let g = null;
+  for (const gr of GRADES) { if (dob >= gr.start && dob <= gr.end) { g = gr; break; } }
+  if (!g) { area.innerHTML = `<div class="err-box">${t('errRange')}</div>`; return; }
+  condFlag = g.id === 'kg2' && dob >= condS && dob <= condE;
+  currentGrade = g; selDisc = null; renderResult(g, condFlag);
+}
+
+function renderResult(g, cond) {
+  const f = g.fees;
+  const Va = { assess: vat(f.assess), reg: vat(f.reg), inst: vat(f.inst), full: vat(f.full) };
+  const disc = DISCS.find(d => d.key === selDisc);
+  const cur = t('cur');
+
+  let discHtml = '';
+  if (disc) {
+    const tot = f.full + Va.full, save = Math.round(tot * disc.pct) / 100, final = Math.round((tot - save) * 100) / 100;
+    discHtml = `<div class="disc-after"><div class="disc-save-lbl">${t('discSave')}: <strong style="font-family:Nunito,sans-serif">${fmt(save)} ${cur}</strong></div><div class="disc-final-price">${fmt(final)} <span style="font-size:14px">${cur}</span></div><div class="disc-label">${t('discAfterLbl')} • ${disc.pct}% off</div></div>`;
+  }
+  const syl = (lang === 'ar' ? g.sylAr : g.sylEn).map(s => `<div class="syl-item"><div class="syl-dot"></div><span>${s}</span></div>`).join('');
+  const chips = DISCS.map(d => `<div class="dc${selDisc === d.key ? ' on' : ''}" onclick="pickDisc('${d.key}')"><span class="dc-pct">${d.pct}%</span><span class="dc-name">${lang === 'ar' ? d.ar : d.en}</span></div>`).join('');
+  const condNote = cond ? `<div class="warn-box">${t('warnCond')}</div>` : '';
+
+  document.getElementById('result-area').innerHTML = `
   <div class="res-card">
     <div class="res-head" style="background:${g.grad}">
       <div class="res-head-label">✅ ${t('gradeOf')}</div>
-      <div class="res-grade">${lang==='ar'?g.ar:g.en}</div>
+      <div class="res-grade">${lang === 'ar' ? g.ar : g.en}</div>
       <div class="res-year">2026 – 2027</div>
     </div>
     <div class="res-body">
       ${condNote}
       <div class="fee-sec-lbl" style="margin-top:4px">${t('feeBreak')}</div>
-      ${feeRow(t('feeAssess'),f.assess,Va.assess,cur)}
-      ${feeRow(t('feeReg'),f.reg,Va.reg,cur)}
-      ${feeRow(t('feeInst1'),f.inst,Va.inst,cur)}
-      ${feeRow(t('feeInst2'),f.inst,Va.inst,cur)}
+      ${feeRow(t('feeAssess'), f.assess, Va.assess, cur)}
+      ${feeRow(t('feeReg'), f.reg, Va.reg, cur)}
+      ${feeRow(t('feeInst1'), f.inst, Va.inst, cur)}
+      ${feeRow(t('feeInst2'), f.inst, Va.inst, cur)}
       <div class="total-band">
         <div class="total-band-right">
           <div class="total-band-lbl">${t('yearTotal')}</div>
@@ -797,11 +880,10 @@ function renderResult(g,cond){
           <div class="total-band-vat">+ ${t('vatLabel')} ${fmt(Va.full)} ${cur}</div>
         </div>
         <div class="total-band-left">
-          <div class="total-band-main">${fmt(f.full+Va.full)}</div>
+          <div class="total-band-main">${fmt(f.full + Va.full)}</div>
           <div class="total-band-cur">${cur}</div>
         </div>
-      </div>
-      ${discHtml}
+      </div>      ${discHtml}
       <div style="font-size:12.5px;font-weight:700;color:var(--text);margin:14px 0 9px">${t('discTitle')}</div>
       <div class="disc-grid">${chips}</div>
       <div class="syl-box"><div class="syl-title">${t('sylTitle')}</div>${syl}</div>
@@ -809,7 +891,7 @@ function renderResult(g,cond){
   </div>`;
 }
 
-function feeRow(lbl,base,v,cur){
+function feeRow(lbl, base, v, cur) {
   return `<div class="fee-row">
     <div class="fee-row-top">
       <span class="fee-label">${lbl}</span>
@@ -819,45 +901,44 @@ function feeRow(lbl,base,v,cur){
       <span class="fee-vat-badge">${t('vatLabel')}</span>
       <span class="fee-vat-amount">+ ${fmt(v)} ${cur}</span>
       <span class="fee-sep">|</span>
-      <span class="fee-total-inline">${t('totalLabel')}: ${fmt(base+v)} ${cur}</span>
+      <span class="fee-total-inline">${t('totalLabel')}: ${fmt(base + v)} ${cur}</span>
     </div>
   </div>`;
 }
 
-function pickDisc(k){selDisc=selDisc===k?null:k;if(currentGrade)renderResult(currentGrade,condFlag);}
+function pickDisc(k) { selDisc = selDisc === k ? null : k; if (currentGrade) renderResult(currentGrade, condFlag); }
 
 /* DOCUMENTS */
-const DOCS={
-  saudi:{
-    ar:[{t:'بطاقة العائلة',s:'أصل + نسخة'},{t:'كرت تطعيم الطالب',s:'محدّثة ومختومة'},{t:'شهادة ميلاد الطالب',s:'مصدّقة ومختومة'},{t:'شهادة آخر مرحلة دراسية',s:'معتمدة ومختومة (إن وُجدت)'},{t:'الكشف الطبي / اللياقة البدنية',s:'من مستشفى أو مركز معتمد'},{t:'8 صور شخصية',s:'خلفية بيضاء، حديثة'}],
-    en:[{t:'Family Card',s:'Original + copy'},{t:"Student's Immunisation Card",s:'Up-to-date and stamped'},{t:"Student's Birth Certificate",s:'Certified and stamped'},{t:'Previous academic report',s:'If applicable, stamped'},{t:'Physical fitness certificate',s:'From an accredited centre'},{t:'8 personal photographs',s:'White background, recent'}]
+const DOCS = {
+  saudi: {
+    ar: [{ t: 'بطاقة العائلة', s: 'أصل + نسخة' }, { t: 'كرت تطعيم الطالب', s: 'محدّثة ومختومة' }, { t: 'شهادة ميلاد الطالب', s: 'مصدّقة ومختومة' }, { t: 'شهادة آخر مرحلة دراسية', s: 'معتمدة ومختومة (إن وُجدت)' }, { t: 'الكشف الطبي / اللياقة البدنية', s: 'من مستشفى أو مركز معتمد' }, { t: '8 صور شخصية', s: 'خلفية بيضاء، حديثة' }],
+    en: [{ t: 'Family Card', s: 'Original + copy' }, { t: "Student's Immunisation Card", s: 'Up-to-date and stamped' }, { t: "Student's Birth Certificate", s: 'Certified and stamped' }, { t: 'Previous academic report', s: 'If applicable, stamped' }, { t: 'Physical fitness certificate', s: 'From an accredited centre' }, { t: '8 personal photographs', s: 'White background, recent' }]
   },
-  nonsaudi:{
-    ar:[{t:'إقامة الطالب المجددة',s:'سارية المفعول'},{t:'إقامة الأب المجددة',s:'سارية المفعول'},{t:'إقامة الأم المجددة',s:'سارية المفعول'},{t:'جواز سفر الطالب',s:'صفحة البيانات الشخصية'},{t:'جواز سفر الأب',s:'صفحة البيانات الشخصية'},{t:'جواز سفر الأم',s:'صفحة البيانات الشخصية'},{t:'كرت تطعيم الطالب',s:'محدّثة ومختومة'},{t:'شهادة ميلاد الطالب',s:'مصدّقة ومختومة'},{t:'شهادة آخر مرحلة دراسية',s:'معتمدة ومختومة (إن وُجدت)'},{t:'الكشف الطبي / اللياقة البدنية',s:'من مستشفى أو مركز معتمد'},{t:'8 صور شخصية',s:'خلفية بيضاء، حديثة'}],
-    en:[{t:"Student's renewed Iqama",s:'Must be valid'},{t:"Father's renewed Iqama",s:'Must be valid'},{t:"Mother's renewed Iqama",s:'Must be valid'},{t:"Student's passport",s:'Personal data page'},{t:"Father's passport",s:'Personal data page'},{t:"Mother's passport",s:'Personal data page'},{t:"Student's Immunisation Card",s:'Up-to-date and stamped'},{t:"Student's Birth Certificate",s:'Certified and stamped'},{t:'Previous academic report',s:'If applicable, stamped'},{t:'Physical fitness certificate',s:'From an accredited centre'},{t:'8 personal photographs',s:'White background, recent'}]
+  nonsaudi: {
+    ar: [{ t: 'إقامة الطالب المجددة', s: 'سارية المفعول' }, { t: 'إقامة الأب المجددة', s: 'سارية المفعول' }, { t: 'إقامة الأم المجددة', s: 'سارية المفعول' }, { t: 'جواز سفر الطالب', s: 'صفحة البيانات الشخصية' }, { t: 'جواز سفر الأب', s: 'صفحة البيانات الشخصية' }, { t: 'جواز سفر الأم', s: 'صفحة البيانات الشخصية' }, { t: 'كرت تطعيم الطالب', s: 'محدّثة ومختومة' }, { t: 'شهادة ميلاد الطالب', s: 'مصدّقة ومختومة' }, { t: 'شهادة آخر مرحلة دراسية', s: 'معتمدة ومختومة (إن وُجدت)' }, { t: 'الكشف الطبي / اللياقة البدنية', s: 'من مستشفى أو مركز معتمد' }, { t: '8 صور شخصية', s: 'خلفية بيضاء، حديثة' }],
+    en: [{ t: "Student's renewed Iqama", s: 'Must be valid' }, { t: "Father's renewed Iqama", s: 'Must be valid' }, { t: "Mother's renewed Iqama", s: 'Must be valid' }, { t: "Student's passport", s: 'Personal data page' }, { t: "Father's passport", s: 'Personal data page' }, { t: "Mother's passport", s: 'Personal data page' }, { t: "Student's Immunisation Card", s: 'Up-to-date and stamped' }, { t: "Student's Birth Certificate", s: 'Certified and stamped' }, { t: 'Previous academic report', s: 'If applicable, stamped' }, { t: 'Physical fitness certificate', s: 'From an accredited centre' }, { t: '8 personal photographs', s: 'White background, recent' }]
   }
 };
-let curNat='saudi',checked={saudi:new Set(),nonsaudi:new Set()};
-function setNat(n){curNat=n;document.getElementById('nat-sa').classList.toggle('on',n==='saudi');document.getElementById('nat-ns').classList.toggle('on',n==='nonsaudi');renderDocs();}
-function renderDocs(){
-  const docs=DOCS[curNat][lang==='ar'?'ar':'en'],ck=checked[curNat];
-  document.getElementById('doc-list').innerHTML=docs.map((d,i)=>`<div class="doc-item" onclick="togDoc(${i})"><div class="doc-chk${ck.has(i)?' on':''}"><span class="ck-mark">✓</span></div><div><div class="doc-txt">${d.t}</div><div class="doc-sub">${d.s}</div></div></div>`).join('');
-  const n=ck.size,tot=docs.length,pct=tot?Math.round(n/tot*100):0;
-  document.getElementById('prog-fill').style.width=pct+'%';
-  document.getElementById('prog-txt').textContent=lang==='ar'?`${n} من ${tot} وثيقة جاهزة`:`${n} of ${tot} documents ready`;
-  document.getElementById('prog-pct').textContent=pct+'%';
+let curNat = 'saudi', checked = { saudi: new Set(), nonsaudi: new Set() };
+function setNat(n) { curNat = n; document.getElementById('nat-sa').classList.toggle('on', n === 'saudi'); document.getElementById('nat-ns').classList.toggle('on', n === 'nonsaudi'); renderDocs(); }
+function renderDocs() {
+  const docs = DOCS[curNat][lang === 'ar' ? 'ar' : 'en'], ck = checked[curNat];
+  document.getElementById('doc-list').innerHTML = docs.map((d, i) => `<div class="doc-item" onclick="togDoc(${i})"><div class="doc-chk${ck.has(i) ? ' on' : ''}"><span class="ck-mark">✓</span></div><div><div class="doc-txt">${d.t}</div><div class="doc-sub">${d.s}</div></div></div>`).join('');
+  const n = ck.size, tot = docs.length, pct = tot ? Math.round(n / tot * 100) : 0;
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-txt').textContent = lang === 'ar' ? `${n} من ${tot} وثيقة جاهزة` : `${n} of ${tot} documents ready`;
+  document.getElementById('prog-pct').textContent = pct + '%';
 }
-function togDoc(i){const ck=checked[curNat];ck.has(i)?ck.delete(i):ck.add(i);renderDocs();}
+function togDoc(i) { const ck = checked[curNat]; ck.has(i) ? ck.delete(i) : ck.add(i); renderDocs(); }
 renderDocs();
 
-/* TICKET */
-let ticketN=parseInt(localStorage.getItem('kg_t')||'0');
-let currentServing=parseInt(localStorage.getItem('kg_s')||'0');
-function takeTicket(){
-  ticketN++;localStorage.setItem('kg_t',ticketN);
+/* TICKET */let ticketN = parseInt(localStorage.getItem('kg_t') || '0');
+let currentServing = parseInt(localStorage.getItem('kg_s') || '0');
+function takeTicket() {
+  ticketN++; localStorage.setItem('kg_t', ticketN);
   updateServingDisplay();
-  const time=new Date().toLocaleTimeString('ar-SA',{hour:'2-digit',minute:'2-digit'});
-  document.getElementById('ticket-area').innerHTML=`
+  const time = new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' });
+  document.getElementById('ticket-area').innerHTML = `
     <div class="ticket-result">
       <div class="ticket-top">
         <div style="font-size:13px;opacity:.82;margin-bottom:8px">${t('ticketYour')}</div>
@@ -870,74 +951,73 @@ function takeTicket(){
       </div>
     </div>`;
 }
-function updateServingDisplay(){document.getElementById('queue-cur').textContent=currentServing||'—';}
+function updateServingDisplay() { document.getElementById('queue-cur').textContent = currentServing || '—'; }
 updateServingDisplay();
 
 /* CALL NUMBER */
-let isAdmin=false;
-function renderCallGrid(){
-  if(!isAdmin)return;
-  const grid=document.getElementById('call-grid');if(!grid)return;
-  grid.innerHTML=[1,2,3,4,5,6,7,8,9,10].map(n=>`<button class="call-num-btn" onclick="callNumber(${n})">${n}</button>`).join('');
+let isAdmin = false;
+function renderCallGrid() {
+  if (!isAdmin) return;
+  const grid = document.getElementById('call-grid'); if (!grid) return;
+  grid.innerHTML = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => `<button class="call-num-btn" onclick="callNumber(${n})">${n}</button>`).join('');
 }
-function callNumber(n){
-  const num=n||parseInt(document.getElementById('call-input').value);
-  if(!num||isNaN(num)||num<1)return;
-  currentServing=num;localStorage.setItem('kg_s',num);updateServingDisplay();
-  if(n){document.querySelectorAll('.call-num-btn').forEach(b=>{if(parseInt(b.textContent)===n){b.classList.add('ringing');setTimeout(()=>b.classList.remove('ringing'),700);}});}
-  const badge=document.getElementById('called-badge');
-  document.getElementById('called-num').textContent=num;
-  document.getElementById('called-txt').textContent=t('calledTxt');
-  badge.classList.add('show');showNotif(num);
-  setTimeout(()=>badge.classList.remove('show'),4000);
-  document.getElementById('call-input').value='';
+function callNumber(n) {
+  const num = n || parseInt(document.getElementById('call-input').value);
+  if (!num || isNaN(num) || num < 1) return;
+  currentServing = num; localStorage.setItem('kg_s', num); updateServingDisplay();
+  if (n) { document.querySelectorAll('.call-num-btn').forEach(b => { if (parseInt(b.textContent) === n) { b.classList.add('ringing'); setTimeout(() => b.classList.remove('ringing'), 700); } }); }
+  const badge = document.getElementById('called-badge');
+  document.getElementById('called-num').textContent = num;
+  document.getElementById('called-txt').textContent = t('calledTxt');
+  badge.classList.add('show'); showNotif(num);
+  setTimeout(() => badge.classList.remove('show'), 4000);
+  document.getElementById('call-input').value = '';
 }
-function showNotif(num){
-  const banner=document.getElementById('notif-banner');
-  document.getElementById('notif-title').textContent=t('notifTitle');
-  document.getElementById('notif-num').textContent=num;
-  document.getElementById('notif-sub').textContent=t('notifSub');
-  banner.classList.add('show');setTimeout(()=>banner.classList.remove('show'),5000);
+function showNotif(num) {
+  const banner = document.getElementById('notif-banner');
+  document.getElementById('notif-title').textContent = t('notifTitle');
+  document.getElementById('notif-num').textContent = num;
+  document.getElementById('notif-sub').textContent = t('notifSub');
+  banner.classList.add('show'); setTimeout(() => banner.classList.remove('show'), 5000);
 }
-function closeNotif(){document.getElementById('notif-banner').classList.remove('show');}
-
+function closeNotif() { document.getElementById('notif-banner').classList.remove('show'); }
 /* ADMIN */
-function openAdminCode(){
+function openAdminCode() {
   document.getElementById('admin-code-overlay')?.remove();
-  const o=document.createElement('div');o.className='admin-code-overlay';o.id='admin-code-overlay';
-  o.innerHTML=`<div class="admin-code-box"><div class="admin-code-icon">🔐</div><div class="admin-code-title">${t('adminTitle')}</div><div class="admin-code-sub">${t('adminSub')}</div><input class="code-input" type="password" id="code-inp" maxlength="10" placeholder="••••" onkeydown="if(event.key==='Enter')checkCode()"><div class="code-err" id="code-err">${t('adminWrong')}</div><div class="code-btns"><button class="code-cancel" onclick="document.getElementById('admin-code-overlay').remove()">${t('adminCancel')}</button><button class="code-go" onclick="checkCode()">${t('adminEnter')}</button></div></div>`;
-  document.body.appendChild(o);setTimeout(()=>document.getElementById('code-inp')?.focus(),100);
+  const o = document.createElement('div'); o.className = 'admin-code-overlay'; o.id = 'admin-code-overlay';
+  o.innerHTML = `<div class="admin-code-box"><div class="admin-code-icon">🔐</div><div class="admin-code-title">${t('adminTitle')}</div><div class="admin-code-sub">${t('adminSub')}</div><input class="code-input" type="password" id="code-inp" maxlength="10" placeholder="••••" onkeydown="if(event.key==='Enter')checkCode()"><div class="code-err" id="code-err">${t('adminWrong')}</div><div class="code-btns"><button class="code-cancel" onclick="document.getElementById('admin-code-overlay').remove()">${t('adminCancel')}</button><button class="code-go" onclick="checkCode()">${t('adminEnter')}</button></div></div>`;
+  document.body.appendChild(o); setTimeout(() => document.getElementById('code-inp')?.focus(), 100);
 }
-async function checkCode(){
-  const v=document.getElementById('code-inp').value,e=document.getElementById('code-err');
-  if(v===ADMIN_CODE){
-    document.getElementById('admin-code-overlay').remove();isAdmin=true;
-    const cs=document.getElementById('call-section');if(cs)cs.style.display='block';
-    renderCallGrid();switchPg('queue');await showAdmin();
-  }else{
-    e.classList.add('show');document.getElementById('code-inp').value='';document.getElementById('code-inp').style.borderColor='#e53935';
-    setTimeout(()=>{e.classList.remove('show');document.getElementById('code-inp').style.borderColor='';},2000);
+async function checkCode() {
+  const v = document.getElementById('code-inp').value, e = document.getElementById('code-err');
+  if (v === ADMIN_CODE) {
+    document.getElementById('admin-code-overlay').remove(); isAdmin = true;
+    const cs = document.getElementById('call-section'); if (cs) cs.style.display = 'block';
+    renderCallGrid(); switchPg('queue'); await showAdmin();
+  } else {
+    e.classList.add('show'); document.getElementById('code-inp').value = ''; document.getElementById('code-inp').style.borderColor = '#e53935';
+    setTimeout(() => { e.classList.remove('show'); document.getElementById('code-inp').style.borderColor = ''; }, 2000);
   }
 }
-async function showAdmin(){
-  let guardians=[];try{guardians=JSON.parse(localStorage.getItem('kg_g')||'[]');}catch(e){}
-  guardians.sort((a,b)=>b.ts-a.ts);
-  const today=guardians.filter(g=>g.ts>Date.now()-86400000).length;
-  const rows=guardians.length?guardians.map(g=>`<tr><td style="padding:9px 10px;font-weight:700;color:#0f1f1c">${g.name}</td><td style="padding:9px 10px;font-family:Nunito,sans-serif;direction:ltr;color:#2d4a45">${g.phone}</td><td style="padding:9px 10px;color:#6b8c85">${g.child}</td><td style="padding:9px 8px;font-size:11px;color:#6b8c85">${g.time}</td></tr>`).join(''):`<tr><td colspan="4" style="text-align:center;padding:24px;color:#6b8c85">${lang==='ar'?'لا يوجد بيانات بعد':'No data yet'}</td></tr>`;
-  const csv='Name,Phone,Child,Time\n'+guardians.map(g=>`"${g.name}","${g.phone}","${g.child}","${g.time}"`).join('\n');
-  const url=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
-  const m=document.createElement('div');
-  m.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:99998;display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;padding:16px;backdrop-filter:blur(4px)';
-  m.innerHTML=`<div style="background:#fff;border-radius:22px;width:100%;max-width:560px;overflow:hidden;margin:auto;box-shadow:0 24px 80px rgba(0,0,0,.3)"><div style="background:linear-gradient(135deg,#0b5e52,#0d7a6a);padding:18px 20px;color:#fff;display:flex;justify-content:space-between;align-items:flex-start"><div><div style="font-size:17px;font-weight:800;margin-bottom:3px">📊 ${lang==='ar'?'لوحة إدارة القبول':'Admission Dashboard'}</div><div style="font-size:12px;opacity:.75">${lang==='ar'?'إجمالي الزيارات':'Total visits'}: ${guardians.length}</div></div><button onclick="this.closest('div[style*=fixed]').remove()" style="background:rgba(255,255,255,.15);border:none;color:#fff;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center">×</button></div><div style="padding:16px"><div style="display:flex;gap:10px;margin-bottom:14px"><div style="flex:1;background:#eef7f5;border-radius:14px;padding:14px;text-align:center;border:1.5px solid #c8deda"><div style="font-size:30px;font-weight:900;color:#0b5e52;font-family:Nunito,sans-serif">${guardians.length}</div><div style="font-size:11px;color:#6b8c85;margin-top:2px">${lang==='ar'?'إجمالي':'Total'}</div></div><div style="flex:1;background:#fdf3d0;border-radius:14px;padding:14px;text-align:center;border:1.5px solid #f5c843"><div style="font-size:30px;font-weight:900;color:#b8860b;font-family:Nunito,sans-serif">${today}</div><div style="font-size:11px;color:#6b8c85;margin-top:2px">${lang==='ar'?'آخر 24 ساعة':'Last 24h'}</div></div><div style="flex:1;background:#eef7f5;border-radius:14px;padding:14px;text-align:center;border:1.5px solid #c8deda"><div style="font-size:30px;font-weight:900;color:#0b5e52;font-family:Nunito,sans-serif">${currentServing||'—'}</div><div style="font-size:11px;color:#6b8c85;margin-top:2px">${lang==='ar'?'يُخدم الآن':'Serving now'}</div></div></div><a href="${url}" download="kids_gate.csv" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#b8860b,#d4a017);color:#fff;border-radius:12px;padding:11px;font-weight:700;font-size:13px;margin-bottom:14px;text-decoration:none">⬇️ ${lang==='ar'?'تصدير CSV':'Export CSV'}</a><div style="overflow-x:auto;border-radius:12px;border:1.5px solid #c8deda"><table style="width:100%;border-collapse:collapse;font-size:12.5px"><thead><tr style="background:#eef7f5;border-bottom:1.5px solid #c8deda"><th style="padding:9px 10px;text-align:right;color:#0b5e52;font-weight:700">${lang==='ar'?'الاسم':'Name'}</th><th style="padding:9px 10px;text-align:right;color:#0b5e52;font-weight:700">${lang==='ar'?'الجوال':'Mobile'}</th><th style="padding:9px 10px;text-align:right;color:#0b5e52;font-weight:700">${lang==='ar'?'الطفل':'Child'}</th><th style="padding:9px 8px;text-align:right;color:#0b5e52;font-weight:700">${lang==='ar'?'الوقت':'Time'}</th></tr></thead><tbody>${rows}</tbody></table></div></div></div>`;
+async function showAdmin() {
+  let guardians = []; try { guardians = JSON.parse(localStorage.getItem('kg_g') || '[]'); } catch (e) { }
+  guardians.sort((a, b) => b.ts - a.ts);
+  const today = guardians.filter(g => g.ts > Date.now() - 86400000).length;
+  const rows = guardians.length ? guardians.map(g => `<tr><td style="padding:9px 10px;font-weight:700;color:#0f1f1c">${g.name}</td><td style="padding:9px 10px;font-family:Nunito,sans-serif;direction:ltr;color:#2d4a45">${g.phone}</td><td style="padding:9px 10px;color:#6b8c85">${g.child}</td><td style="padding:9px 8px;font-size:11px;color:#6b8c85">${g.time}</td></tr>`).join('') : `<tr><td colspan="4" style="text-align:center;padding:24px;color:#6b8c85">${lang === 'ar' ? 'لا يوجد بيانات بعد' : 'No data yet'}</td></tr>`;
+  const csv = 'Name,Phone,Child,Time\n' + guardians.map(g => `"${g.name}","${g.phone}","${g.child}","${g.time}"`).join('\n');
+  const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+  const m = document.createElement('div');
+  m.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:99998;display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;padding:16px;backdrop-filter:blur(4px)';
+  m.innerHTML = `<div style="background:#fff;border-radius:22px;width:100%;max-width:560px;overflow:hidden;margin:auto;box-shadow:0 24px 80px rgba(0,0,0,.3)"><div style="background:linear-gradient(135deg,#0b5e52,#0d7a6a);padding:18px 20px;color:#fff;display:flex;justify-content:space-between;align-items:flex-start"><div><div style="font-size:17px;font-weight:800;margin-bottom:3px">📊 ${lang === 'ar' ? 'لوحة إدارة القبول' : 'Admission Dashboard'}</div><div style="font-size:12px;opacity:.75">${lang === 'ar' ? 'إجمالي الزيارات' : 'Total visits'}: ${guardians.length}</div></div><button onclick="this.closest('div[style*=fixed]').remove()" style="background:rgba(255,255,255,.15);border:none;color:#fff;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center">×</button></div><div style="padding:16px"><div style="display:flex;gap:10px;margin-bottom:14px"><div style="flex:1;background:#eef7f5;border-radius:14px;padding:14px;text-align:center;border:1.5px solid #c8deda"><div style="font-size:30px;font-weight:900;color:#0b5e52;font-family:Nunito,sans-serif">${guardians.length}</div><div style="font-size:11px;color:#6b8c85;margin-top:2px">${lang === 'ar' ? 'إجمالي' : 'Total'}</div></div><div style="flex:1;background:#fdf3d0;border-radius:14px;padding:14px;text-align:center;border:1.5px solid #f5c843"><div style="font-size:30px;font-weight:900;color:#b8860b;font-family:Nunito,sans-serif">${today}</div><div style="font-size:11px;color:#6b8c85;margin-top:2px">${lang === 'ar' ? 'آخر 24 ساعة' : 'Last 24h'}</div></div><div style="flex:1;background:#eef7f5;border-radius:14px;padding:14px;text-align:center;border:1.5px solid #c8deda"><div style="font-size:30px;font-weight:900;color:#0b5e52;font-family:Nunito,sans-serif">${currentServing || '—'}</div><div style="font-size:11px;color:#6b8c85;margin-top:2px">${lang === 'ar' ? 'يُخدم الآن' : 'Serving now'}</div></div></div><a href="${url}" download="kids_gate.csv" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#b8860b,#d4a017);color:#fff;border-radius:12px;padding:11px;font-weight:700;font-size:13px;margin-bottom:14px;text-decoration:none">⬇️ ${lang === 'ar' ? 'تصدير CSV' : 'Export CSV'}</a><div style="overflow-x:auto;border-radius:12px;border:1.5px solid #c8deda"><table style="width:100%;border-collapse:collapse;font-size:12.5px"><thead><tr style="background:#eef7f5;border-bottom:1.5px solid #c8deda"><th style="padding:9px 10px;text-align:right;color:#0b5e52;font-weight:700">${lang === 'ar' ? 'الاسم' : 'Name'}</th><th style="padding:9px 10px;text-align:right;color:#0b5e52;font-weight:700">${lang === 'ar' ? 'الجوال' : 'Mobile'}</th><th style="padding:9px 10px;text-align:right;color:#0b5e52;font-weight:700">${lang === 'ar' ? 'الطفل' : 'Child'}</th><th style="padding:9px 8px;text-align:right;color:#0b5e52;font-weight:700">${lang === 'ar' ? 'الوقت' : 'Time'}</th></tr></thead><tbody>${rows}</tbody></table></div></div></div>`;
   document.body.appendChild(m);
 }
 
-/* ══ CHAT - FULL STRUCTURED AI ══ */
-const CHAT_ANSWERS={
-  fees:{
-    match:q=>/رس[وو]م|fee|fees|كم|تكلف|price|سعر/.test(q),
-    ar(){
-      return`<div class="ans-block">
+/* ══ CHAT - STRUCTURED AI RESPONSES ══ */
+const CHAT_ANSWERS = {
+  fees: {
+    match: q => /رس[وو]م|fee|fees|كم|تكلف|price|سعر/.test(q),
+    ar() {
+      return `<div class="ans-block">
 <div class="ans-title">💰 الرسوم الدراسية · 2026–2027</div>
 <div class="a-fee-item">
   <div class="a-fee-top"><span class="a-fee-name">رسوم التقييم</span><span><span class="a-fee-base">250</span> <span class="a-fee-cur">ريال</span></span></div>
@@ -950,8 +1030,7 @@ const CHAT_ANSWERS={
 <div class="a-sect-sep">الرسوم السنوية حسب المرحلة</div>
 <div class="a-grade-grid">
   <div class="a-gchip"><span class="a-gchip-name">Pre-KG</span><span class="a-gchip-price">14,900</span><span class="a-gchip-vat">+ ض. 2,235</span></div>
-  <div class="a-gchip"><span class="a-gchip-name">KG I / II</span><span class="a-gchip-price">16,900</span><span class="a-gchip-vat">+ ض. 2,535</span></div>
-  <div class="a-gchip"><span class="a-gchip-name">الصفوف 1–3</span><span class="a-gchip-price">17,900</span><span class="a-gchip-vat">+ ض. 2,685</span></div>
+  <div class="a-gchip"><span class="a-gchip-name">KG I / II</span><span class="a-gchip-price">16,900</span><span class="a-gchip-vat">+ ض. 2,535</span></div>  <div class="a-gchip"><span class="a-gchip-name">الصفوف 1–3</span><span class="a-gchip-price">17,900</span><span class="a-gchip-vat">+ ض. 2,685</span></div>
 </div>
 <div class="a-total-band">
   <div class="a-tb-r"><div class="a-tb-lbl">KG I/II — إجمالي سنوي</div><div class="a-tb-base">16,900 ريال</div><div class="a-tb-vat">+ ضريبة 2,535 ريال</div></div>
@@ -960,8 +1039,8 @@ const CHAT_ANSWERS={
 <div class="a-note"><span class="a-note-icon">📌</span><span>تُدفع على قسطين متساويين خلال العام</span></div>
 </div>`;
     },
-    en(){
-      return`<div class="ans-block">
+    en() {
+      return `<div class="ans-block">
 <div class="ans-title">💰 Fees · 2026–2027</div>
 <div class="a-fee-item">
   <div class="a-fee-top"><span class="a-fee-name">Assessment fee</span><span><span class="a-fee-base">250</span> <span class="a-fee-cur">SAR</span></span></div>
@@ -985,124 +1064,120 @@ const CHAT_ANSWERS={
 </div>`;
     }
   },
-  docs:{
-    match:q=>/ورق|وثيق|مستند|doc|paper|أوراق|required/.test(q),
-    ar(){
-      const ls=['بطاقة العائلة — أصل ونسخة','كرت التطعيم — محدّث ومختوم','شهادة الميلاد — مصدّقة','شهادة آخر مرحلة — إن وُجدت','كشف طبي من مركز معتمد','8 صور شخصية — خلفية بيضاء'];
-      return`<div class="ans-block"><div class="ans-title">📋 الوثائق المطلوبة</div><div class="a-sect-sep">للطلاب السعوديين</div><div class="a-hl-list">${ls.map(l=>`<div class="a-hl"><div class="a-hldot"></div><span>${l}</span></div>`).join('')}</div><div class="a-note gold" style="margin-top:10px"><span class="a-note-icon">🌍</span><span>للطلاب غير السعوديين: يُضاف إقامة الطالب والوالدين وجوازات السفر</span></div></div>`;
+  docs: {
+    match: q => /ورق|وثيق|مستند|doc|paper|أوراق|required/.test(q),
+    ar() {
+      const ls = ['بطاقة العائلة — أصل ونسخة', 'كرت التطعيم — محدّث ومختوم', 'شهادة الميلاد — مصدّقة', 'شهادة آخر مرحلة — إن وُجدت', 'كشف طبي من مركز معتمد', '8 صور شخصية — خلفية بيضاء'];
+      return `<div class="ans-block"><div class="ans-title">📋 الوثائق المطلوبة</div><div class="a-sect-sep">للطلاب السعوديين</div><div class="a-hl-list">${ls.map(l => `<div class="a-hl"><div class="a-hldot"></div><span>${l}</span></div>`).join('')}</div><div class="a-note gold" style="margin-top:10px"><span class="a-note-icon">🌍</span><span>للطلاب غير السعوديين: يُضاف إقامة الطالب والوالدين وجوازات السفر</span></div></div>`;
     },
-    en(){
-      const ls=["Family Card — original + copy","Immunisation card — up-to-date","Birth certificate — certified","Previous report — if applicable","Physical fitness certificate","8 passport photos — white background"];
-      return`<div class="ans-block"><div class="ans-title">📋 Required Documents</div><div class="a-sect-sep">Saudi students</div><div class="a-hl-list">${ls.map(l=>`<div class="a-hl"><div class="a-hldot"></div><span>${l}</span></div>`).join('')}</div><div class="a-note gold" style="margin-top:10px"><span class="a-note-icon">🌍</span><span>Non-Saudi students: add renewed Iqama + passports for student & parents</span></div></div>`;
+    en() {
+      const ls = ["Family Card — original + copy", "Immunisation card — up-to-date", "Birth certificate — certified", "Previous report — if applicable", "Physical fitness certificate", "8 passport photos — white background"];
+      return `<div class="ans-block"><div class="ans-title">📋 Required Documents</div><div class="a-sect-sep">Saudi students</div><div class="a-hl-list">${ls.map(l => `<div class="a-hl"><div class="a-hldot"></div><span>${l}</span></div>`).join('')}</div><div class="a-note gold" style="margin-top:10px"><span class="a-note-icon">🌍</span><span>Non-Saudi students: add renewed Iqama + passports for student & parents</span></div></div>`;
     }
   },
-  disc:{
-    match:q=>/خصم|discount|تخفيض|مبكر|early|ثاني|second|ثالث|رابع/.test(q),
-    ar(){
-      const ls=[['10%','دفع سنوي مبكر'],['5%','الطفل الثاني'],['7.5%','الطفل الثالث'],['10%','الطفل الرابع']];
-      return`<div class="ans-block"><div class="ans-title">🏷️ الخصومات المتاحة</div><div class="a-disc-grid">${ls.map(([p,n])=>`<div class="a-dchip"><span class="a-dchip-pct">${p}</span><span class="a-dchip-lbl">${n}</span></div>`).join('')}</div><div class="a-note gold" style="margin-top:10px"><span class="a-note-icon">💡</span><span>تُطبَّق على الرسوم السنوية الكاملة شاملة الضريبة</span></div></div>`;
-    },
-    en(){
-      const ls=[['10%','Early full-year payment'],['5%','2nd child'],['7.5%','3rd child'],['10%','4th child']];
-      return`<div class="ans-block"><div class="ans-title">🏷️ Available Discounts</div><div class="a-disc-grid">${ls.map(([p,n])=>`<div class="a-dchip"><span class="a-dchip-pct">${p}</span><span class="a-dchip-lbl">${n}</span></div>`).join('')}</div><div class="a-note gold" style="margin-top:10px"><span class="a-note-icon">💡</span><span>Applied on the full annual fee including VAT</span></div></div>`;
+  disc: {
+    match: q => /خصم|discount|تخفيض|مبكر|early|ثاني|second|ثالث|رابع/.test(q),
+    ar() {
+      const ls = [['10%', 'دفع سنوي مبكر'], ['5%', 'الطفل الثاني'], ['7.5%', 'الطفل الثالث'], ['10%', 'الطفل الرابع']];
+      return `<div class="ans-block"><div class="ans-title">🏷️ الخصومات المتاحة</div><div class="a-disc-grid">${ls.map(([p, n]) => `<div class="a-dchip"><span class="a-dchip-pct">${p}</span><span class="a-dchip-lbl">${n}</span></div>`).join('')}</div><div class="a-note gold" style="margin-top:10px"><span class="a-note-icon">💡</span><span>تُطبَّق على الرسوم السنوية الكاملة شاملة الضريبة</span></div></div>`;    },
+    en() {
+      const ls = [['10%', 'Early full-year payment'], ['5%', '2nd child'], ['7.5%', '3rd child'], ['10%', '4th child']];
+      return `<div class="ans-block"><div class="ans-title">🏷️ Available Discounts</div><div class="a-disc-grid">${ls.map(([p, n]) => `<div class="a-dchip"><span class="a-dchip-pct">${p}</span><span class="a-dchip-lbl">${n}</span></div>`).join('')}</div><div class="a-note gold" style="margin-top:10px"><span class="a-note-icon">💡</span><span>Applied on the full annual fee including VAT</span></div></div>`;
     }
   },
-  syl:{
-    match:q=>/منهج|curriculum|مواد|subject|يتعلم|يدرس|study/.test(q),
-    ar(){
-      const gs=[['Pre-KG','إمساك القلم · التعبير عن المشاعر · تتبع الخطوط'],['KG I','الحروف والأرقام · العد 1–10 · الألوان والأشكال'],['KG II','كتابة Aa–Zz · الفونيكس · الحروف العربية'],['الصف الأول','قراءة وفهم · رياضيات 1–100 · علوم'],['الصف الثاني','جمل كاملة · الضرب والقسمة · دورة الحياة'],['الصف الثالث','كتابة إبداعية · هندسة · الطاقة والبيئة']];
-      return`<div class="ans-block"><div class="ans-title">📚 المنهج الدراسي</div>${gs.map(([g,s])=>`<div class="a-syl-grade"><div class="a-syl-gname">${g}</div><div class="a-syl-items">${s}</div></div>`).join('')}</div>`;
+  syl: {
+    match: q => /منهج|curriculum|مواد|subject|يتعلم|يدرس|study|syllabus/.test(q),
+    ar() {
+      const gs = [
+        ['Pre-KG', 'إمساك القلم • الإجابة عند السؤال • التعبير عن المشاعر • تتبع الخطوط • المهارات الحركية والفنية'],
+        ['KG I', 'التعرف على الحروف والأرقام • العد 1–10 شفهياً • الألوان الأساسية'],
+        ['KG II', 'كتابة Aa–Zz • الأرقام 1–30 • الجمع أحادي الرقم • الفونيكس • الحروف العربية أ–ي • تمييز أول حرف في الكلمة'],
+        ['الصف الأول', 'إنجليزي: كلمات 3 حروف، is/am/are، المفرد/الجمع • رياضيات: 1–100، جمع/طرح، أشكال • عربي: الحروف مع الحركات، أل الشمسية/القمرية، التنوين، قراءة بخط جميل'],
+        ['الصف الثاني', 'إنجليزي: أجزاء الكلام، ترقيم، فقرات 5 جمل • رياضيات: أرقام مفقودة، عد عكسي، حل مسائل • عربي: مواضع الحروف، الحركات الطويلة، المقطع الساكن، المشدد، تحليل الكلمات، أل والتنوين'],
+        ['الصف الثالث', 'إنجليزي: أجزاء الكلام، ترقيم، فقرات 8 جمل • رياضيات: أعداد 4 خانات، ضرب، مقارنة • عربي: فهم النصوص، المفرد/المثنى/الجمع، الأضداد، أسماء الممدود']
+      ];
+      return `<div class="ans-block"><div class="ans-title">📚 المنهج الدراسي · 2026–2027</div>${gs.map(([g, s]) => `<div class="a-syl-grade"><div class="a-syl-gname">${g}</div><div class="a-syl-items">${s}</div></div>`).join('')}<div class="a-note" style="margin-top:10px"><span class="a-note-icon">📌</span><span>يتم تدريس المواد باللغة الإنجليزية والعربية حسب الخطة المعتمدة</span></div></div>`;
     },
-    en(){
-      const gs=[['Pre-KG','Pencil grip · expressing emotions · tracing'],['KG I','Letters & numbers · counting 1–10 · colours'],['KG II','Writing Aa–Zz · phonics · Arabic letters'],['Grade 1','Reading · Maths 1–100 · Science'],['Grade 2','Full sentences · multiplication · life cycles'],['Grade 3','Creative writing · geometry · ecosystems']];
-      return`<div class="ans-block"><div class="ans-title">📚 Curriculum</div>${gs.map(([g,s])=>`<div class="a-syl-grade"><div class="a-syl-gname">${g}</div><div class="a-syl-items">${s}</div></div>`).join('')}</div>`;
+    en() {
+      const gs = [
+        ['Pre-KG', 'Pencil grip • responding when asked • expressing emotions • tracing lines • fine motor & art'],
+        ['KG I', 'Letters & numbers • oral counting 1–10 • primary colours'],
+        ['KG II', 'Writing Aa–Zz • numbers 1–30 • single-digit addition • phonics • Arabic letters Alif–Ya • first-letter identification'],
+        ['Grade 1', 'English: 3-letter words, is/am/are, singular/plural • Maths: 1–100, addition/subtraction, shapes • Arabic: letters with vowels, Al-Shamsiya/Qamariya, Tanween, beautiful handwriting'],
+        ['Grade 2', 'English: parts of speech, punctuation, 5-sentence paragraphs • Maths: missing numbers, backward counting, problem solving • Arabic: letter positions, long vowels, silent syllables, stressed letters, word analysis'],
+        ['Grade 3', 'English: parts of speech, punctuation, 8-sentence paragraphs • Maths: 4-digit numbers, multiplication, comparison • Arabic: text comprehension, singular/dual/plural, antonyms, extended nouns']
+      ];
+      return `<div class="ans-block"><div class="ans-title">📚 Curriculum · 2026–2027</div>${gs.map(([g, s]) => `<div class="a-syl-grade"><div class="a-syl-gname">${g}</div><div class="a-syl-items">${s}</div></div>`).join('')}<div class="a-note" style="margin-top:10px"><span class="a-note-icon">📌</span><span>Subjects taught in English & Arabic per approved curriculum</span></div></div>`;
     }
   }
 };
 
-const SYS=`You are a warm friendly admissions assistant for Kids Gate Kindergarten Jeddah Saudi Arabia 2026-2027. Reply in same language as user. Be conversational and clear. NO tables NO markdown. Plain paragraphs. Never mention Claude or Anthropic.
+let chatHistory = [], botBusy = false;
 
-FEES (SAR): Pre-KG base 14900 VAT 2235 total 17135. KG I&II base 16900 VAT 2535 total 19435. Grades 1-3 base 17900 VAT 2685 total 20585. Assessment 250+VAT37.50. Registration 500+VAT75. Show base price first then VAT amount then total separately.
-DISCOUNTS: 10% early full year, 5% 2nd child, 7.5% 3rd, 10% 4th.
-AGE: Pre-KG born 25Aug2022-24Aug2023. KGI 25Aug2021-24Aug2022. KGII 25Aug2020-24Aug2021. G1 25Aug2019-24Aug2020. G2 25Aug2018-24Aug2019. G3 25Aug2017-24Aug2018.
-Hours: Sun-Thu 7:30AM-3PM Admin Building floor 1.`;
-
-let chatHistory=[],botBusy=false;
-
-function addChatMsg(html,role){
-  const box=document.getElementById('chat-msgs');
-  const w=document.createElement('div');w.className='msg-wrap';
-  if(role==='bot'){
-    w.innerHTML=`<div class="msg-lbl bot-l">${t('botLbl')}</div><div class="msg bot" style="position:relative"><div class="bot-icon">🏫</div>${html}</div>`;
-  }else{
-    w.innerHTML=`<div class="msg-lbl" style="${lang==='en'?'text-align:right':''}">${t('youLbl')}</div><div class="msg user">${html}</div>`;
+function addChatMsg(html, role) {
+  const box = document.getElementById('chat-msgs');
+  const w = document.createElement('div'); w.className = 'msg-wrap';
+  if (role === 'bot') {
+    w.innerHTML = `<div class="msg-lbl bot-l">${t('botLbl')}</div><div class="msg bot" style="position:relative"><div class="bot-icon">🏫</div>${html}</div>`;
+  } else {
+    w.innerHTML = `<div class="msg-lbl" style="${lang === 'en' ? 'text-align:right' : ''}">${t('youLbl')}</div><div class="msg user">${html}</div>`;
   }
-  box.appendChild(w);box.scrollTop=box.scrollHeight;
+  box.appendChild(w); box.scrollTop = box.scrollHeight;
 }
-function showTyping(){
-  const b=document.getElementById('chat-msgs');
-  const d=document.createElement('div');d.id='typing';d.className='msg-wrap';
-  d.innerHTML=`<div class="msg-lbl bot-l">${t('botLbl')}</div><div class="msg bot" style="padding:13px 15px"><div class="typing-row"><div class="td"></div><div class="td"></div><div class="td"></div></div></div>`;
-  b.appendChild(d);b.scrollTop=b.scrollHeight;
-}
-function hideTyping(){document.getElementById('typing')?.remove();}
+function showTyping() {
+  const b = document.getElementById('chat-msgs');
+  const d = document.createElement('div'); d.id = 'typing'; d.className = 'msg-wrap';
+  d.innerHTML = `<div class="msg-lbl bot-l">${t('botLbl')}</div><div class="msg bot" style="padding:13px 15px"><div class="typing-row"><div class="td"></div><div class="td"></div><div class="td"></div></div></div>`;
+  b.appendChild(d); b.scrollTop = b.scrollHeight;}
+function hideTyping() { document.getElementById('typing')?.remove(); }
 
-function hideChips(){document.getElementById('quick-chips-wrap').style.display='none';}
-function showChips(){
-  const cw=document.getElementById('quick-chips-wrap');
-  cw.style.display='block';
-  const chips=cw.querySelectorAll('.qq');
-  chips.forEach((c,i)=>{c.style.animationDelay=(i*.06)+'s';c.style.animation='none';void c.offsetWidth;c.style.animation='chipIn .32s ease both';});
+function hideChips() { document.getElementById('quick-chips-wrap').style.display = 'none'; }
+function showChips() {
+  const cw = document.getElementById('quick-chips-wrap');
+  cw.style.display = 'block';
+  const chips = cw.querySelectorAll('.qq');
+  chips.forEach((c, i) => { c.style.animationDelay = (i * .06) + 's'; c.style.animation = 'none'; void c.offsetWidth; c.style.animation = 'chipIn .32s ease both'; });
 }
 
-async function sendMsg(){
-  if(botBusy)return;
-  const inp=document.getElementById('chat-input');const txt=inp.value.trim();if(!txt)return;
-  inp.value='';
-  addChatMsg(txt,'user');chatHistory.push({role:'user',content:txt});
-  hideChips();botBusy=true;showTyping();
-  const lc=txt.toLowerCase();
-  let structHtml=null;
-  for(const key of Object.keys(CHAT_ANSWERS)){
-    const a=CHAT_ANSWERS[key];
-    if(a.match(lc)){structHtml=lang==='ar'?a.ar():a.en();break;}
+async function sendMsg() {
+  if (botBusy) return;
+  const inp = document.getElementById('chat-input'); const txt = inp.value.trim(); if (!txt) return;
+  inp.value = '';
+  addChatMsg(txt, 'user'); chatHistory.push({ role: 'user', content: txt });
+  hideChips(); botBusy = true; showTyping();
+  const lc = txt.toLowerCase();
+  let structHtml = null;
+  for (const key of Object.keys(CHAT_ANSWERS)) {
+    const a = CHAT_ANSWERS[key];
+    if (a.match(lc)) { structHtml = lang === 'ar' ? a.ar() : a.en(); break; }
   }
-  if(structHtml){
-    setTimeout(()=>{
-      hideTyping();addChatMsg(structHtml,'bot');
-      chatHistory.push({role:'assistant',content:txt});
-      setTimeout(()=>{showChips();botBusy=false;},380);
-    },650+Math.random()*380);
-  }else{
-    try{
-      const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:500,system:SYS,messages:chatHistory})});
-      const data=await res.json();hideTyping();
-      const reply=data.content?.map(c=>c.text||'').join('')||'—';
-      chatHistory.push({role:'assistant',content:reply});
-      addChatMsg(reply.replace(/\n/g,'<br>'),'bot');
-    }catch(e){
-      hideTyping();
-      addChatMsg(t('noKnow'),'bot');
-    }
-    setTimeout(()=>{showChips();botBusy=false;},380);
-  }
-}
-
-function sendQ(btn,key){
-  const txt=btn.textContent.trim();
-  document.getElementById('chat-input').value='';
-  if(botBusy)return;
-  botBusy=true;hideChips();
-  addChatMsg(txt,'user');chatHistory.push({role:'user',content:txt});
-  showTyping();
-  const a=CHAT_ANSWERS[key];
-  setTimeout(()=>{
+  if (structHtml) {
+    setTimeout(() => {
+      hideTyping(); addChatMsg(structHtml, 'bot');
+      chatHistory.push({ role: 'assistant', content: txt });
+      setTimeout(() => { showChips(); botBusy = false; }, 380);
+    }, 650 + Math.random() * 380);
+  } else {
     hideTyping();
-    const html=lang==='ar'?a.ar():a.en();
-    addChatMsg(html,'bot');chatHistory.push({role:'assistant',content:txt});
-    setTimeout(()=>{showChips();botBusy=false;},380);
-  },650+Math.random()*380);
+    addChatMsg(t('noKnow'), 'bot');
+    setTimeout(() => { showChips(); botBusy = false; }, 380);
+  }
 }
+
+function sendQ(btn, key) {
+  const txt = btn.textContent.trim();
+  document.getElementById('chat-input').value = '';
+  if (botBusy) return;
+  botBusy = true; hideChips();
+  addChatMsg(txt, 'user'); chatHistory.push({ role: 'user', content: txt });
+  showTyping();
+  const a = CHAT_ANSWERS[key];
+  setTimeout(() => {
+    hideTyping();
+    const html = lang === 'ar' ? a.ar() : a.en();
+    addChatMsg(html, 'bot'); chatHistory.push({ role: 'assistant', content: txt });
+    setTimeout(() => { showChips(); botBusy = false; }, 380);
+  }, 650 + Math.random() * 380);}
 </script>
 </body>
-</html>
+  </html>
