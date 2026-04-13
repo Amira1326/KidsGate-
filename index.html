@@ -2,10 +2,8 @@
 <html lang="ar" dir="rtl" id="html-root">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#0b5e52">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Kids Gate – مساعد القبول</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -17,7 +15,6 @@
   --text:#0f1f1c;--text-mid:#2d4a45;--muted:#6b8c85;--border:#c8deda;
   --shadow-sm:0 2px 12px rgba(11,94,82,.08);--shadow-md:0 6px 30px rgba(11,94,82,.13);--shadow-lg:0 16px 60px rgba(11,94,82,.18);
   --r:16px;--rL:22px;--rXL:28px;
-  --safe-bottom:env(safe-area-inset-bottom);
 }
 html,body{height:100%;background:var(--cream);color:var(--text);font-size:16px;line-height:1.6;overflow-x:hidden}
 body.ar{font-family:'Cairo',sans-serif;direction:rtl}
@@ -61,4 +58,1075 @@ body.en .field-input{font-family:'Nunito',sans-serif}
 .field-err{font-size:11px;color:#e53935;margin-top:4px;display:none;padding-right:4px}
 .field-err.show{display:block}
 input[type=tel]{direction:ltr;text-align:left}
-.gate-btn{width:100%;padding:16px;margin-top:8px;background:linear-gradient(135deg,var(--emerald) 0%,var(--emerald-mid) 100%);color:#fff;border:none;border-radius:16px;font-size:16px;font-weight
+.gate-btn{width:100%;padding:16px;margin-top:8px;background:linear-gradient(135deg,var(--emerald) 0%,var(--emerald-mid) 100%);color:#fff;border:none;border-radius:16px;font-size:16px;font-weight:800;cursor:pointer;font-family:'Cairo',sans-serif;box-shadow:0 6px 24px rgba(11,94,82,.35);transition:.2s;display:flex;align-items:center;justify-content:center;gap:8px}
+body.en .gate-btn{font-family:'Nunito',sans-serif}
+.gate-btn:active{transform:scale(.97)}
+.gate-btn:disabled{opacity:.6;cursor:not-allowed}
+.privacy{font-size:11px;color:var(--muted);text-align:center;margin-top:14px;line-height:1.7;padding:0 10px}
+
+/* ── APP ── */
+#app{display:none}
+#app.on{display:block}
+.hdr{background:linear-gradient(135deg,var(--emerald) 0%,var(--emerald-mid) 100%);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 4px 20px rgba(11,94,82,.25)}
+.hdr-left{display:flex;align-items:center;gap:10px}
+.hdr-logo{width:38px;height:38px;flex-shrink:0}
+.hdr-text-title{color:#fff;font-size:15px;font-weight:700;line-height:1.2}
+.hdr-text-sub{color:rgba(255,255,255,.65);font-size:10.5px}
+.hdr-right{display:flex;align-items:center;gap:7px}
+.lang-sw{display:flex;background:rgba(255,255,255,.13);border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.2)}
+.lang-sw button{background:none;border:none;padding:4px 10px;font-size:11px;font-weight:700;color:rgba(255,255,255,.7);cursor:pointer;transition:.18s;font-family:'Nunito',sans-serif}
+.lang-sw button.on{background:rgba(255,255,255,.88);color:var(--emerald)}
+.user-tag{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:4px 10px;color:#fff;font-size:11px;cursor:pointer;white-space:nowrap;max-width:90px;overflow:hidden;text-overflow:ellipsis;transition:.18s}
+.user-tag:hover{background:rgba(255,255,255,.22)}
+
+/* BOTTOM NAV */
+.bnav{position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(4,1fr);z-index:200;box-shadow:0 -6px 30px rgba(11,94,82,.1);padding-bottom:env(safe-area-inset-bottom)}
+.bnav-btn{background:none;border:none;padding:10px 4px 7px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:.18s;position:relative}
+.bnav-btn .bi{font-size:20px;transition:.2s}
+.bnav-btn .bl{font-size:10px;color:var(--muted);font-weight:600;transition:.18s;font-family:'Cairo',sans-serif}
+body.en .bnav-btn .bl{font-family:'Nunito',sans-serif}
+.bnav-btn.on .bl{color:var(--emerald);font-weight:800}
+.bnav-btn.on .bi{transform:scale(1.15)}
+.bnav-btn::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:3px;background:var(--emerald);border-radius:3px 3px 0 0;transition:.2s}
+.bnav-btn.on::after{width:32px}
+
+/* PAGES */
+.pg{display:none;padding:0 0 90px;animation:fadeUp .25s ease;min-height:calc(100vh - 64px)}
+.pg.on{display:block}
+
+/* HOME */
+.home-hero{background:linear-gradient(160deg,var(--emerald) 0%,var(--emerald-mid) 50%,var(--emerald-bright) 100%);padding:28px 20px 36px;position:relative;overflow:hidden}
+.home-hero-blob1{position:absolute;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.06);top:-50px;left:-50px}.home-hero-blob2{position:absolute;width:120px;height:120px;border-radius:50%;background:rgba(245,200,67,.1);bottom:-30px;right:-20px}
+.home-hero-greeting{font-size:13px;color:rgba(255,255,255,.75);margin-bottom:4px;position:relative;z-index:1}
+.home-hero-name{font-size:23px;font-weight:900;color:#fff;position:relative;z-index:1;line-height:1.25}
+.home-hero-sub{font-size:12.5px;color:rgba(255,255,255,.72);margin-top:6px;position:relative;z-index:1;line-height:1.6}
+.home-hero-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(245,200,67,.2);border:1.5px solid rgba(245,200,67,.45);color:var(--gold-shine);font-size:11px;font-weight:700;padding:5px 14px;border-radius:20px;margin-top:12px;font-family:'Nunito',sans-serif;position:relative;z-index:1}
+.home-section-title{font-size:13px;font-weight:700;color:var(--muted);padding:18px 16px 8px;letter-spacing:.3px}
+.home-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;padding:0 16px}
+.hg-card{background:var(--white);border-radius:var(--rL);padding:18px 14px;text-align:center;cursor:pointer;border:1.5px solid var(--border);transition:.18s;box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
+.hg-card:active{transform:scale(.95)}
+.hg-icon-wrap{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:26px}
+.hg-icon-wrap.teal{background:var(--emerald-xlight)}
+.hg-icon-wrap.gold{background:var(--gold-light)}
+.hg-icon-wrap.blue{background:#e8f0fe}
+.hg-icon-wrap.pink{background:#fce4ec}
+.hg-label{font-size:13px;font-weight:800;color:var(--text);display:block;margin-bottom:3px}
+.hg-sub{font-size:11px;color:var(--muted)}
+.hours-card{margin:14px 16px 0;background:var(--white);border-radius:var(--rL);padding:18px;box-shadow:var(--shadow-sm);border:1px solid var(--border)}
+.hours-title{font-size:13.5px;font-weight:700;color:var(--emerald);margin-bottom:12px;display:flex;align-items:center;gap:7px}
+.hours-row{display:flex;align-items:center;gap:9px;padding:6px 0;font-size:13px;color:var(--text-mid);border-bottom:1px dashed var(--border)}
+.hours-row:last-child{border-bottom:none}
+.hours-icon{font-size:15px;flex-shrink:0;width:20px;text-align:center}
+
+/* SHARED */
+.section-card{background:var(--white);border-radius:var(--rL);padding:18px;box-shadow:var(--shadow-sm);border:1px solid var(--border);margin:0 16px 13px}
+.section-card-title{font-size:13.5px;font-weight:700;color:var(--emerald);margin-bottom:12px;display:flex;align-items:center;gap:7px}
+.pg-title{font-size:19px;font-weight:900;color:var(--text);margin-bottom:3px}
+.pg-sub{font-size:12.5px;color:var(--muted);margin-bottom:14px}
+.pg-header{padding:20px 16px 14px}
+
+/* AGE */
+.date-wrap{background:var(--emerald-xlight);border-radius:var(--r);padding:16px;margin:0 16px 14px;border:2px solid var(--emerald-light)}
+.date-wrap label{font-size:13px;font-weight:700;color:var(--emerald);display:block;margin-bottom:7px}
+input[type=date]{width:100%;padding:12px 14px;border:2px solid var(--border);border-radius:12px;font-size:15px;color:var(--text);background:#fff;direction:ltr;text-align:center;font-family:'Nunito',sans-serif;transition:.2s}
+input[type=date]:focus{outline:none;border-color:var(--emerald-bright);box-shadow:0 0 0 3px rgba(18,160,141,.1)}
+
+/* RESULT */
+.res-card{border-radius:var(--rXL);overflow:hidden;box-shadow:var(--shadow-lg);animation:popIn .38s cubic-bezier(.34,1.56,.64,1);margin:14px 16px}
+.res-head{padding:22px 20px 18px;color:#fff;text-align:center;position:relative;overflow:hidden}
+.res-head::before{content:'';position:absolute;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.07);top:-60px;right:-60px}
+.res-head-label{font-size:12px;opacity:.82;margin-bottom:5px;display:flex;align-items:center;justify-content:center;gap:5px}
+.res-grade{font-size:24px;font-weight:900;position:relative;z-index:1}
+.res-year{font-size:11.5px;opacity:.75;margin-top:4px;font-family:'Nunito',sans-serif;position:relative;z-index:1}
+.res-body{background:var(--white);padding:18px}
+
+/* FEE ROWS */
+.fee-row{padding:11px 0;border-bottom:1px dashed var(--border)}
+.fee-row:last-child{border-bottom:none}
+.fee-row-top{display:flex;justify-content:space-between;align-items:baseline}
+.fee-label{font-size:13.5px;color:var(--text);font-weight:700}
+.fee-base-amount{font-size:22px;font-weight:900;color:var(--text);font-family:'Nunito',sans-serif;line-height:1;letter-spacing:-.3px}.fee-currency{font-size:12px;color:var(--muted);font-weight:600}
+.fee-vat-row{display:flex;align-items:center;gap:6px;margin-top:5px;flex-wrap:wrap}
+.fee-vat-badge{font-size:10.5px;color:var(--muted);background:var(--emerald-xlight);border:1px solid var(--emerald-light);border-radius:6px;padding:2px 7px}
+.fee-vat-amount{font-size:11.5px;color:var(--muted);font-family:'Nunito',sans-serif}
+.fee-sep{font-size:11px;color:var(--border)}
+.fee-total-inline{font-size:12px;color:var(--text-mid);font-family:'Nunito',sans-serif;font-weight:700}
+.fee-sec-lbl{font-size:10.5px;font-weight:700;color:var(--muted);letter-spacing:.6px;text-transform:uppercase;margin:14px 0 8px;padding-bottom:5px;border-bottom:1.5px solid var(--emerald-light)}
+
+.total-band{background:linear-gradient(135deg,var(--emerald),var(--emerald-mid));border-radius:16px;padding:16px 18px;color:#fff;margin:14px 0 12px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 8px 24px rgba(11,94,82,.28)}
+.total-band-right{display:flex;flex-direction:column;gap:2px}
+.total-band-lbl{font-size:11px;opacity:.75}
+.total-band-base{font-size:13px;font-family:'Nunito',sans-serif;opacity:.75}
+.total-band-vat{font-size:11px;font-family:'Nunito',sans-serif;opacity:.6}
+.total-band-left{text-align:left}
+.total-band-main{font-size:30px;font-weight:900;font-family:'Nunito',sans-serif;line-height:1;direction:ltr}
+.total-band-cur{font-size:13px;opacity:.88}
+
+.disc-after{background:linear-gradient(135deg,#fffbea,#fff8d6);border:2px solid var(--gold-warm);border-radius:14px;padding:13px 16px;margin-top:10px;text-align:center;box-shadow:0 4px 16px rgba(184,134,11,.12)}
+.disc-save-lbl{font-size:11px;color:var(--gold);font-weight:700;margin-bottom:3px}
+.disc-final-price{font-size:26px;font-weight:900;color:var(--gold);font-family:'Nunito',sans-serif;direction:ltr;line-height:1.15}
+.disc-label{font-size:11px;color:var(--gold);margin-top:2px}
+.disc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.dc{background:var(--emerald-xlight);border:2px solid var(--emerald-light);border-radius:12px;padding:11px 8px;cursor:pointer;text-align:center;transition:.18s}
+.dc.on{background:var(--emerald);border-color:var(--emerald);box-shadow:0 4px 16px rgba(11,94,82,.25)}
+.dc-pct{font-size:20px;font-weight:900;color:var(--emerald);font-family:'Nunito',sans-serif;display:block;line-height:1.1}
+.dc.on .dc-pct{color:#fff}
+.dc-name{font-size:11px;color:var(--muted);display:block;margin-top:2px;font-weight:600;line-height:1.3}
+.dc.on .dc-name{color:rgba(255,255,255,.85)}
+.dc:active{transform:scale(.95)}
+
+.syl-box{background:var(--emerald-xlight);border-radius:12px;padding:14px 15px;margin-top:12px;border:1.5px solid var(--emerald-light)}
+.syl-title{font-size:12px;font-weight:700;color:var(--emerald);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.syl-item{font-size:12.5px;color:var(--text-mid);padding:3px 0;display:flex;gap:7px;align-items:baseline;line-height:1.5}
+.syl-dot{width:6px;height:6px;border-radius:50%;background:var(--emerald-bright);flex-shrink:0;margin-top:5px}
+.warn-box{background:#fffde7;border:2px solid #ffe082;border-radius:12px;padding:11px 13px;font-size:12px;color:#7a5c00;line-height:1.7;margin-top:10px}
+.err-box{background:#ffebee;border:2px solid #ef9a9a;border-radius:12px;padding:11px 13px;font-size:13px;color:#c62828;margin:14px 16px}
+
+/* DOCS */
+.nat-toggle{display:grid;grid-template-columns:1fr 1fr;background:var(--emerald-xlight);border-radius:14px;padding:4px;margin:0 16px 14px;border:2px solid var(--emerald-light)}
+.nat-btn{background:none;border:none;padding:10px;border-radius:11px;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;transition:.18s;font-family:'Cairo',sans-serif}
+body.en .nat-btn{font-family:'Nunito',sans-serif}
+.nat-btn.on{background:var(--emerald);color:#fff;box-shadow:0 4px 14px rgba(11,94,82,.25)}
+.prog-wrap{background:var(--white);border-radius:var(--r);padding:14px 16px;margin:0 16px 14px;border:1.5px solid var(--border);box-shadow:var(--shadow-sm)}
+.prog-info{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.prog-txt{font-size:13px;font-weight:700;color:var(--emerald)}
+.prog-pct{font-size:13px;font-weight:800;color:var(--emerald);font-family:'Nunito',sans-serif}
+.prog-bar{background:var(--emerald-light);border-radius:20px;height:8px;overflow:hidden}
+.prog-fill{background:linear-gradient(90deg,var(--emerald),var(--emerald-bright));height:100%;border-radius:20px;transition:.5s cubic-bezier(.34,1.56,.64,1)}
+.prog-hint{font-size:11px;color:var(--muted);margin-top:5px}
+.doc-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:.15s}.doc-item:last-child{border-bottom:none}
+.doc-chk{width:23px;height:23px;border-radius:7px;border:2px solid var(--border);flex-shrink:0;margin-top:1px;transition:.2s;display:flex;align-items:center;justify-content:center}
+.doc-chk.on{background:var(--emerald);border-color:var(--emerald);box-shadow:0 3px 10px rgba(11,94,82,.25)}
+.ck-mark{display:none;color:#fff;font-size:13px;font-weight:900}
+.doc-chk.on .ck-mark{display:block}
+.doc-txt{font-size:13.5px;color:var(--text);font-weight:600}
+.doc-sub{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* CHAT */
+.chat-wrap{display:flex;flex-direction:column;height:calc(100dvh - 150px);min-height:360px}
+.chat-msgs{flex:1;overflow-y:auto;padding:14px 14px 4px;display:flex;flex-direction:column;gap:11px;scroll-behavior:smooth}
+.chat-msgs::-webkit-scrollbar{width:3px}
+.chat-msgs::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+.msg-wrap{animation:fadeUp .22s ease}
+.msg-lbl{font-size:10.5px;font-weight:700;color:var(--muted);margin-bottom:4px}
+.msg-lbl.bot-l{color:var(--emerald)}
+.msg.bot{background:var(--white);border:1.5px solid var(--border);border-radius:4px 18px 18px 18px;padding:13px 15px;font-size:13.5px;line-height:1.75;color:var(--text);box-shadow:var(--shadow-sm);max-width:92%;position:relative}
+body.en .msg.bot{border-radius:18px 4px 18px 18px}
+.msg.user{background:linear-gradient(135deg,var(--emerald),var(--emerald-mid));color:#fff;border-radius:18px 4px 18px 18px;padding:11px 15px;font-size:13.5px;line-height:1.7;align-self:flex-end;max-width:82%;font-weight:600}
+.bot-icon{width:26px;height:26px;background:var(--emerald-xlight);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;position:absolute;top:-11px;right:-10px;border:2px solid var(--cream);box-shadow:0 2px 8px rgba(11,94,82,.14)}
+body.en .bot-icon{right:auto;left:-10px}
+.typing-row{display:flex;gap:5px;align-items:center;padding:3px 0}
+.td{width:8px;height:8px;background:var(--emerald-light);border-radius:50%;animation:boing .8s infinite}
+.td:nth-child(2){animation-delay:.15s}.td:nth-child(3){animation-delay:.3s}
+
+/* QUICK CHIPS */
+.quick-chips-wrap{flex-shrink:0;background:var(--white);border-top:1.5px solid var(--border)}
+.quick-chips-lbl{font-size:11px;font-weight:700;color:var(--muted);padding:9px 14px 4px}
+.quick-chips{display:flex;flex-wrap:wrap;gap:7px;padding:0 13px 10px}
+.qq{background:var(--cream);border:1.5px solid var(--border);color:var(--text-mid);font-size:12.5px;padding:8px 14px;border-radius:22px;cursor:pointer;font-weight:700;font-family:'Cairo',sans-serif;transition:.18s;box-shadow:var(--shadow-sm);animation:chipIn .3s ease both}
+body.en .qq{font-family:'Nunito',sans-serif}
+.qq:nth-child(1){animation-delay:.04s}.qq:nth-child(2){animation-delay:.09s}.qq:nth-child(3){animation-delay:.14s}.qq:nth-child(4){animation-delay:.19s}
+.qq:hover{background:var(--emerald);color:#fff;border-color:var(--emerald);transform:translateY(-2px)}
+.qq:active{transform:scale(.94)}
+.chat-input-row{display:flex;gap:8px;padding:10px 13px 14px;background:var(--white);border-top:1px solid var(--border);flex-shrink:0}
+.chat-in{flex:1;padding:11px 14px;border:1.5px solid var(--border);border-radius:14px;font-size:14px;color:var(--text);background:var(--cream);resize:none;font-family:'Cairo',sans-serif;transition:.2s}
+body.en .chat-in{font-family:'Nunito',sans-serif;direction:ltr}
+.chat-in:focus{outline:none;border-color:var(--emerald-bright);background:#fff;box-shadow:0 0 0 3px rgba(18,160,141,.1)}
+.send-btn{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--emerald),var(--emerald-mid));color:#fff;border:none;cursor:pointer;font-size:18px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.18s;box-shadow:0 4px 14px rgba(11,94,82,.3)}
+.send-btn:active{transform:scale(.9)}
+
+/* ANSWER STYLES */
+.ans-block{animation:popIn .32s cubic-bezier(.34,1.56,.64,1)}
+.ans-title{font-size:14px;font-weight:900;color:var(--emerald);margin-bottom:12px;display:flex;align-items:center;gap:7px}
+.a-fee-item{padding:10px 0;border-bottom:1.5px dashed var(--border)}
+.a-fee-item:last-of-type{border-bottom:none}
+.a-fee-top{display:flex;justify-content:space-between;align-items:baseline}
+.a-fee-name{font-size:13px;font-weight:700;color:var(--text)}
+.a-fee-base{font-size:21px;font-weight:900;color:var(--text);font-family:'Nunito',sans-serif;line-height:1;letter-spacing:-.3px}
+.a-fee-cur{font-size:12px;color:var(--muted);font-weight:600}.a-fee-vat{display:flex;align-items:center;gap:6px;margin-top:5px;flex-wrap:wrap}
+.a-vat-badge{font-size:10.5px;color:var(--muted);background:var(--emerald-xlight);border:1px solid var(--emerald-light);border-radius:6px;padding:2px 7px}
+.a-vat-num{font-size:11.5px;color:var(--muted);font-family:'Nunito',sans-serif}
+.a-sep{font-size:11px;color:var(--border)}
+.a-total-inline{font-size:12px;color:var(--text-mid);font-family:'Nunito',sans-serif;font-weight:700}
+.a-sect-sep{font-size:10.5px;font-weight:700;color:var(--muted);letter-spacing:.5px;margin:12px 0 8px;padding-bottom:5px;border-bottom:1.5px solid var(--emerald-light)}
+.a-grade-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:2px}
+.a-gchip{border-radius:10px;padding:10px 8px;text-align:center;border:1.5px solid var(--border);background:var(--cream)}
+.a-gchip-name{font-size:11.5px;font-weight:700;color:var(--text);display:block;margin-bottom:4px}
+.a-gchip-price{font-size:17px;font-weight:900;font-family:'Nunito',sans-serif;color:var(--emerald);display:block;line-height:1}
+.a-gchip-vat{font-size:10px;color:var(--muted);display:block;margin-top:3px;font-family:'Nunito',sans-serif}
+.a-total-band{background:linear-gradient(135deg,var(--emerald),var(--emerald-mid));border-radius:14px;padding:14px 16px;margin-top:12px;color:#fff;display:flex;justify-content:space-between;align-items:center}
+.a-tb-r{display:flex;flex-direction:column;gap:3px}
+.a-tb-lbl{font-size:11px;opacity:.75}
+.a-tb-base{font-size:13px;font-family:'Nunito',sans-serif;opacity:.75}
+.a-tb-vat{font-size:11px;font-family:'Nunito',sans-serif;opacity:.6}
+.a-tb-l{text-align:left}
+.a-tb-main{font-size:28px;font-weight:900;font-family:'Nunito',sans-serif;line-height:1;direction:ltr}
+.a-tb-cur{font-size:13px;opacity:.85}
+.a-note{background:var(--emerald-xlight);border:1.5px solid var(--emerald-light);border-radius:10px;padding:9px 12px;margin-top:10px;font-size:12px;color:var(--text-mid);line-height:1.6;display:flex;gap:7px;align-items:flex-start}
+.a-note-icon{font-size:14px;flex-shrink:0;margin-top:1px}
+.a-note.gold{background:var(--gold-light);border-color:var(--gold-warm);color:#7a5200}
+.a-hl-list{display:flex;flex-direction:column;gap:4px;margin-top:4px}
+.a-hl{display:flex;align-items:flex-start;gap:8px;padding:4px 0;font-size:13px;color:var(--text-mid);line-height:1.55}
+.a-hldot{width:7px;height:7px;border-radius:50%;background:var(--emerald-bright);flex-shrink:0;margin-top:5px}
+.a-disc-grid{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+.a-dchip{background:var(--gold-light);border:1.5px solid var(--gold-warm);border-radius:10px;padding:8px 14px;text-align:center}
+.a-dchip-pct{font-size:18px;font-weight:900;font-family:'Nunito',sans-serif;color:var(--gold);display:block;line-height:1}
+.a-dchip-lbl{font-size:11.5px;color:#7a5200;font-weight:700;display:block;margin-top:2px}
+.a-syl-grade{background:var(--emerald-xlight);border:1.5px solid var(--emerald-light);border-radius:10px;padding:9px 13px;margin-bottom:7px}
+.a-syl-gname{font-size:12px;font-weight:900;color:var(--emerald);margin-bottom:5px}
+.a-syl-items{font-size:12px;color:var(--text-mid);line-height:1.7}
+
+/* QUEUE */
+.queue-hero{background:linear-gradient(135deg,var(--gold) 0%,var(--gold-bright) 100%);margin:16px;border-radius:var(--rXL);padding:24px;text-align:center;box-shadow:0 8px 30px rgba(184,134,11,.25);position:relative;overflow:hidden}
+.queue-hero::before{content:'';position:absolute;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.08);top:-40px;right:-40px}
+.queue-serving-lbl{font-size:12px;color:rgba(255,255,255,.8);margin-bottom:4px;position:relative;z-index:1}
+.queue-num{font-size:60px;font-weight:900;color:#fff;font-family:'Nunito',sans-serif;line-height:1;position:relative;z-index:1}
+.ticket-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:calc(100% - 32px);margin:0 16px;padding:16px;background:linear-gradient(135deg,var(--gold),var(--gold-bright));color:#fff;border:none;border-radius:16px;font-size:16px;font-weight:800;cursor:pointer;font-family:'Cairo',sans-serif;box-shadow:0 6px 24px rgba(184,134,11,.3);transition:.18s}
+body.en .ticket-btn{font-family:'Nunito',sans-serif}
+.ticket-btn:active{transform:scale(.97)}
+.ticket-result{margin:14px 16px 0;border-radius:var(--rXL);overflow:hidden;animation:popIn .38s cubic-bezier(.34,1.56,.64,1)}
+.ticket-top{background:linear-gradient(135deg,var(--gold),var(--gold-bright));padding:22px;text-align:center;color:#fff}
+.ticket-num-big{font-size:64px;font-weight:900;font-family:'Nunito',sans-serif;line-height:1}
+.ticket-bottom{background:var(--white);padding:16px;border:1px solid var(--border);border-top:0}
+.print-btn{width:100%;padding:11px;border:2px solid var(--emerald-light);border-radius:12px;background:var(--emerald-xlight);color:var(--emerald);font-size:13px;font-weight:700;cursor:pointer;font-family:'Cairo',sans-serif;transition:.18s}
+body.en .print-btn{font-family:'Nunito',sans-serif}
+.info-row{display:flex;align-items:flex-start;gap:9px;padding:9px 0;font-size:13px;color:var(--text-mid);border-bottom:1px dashed var(--border)}
+.info-row:last-child{border-bottom:none}
+.info-icon{font-size:17px;flex-shrink:0;width:22px;text-align:center;margin-top:1px}
+/* CALL NUMBER */
+.call-section{margin:14px 16px 0;background:var(--white);border-radius:var(--rL);padding:18px;box-shadow:var(--shadow-sm);border:1px solid var(--border)}
+.call-title{font-size:13.5px;font-weight:700;color:var(--emerald);margin-bottom:12px;display:flex;align-items:center;gap:7px}
+.call-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px}
+.call-num-btn{background:var(--emerald-xlight);border:2px solid var(--emerald-light);border-radius:12px;padding:12px 6px;font-size:18px;font-weight:900;color:var(--emerald);font-family:'Nunito',sans-serif;cursor:pointer;transition:.18s;text-align:center;line-height:1}
+.call-num-btn:active{transform:scale(.92);background:var(--emerald);color:#fff;border-color:var(--emerald)}
+.call-num-btn.ringing{animation:ring .6s ease;background:var(--emerald);color:#fff;border-color:var(--emerald)}
+.call-custom-row{display:flex;gap:8px}
+.call-input{flex:1;padding:10px 14px;border:2px solid var(--border);border-radius:12px;font-size:15px;font-family:'Nunito',sans-serif;direction:ltr;text-align:center;transition:.2s}
+.call-input:focus{outline:none;border-color:var(--emerald-bright)}
+.call-go-btn{padding:10px 20px;background:linear-gradient(135deg,var(--emerald),var(--emerald-mid));color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:800;cursor:pointer;font-family:'Cairo',sans-serif;transition:.18s;white-space:nowrap}
+body.en .call-go-btn{font-family:'Nunito',sans-serif}
+.call-go-btn:active{transform:scale(.96)}
+.called-badge{display:none;margin-top:12px;background:linear-gradient(135deg,var(--emerald-xlight),#fff);border:2px solid var(--emerald-light);border-radius:14px;padding:12px 16px;text-align:center;animation:popIn .3s ease}
+.called-badge.show{display:block}
+.called-num{font-size:36px;font-weight:900;color:var(--emerald);font-family:'Nunito',sans-serif;line-height:1}
+.called-txt{font-size:12px;color:var(--muted);margin-top:4px}
+
+/* NOTIFICATION BANNER */
+.notif-banner{display:none;position:fixed;top:70px;left:16px;right:16px;z-index:9000;background:linear-gradient(135deg,var(--emerald),var(--emerald-mid));color:#fff;border-radius:16px;padding:14px 18px;box-shadow:0 8px 30px rgba(11,94,82,.4);animation:slideDown .4s ease;flex-direction:column;gap:4px}
+.notif-banner.show{display:flex}
+.notif-top{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700}
+.notif-num{font-size:22px;font-weight:900;font-family:'Nunito',sans-serif;margin-top:2px}
+.notif-close{position:absolute;top:10px;left:12px;background:rgba(255,255,255,.2);border:none;color:#fff;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center}
+body.ar .notif-close{left:auto;right:12px}
+
+/* ADMIN MODAL */
+.admin-code-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+.admin-code-box{background:#fff;border-radius:22px;width:100%;max-width:320px;padding:26px;text-align:center;box-shadow:0 24px 70px rgba(0,0,0,.3);animation:popIn .3s ease}
+.admin-code-icon{font-size:36px;margin-bottom:10px}
+.admin-code-title{font-size:17px;font-weight:800;color:var(--text);margin-bottom:5px}
+.admin-code-sub{font-size:12.5px;color:var(--muted);margin-bottom:18px}
+.code-input{width:100%;padding:13px;border:2px solid var(--border);border-radius:12px;font-size:22px;text-align:center;letter-spacing:8px;font-family:'Nunito',sans-serif;transition:.2s;margin-bottom:8px}
+.code-input:focus{outline:none;border-color:var(--emerald-bright);box-shadow:0 0 0 3px rgba(18,160,141,.1)}
+.code-err{font-size:11.5px;color:#e53935;display:none;margin-bottom:8px}
+.code-err.show{display:block}
+.code-btns{display:flex;gap:8px}
+.code-cancel{flex:1;padding:11px;border:2px solid var(--border);border-radius:11px;background:#fff;font-size:14px;cursor:pointer;font-family:'Cairo',sans-serif;color:var(--muted)}
+body.en .code-cancel{font-family:'Nunito',sans-serif}
+.code-go{flex:2;padding:11px;border:none;border-radius:11px;background:var(--emerald);color:#fff;font-size:14px;font-weight:800;cursor:pointer;font-family:'Cairo',sans-serif}
+body.en .code-go{font-family:'Nunito',sans-serif}
+</style>
+</head>
+<body class="ar">
+
+<!-- NOTIFICATION BANNER -->
+<div class="notif-banner" id="notif-banner">
+  <button class="notif-close" onclick="closeNotif()">×</button>
+  <div class="notif-top"><span>🔔</span><span id="notif-title">نداء رقم</span></div>  <div class="notif-num" id="notif-num">—</div>
+  <div style="font-size:11px;opacity:.8" id="notif-sub">يُرجى التوجه إلى مكتب القبول</div>
+</div>
+
+<!-- GATE -->
+<div id="gate">
+  <div class="gate-blob gate-blob-1"></div>
+  <div class="gate-blob gate-blob-2"></div>
+  <div class="gate-header">
+    <div class="gate-lang-row">
+      <button class="g-lang-btn on" onclick="gateLang('ar')">عربي</button>
+      <button class="g-lang-btn" onclick="gateLang('en')">English</button>
+    </div>
+  </div>
+  <div class="gate-hero">
+    <!-- 🖼️ LOGO - GitHub Pages URL -->
+    <div class="gate-logo-wrap">
+      <img src="https://amira1326.github.io/KidsGate-/logo.png" 
+           alt="Kids Gate Logo"
+           style="width:100%;height:100%;object-fit:contain"
+           onerror="this.style.display='none';this.parentElement.innerHTML='🏫'">
+    </div>
+    <div style="font-family:sans-serif;font-size:26px;font-weight:900;color:#fff;margin-bottom:6px">Kids Gate</div>
+    <div class="gate-tagline" id="gt-sub">روضة أطفال وطفولة مبكرة<br>مساعد القبول الذكي</div>
+    <span class="gate-pill" id="gt-pill">✦ العام الدراسي 2026 – 2027</span>
+  </div>
+  <div class="gate-form-wrap">
+    <div class="gate-form-handle"></div>
+    <div class="gate-form-title" id="gf-title">أهلاً بك 👋</div>
+    <div class="gate-form-sub" id="gf-sub">سجّل بياناتك للمتابعة</div>
+    <div class="field">
+      <label class="field-label"><span>👤</span><span id="fl-name-t">اسم ولي الأمر</span></label>
+      <input class="field-input" type="text" id="inp-name" placeholder="مثال: محمد عبدالله">
+      <div class="field-err" id="err-name">الرجاء إدخال الاسم</div>
+    </div>
+    <div class="field">
+      <label class="field-label"><span>📱</span><span id="fl-phone-t">رقم الجوال</span></label>
+      <input class="field-input" type="tel" id="inp-phone" placeholder="05XXXXXXXX" maxlength="13">
+      <div class="field-err" id="err-phone">الرجاء إدخال رقم جوال صحيح</div>
+    </div>
+    <div class="field">
+      <label class="field-label"><span>👶</span><span id="fl-child-t">اسم الطفل</span> <span style="font-size:11px;color:var(--muted);font-weight:400" id="fl-opt">(اختياري)</span></label>
+      <input class="field-input" type="text" id="inp-child" placeholder="اسم الطفل">
+    </div>
+    <button class="gate-btn" id="gate-btn" onclick="submitGate()">
+      <span id="gate-btn-txt">متابعة</span><span>←</span>
+    </button>
+    <div class="privacy" id="priv-txt">🔒 بياناتك محفوظة لدى إدارة Kids Gate فقط</div>
+  </div>
+</div>
+<!-- APP -->
+<div id="app">
+  <div class="hdr">
+    <div class="hdr-left">
+      <div style="width:38px;height:38px;background:rgba(255,255,255,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px">🏫</div>
+      <div>
+        <div class="hdr-text-title" id="h-title">مساعد القبول الذكي</div>
+        <div class="hdr-text-sub">Kids Gate • 2026–2027</div>
+      </div>
+    </div>
+    <div class="hdr-right">
+      <div class="lang-sw">
+        <button class="on" onclick="setLang('ar')">عربي</button>
+        <button onclick="setLang('en')">EN</button>
+      </div>
+      <div class="user-tag" id="user-tag" onclick="openAdminCode()">👤 —</div>
+    </div>
+  </div>
+
+  <!-- HOME -->
+  <div class="pg on" id="pg-home">
+    <div class="home-hero">
+      <div class="home-hero-blob1"></div><div class="home-hero-blob2"></div>
+      <div class="home-hero-greeting" id="hero-greet">أهلاً،</div>
+      <div class="home-hero-name" id="hero-name">تفضل باستكشاف معلومات القبول</div>
+      <div class="home-hero-sub" id="hero-sub">كل ما تحتاجه عن المراحل والرسوم والأوراق في مكان واحد</div>
+      <span class="home-hero-pill"><span>✦</span><span>2026 – 2027</span></span>
+    </div>
+    <div class="home-section-title" id="hs-title">الخدمات المتاحة</div>
+    <div class="home-grid">
+      <div class="hg-card" onclick="switchPg('age')">
+        <div class="hg-icon-wrap teal">🎂</div>
+        <span class="hg-label" id="hg1l">تحديد المرحلة</span>
+        <span class="hg-sub" id="hg1s">أدخل تاريخ الميلاد</span>
+      </div>
+      <div class="hg-card" onclick="switchPg('docs')">
+        <div class="hg-icon-wrap gold">📋</div>
+        <span class="hg-label" id="hg2l">الأوراق المطلوبة</span>
+        <span class="hg-sub" id="hg2s">قائمة التحقق</span>
+      </div>
+      <div class="hg-card" onclick="switchPg('chat')">
+        <div class="hg-icon-wrap blue">🤖</div>
+        <span class="hg-label" id="hg3l">مساعد ذكي</span>
+        <span class="hg-sub" id="hg3s">اسأل أي سؤال</span>
+      </div>
+      <div class="hg-card" onclick="switchPg('queue')">
+        <div class="hg-icon-wrap pink">🎫</div>
+        <span class="hg-label" id="hg4l">رقم الانتظار</span>
+        <span class="hg-sub" id="hg4s">احجز دورك</span>      </div>
+    </div>
+    <div class="hours-card">
+      <div class="hours-title" id="hours-title">⏰ أوقات الاستقبال</div>
+      <div class="hours-row"><span class="hours-icon">📅</span><span id="hr1">الأحد – الخميس</span></div>
+      <div class="hours-row"><span class="hours-icon">🕗</span><span id="hr2">7:00 صباحاً – 3:00 مساءً</span></div>
+      <div class="hours-row"><span class="hours-icon">📍</span><span id="hr3">مكتب القبول والتسجيل  – الدور الارضي </span></div>
+    </div>
+  </div>
+
+  <!-- AGE & FEES -->
+  <div class="pg" id="pg-age">
+    <div class="pg-header">
+      <div class="pg-title" id="age-title">تحديد المرحلة والرسوم</div>
+      <div class="pg-sub" id="age-sub">أدخل تاريخ ميلاد طفلك</div>
+    </div>
+    <div class="date-wrap">
+      <label id="dob-lbl">📅 تاريخ ميلاد الطفل</label>
+      <input type="date" id="dob" max="2023-12-31" min="2016-01-01" onchange="calcGrade()">
+    </div>
+    <div id="result-area"></div>
+  </div>
+
+  <!-- DOCS -->
+  <div class="pg" id="pg-docs">
+    <div class="pg-header">
+      <div class="pg-title" id="docs-title">الأوراق المطلوبة</div>
+      <div class="pg-sub" id="docs-sub">اضغط على كل وثيقة عند تجهيزها</div>
+    </div>
+    <div class="nat-toggle">
+      <button class="nat-btn on" id="nat-sa" onclick="setNat('saudi')">🇸🇦 <span id="nat-sa-t">سعودي</span></button>
+      <button class="nat-btn" id="nat-ns" onclick="setNat('nonsaudi')">🌍 <span id="nat-ns-t">غير سعودي</span></button>
+    </div>
+    <div class="prog-wrap">
+      <div class="prog-info">
+        <span class="prog-txt" id="prog-txt">0 من 0</span>
+        <span class="prog-pct" id="prog-pct">0%</span>
+      </div>
+      <div class="prog-bar"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+      <div class="prog-hint" id="prog-hint">اضغط على كل وثيقة لتأكيد تجهيزها</div>
+    </div>
+    <div class="section-card" id="doc-list"></div>
+  </div>
+
+  <!-- CHAT -->
+  <div class="pg" id="pg-chat">
+    <div class="chat-wrap">
+      <div class="chat-msgs" id="chat-msgs">
+        <div class="msg-wrap">
+          <div class="msg-lbl bot-l" id="bot-lbl">🤖 مساعد Kids Gate</div>          <div class="msg bot" style="position:relative">
+            <div class="bot-icon">🏫</div>
+            <span id="welcome-msg">مرحباً! 👋 أنا مساعدك الذكي لروضة Kids Gate.<br>اختر سؤالاً أو اكتب ما تريد معرفته.</span>
+          </div>
+        </div>
+      </div>
+      <div class="quick-chips-wrap" id="quick-chips-wrap">
+        <div class="quick-chips-lbl" id="chips-lbl-txt">أسئلة شائعة</div>
+        <div class="quick-chips" id="quick-chips">
+          <button class="qq" onclick="sendQ(this,'fees')" id="qq1">💰 كم الرسوم؟</button>
+          <button class="qq" onclick="sendQ(this,'docs')" id="qq2">📋 الأوراق المطلوبة؟</button>
+          <button class="qq" onclick="sendQ(this,'disc')" id="qq4">🏷️ هل يوجد خصومات؟</button>
+          <button class="qq" onclick="sendQ(this,'syl')" id="qq5">📚 ما مواد المنهج؟</button>
+        </div>
+      </div>
+      <div class="chat-input-row">
+        <button class="send-btn" onclick="sendMsg()">➤</button>
+        <textarea class="chat-in" id="chat-input" rows="1" placeholder="اكتب سؤالك هنا..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg()}"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUEUE -->
+  <div class="pg" id="pg-queue">
+    <div class="queue-hero">
+      <div class="queue-serving-lbl" id="q-lbl">الرقم الحالي قيد الخدمة</div>
+      <div class="queue-num" id="queue-cur">—</div>
+    </div>
+    <div style="height:14px"></div>
+    <button class="ticket-btn" onclick="takeTicket()"><span>🎫</span><span id="ticket-lbl">استلام رقم انتظار</span></button>
+    <div id="ticket-area"></div>
+    <div class="call-section" id="call-section" style="display:none">
+      <div class="call-title" id="call-title">📢 نداء رقم</div>
+      <div class="call-grid" id="call-grid"></div>
+      <div class="call-custom-row">
+        <input class="call-input" type="number" id="call-input" min="1" max="999" placeholder="أدخل رقماً">
+        <button class="call-go-btn" onclick="callNumber()" id="call-go">نداء</button>
+      </div>
+      <div class="called-badge" id="called-badge">
+        <div class="called-num" id="called-num">—</div>
+        <div class="called-txt" id="called-txt">تم نداء هذا الرقم</div>
+      </div>
+    </div>
+    <div class="section-card" style="margin-top:14px">
+      <div class="section-card-title" id="q-info-title">ℹ️ تعليمات الانتظار</div>
+      <div class="info-row"><span class="info-icon">📢</span><span id="qi1">ستُناديك موظفة القبول بالاسم والرقم</span></div>
+      <div class="info-row"><span class="info-icon">🪑</span><span id="qi2">يُرجى التواجد في منطقة الانتظار</span></div>
+      <div class="info-row"><span class="info-icon">🤖</span><span id="qi3">يمكنك استخدام المساعد الذكي أثناء الانتظار</span></div>
+      <div class="info-row"><span class="info-icon">⏱</span><span id="qi4">متوسط وقت الانتظار: <strong style="color:var(--emerald)">10–15 دقيقة</strong></span></div>
+    </div>  </div>
+
+  <nav class="bnav">
+    <button class="bnav-btn on" onclick="switchPg('home')" id="nav-home"><span class="bi">🏠</span><span class="bl" id="nl-home">الرئيسية</span></button>
+    <button class="bnav-btn" onclick="switchPg('age')" id="nav-age"><span class="bi">🎂</span><span class="bl" id="nl-age">المرحلة</span></button>
+    <button class="bnav-btn" onclick="switchPg('docs')" id="nav-docs"><span class="bi">📋</span><span class="bl" id="nl-docs">الأوراق</span></button>
+    <button class="bnav-btn" onclick="switchPg('chat')" id="nav-chat"><span class="bi">🤖</span><span class="bl" id="nl-chat">مساعد</span></button>
+  </nav>
+</div>
+
+<script>
+// ⚙️ CONFIGURATION
+const ADMIN_CODE = '9878';
+let lang = 'ar';
+const SCHOOL_LOGO_URL = 'https://amira1326.github.io/KidsGate-/logo.png';
+
+// 🌍 TRANSLATIONS
+const T = {
+  ar: {
+    hTitle: 'مساعد القبول الذكي', gtSub: 'روضة أطفال وطفولة مبكرة<br>مساعد القبول الذكي', gtPill: '✦ العام الدراسي 2026 – 2027',
+    gfTitle: 'أهلاً بك 👋', gfSub: 'سجّل بياناتك للمتابعة', flName: 'اسم ولي الأمر', flPhone: 'رقم الجوال', flChild: 'اسم الطفل', flOpt: '(اختياري)',
+    gateBtnTxt: 'متابعة', errName: 'الرجاء إدخال الاسم', errPhone: 'الرجاء إدخال رقم جوال صحيح',
+    privTxt: '🔒 بياناتك محفوظة لدى إدارة Kids Gate فقط',
+    heroGreet: 'أهلاً،', heroSub: 'كل ما تحتاجه عن المراحل والرسوم والأوراق في مكان واحد',
+    hsTitle: 'الخدمات المتاحة', hg1l: 'تحديد المرحلة', hg1s: 'أدخل تاريخ الميلاد', hg2l: 'الأوراق المطلوبة', hg2s: 'قائمة التحقق',
+    hg3l: 'مساعد ذكي', hg3s: 'اسأل أي سؤال', hg4l: 'رقم الانتظار', hg4s: 'احجز دورك',
+    hoursTitle: '⏰ أوقات الاستقبال', hr1: 'الأحد – الخميس', hr2: '7:30 صباحاً – 3:00 مساءً', hr3: 'مبنى الإدارة – الدور الأول',
+    ageTitle: 'تحديد المرحلة والرسوم', ageSub: 'أدخل تاريخ ميلاد طفلك', dobLbl: '📅 تاريخ ميلاد الطفل',
+    docsTitle: 'الأوراق المطلوبة', docsSub: 'اضغط على كل وثيقة عند تجهيزها', natSa: 'سعودي', natNs: 'غير سعودي', progHint: 'اضغط على كل وثيقة لتأكيد تجهيزها',
+    botLbl: '🤖 مساعد Kids Gate', welcomeMsg: 'مرحباً! 👋 أنا مساعدك الذكي لروضة Kids Gate.<br>اختر سؤالاً أو اكتب ما تريد معرفته.',
+    chatPh: 'اكتب سؤالك هنا...', chipsLbl: 'أسئلة شائعة',
+    qq1: '💰 كم الرسوم؟', qq2: '📋 الأوراق المطلوبة؟', qq4: '🏷️ هل يوجد خصومات؟', qq5: '📚 ما مواد المنهج؟',
+    qLbl: 'الرقم الحالي قيد الخدمة', ticketLbl: 'استلام رقم انتظار',
+    qInfoTitle: 'ℹ️ تعليمات الانتظار',
+    qi1: 'ستُناديك موظفة القبول بالاسم والرقم', qi2: 'يُرجى التواجد في منطقة الانتظار',
+    qi3: 'يمكنك استخدام المساعد الذكي أثناء الانتظار', qi4: 'متوسط وقت الانتظار: <strong style="color:var(--emerald)">10–15 دقيقة</strong>',
+    nlHome: 'الرئيسية', nlAge: 'المرحلة', nlDocs: 'الأوراق', nlChat: 'مساعد',
+    cur: 'ريال', feeBreak: 'تفاصيل الرسوم', feeAssess: 'رسوم التقييم', feeReg: 'رسوم التسجيل', feeInst1: 'القسط الأول', feeInst2: 'القسط الثاني',
+    yearTotal: 'الإجمالي السنوي', vatLabel: 'ضريبة 15%', totalLabel: 'الإجمالي شاملة الضريبة',
+    discTitle: '🏷️ خصومات متاحة — اضغط لحساب السعر بعد الخصم',
+    discSave: 'وفّرت', discAfterLbl: 'السعر بعد الخصم',
+    sylTitle: '📚 المنهج الدراسي',
+    warnCond: '⚠️ مواليد 25 أغسطس – 22 نوفمبر 2020 يُقبلون في KG II بشرط إتمام المرحلة.',
+    errRange: '⚠️ تاريخ الميلاد خارج النطاق المقبول. يرجى التواصل مع موظفة القبول.',
+    ticketYour: 'رقمك في الانتظار', ticketWait: '📍 يُرجى الانتظار في الصالة', printBtn: '🖨️ طباعة',
+    youLbl: 'أنت', gradeOf: 'مرحلة طفلك',
+    adminTitle: 'لوحة الإدارة', adminSub: 'أدخل كود الإدارة للمتابعة', adminEnter: 'دخول', adminCancel: 'إلغاء', adminWrong: 'كود خاطئ، حاول مرة أخرى',
+    callTitle: '📢 نداء رقم', callGo: 'نداء', calledTxt: 'تم نداء هذا الرقم بنجاح',
+    notifTitle: 'نداء رقم', notifSub: 'يُرجى التوجه إلى مكتب القبول',
+    noKnow: 'يُرجى التواصل مع موظفة القبول مباشرة للإجابة على هذا السؤال 😊',  },
+  en: {
+    hTitle: 'Smart Admission Assistant', gtSub: 'Kindergarten & Early Childhood<br>Smart Admission Assistant', gtPill: '✦ Academic Year 2026 – 2027',
+    gfTitle: 'Welcome 👋', gfSub: 'Enter your details to continue', flName: 'Guardian name', flPhone: 'Mobile number', flChild: "Child's name", flOpt: '(optional)',
+    gateBtnTxt: 'Continue', errName: 'Please enter your name', errPhone: 'Please enter a valid mobile number',
+    privTxt: "🔒 Your details are kept with Kids Gate's management only",
+    heroGreet: 'Welcome,', heroSub: 'Everything you need about grades, fees and documents in one place',
+    hsTitle: 'Services', hg1l: 'Find Grade', hg1s: 'Enter date of birth', hg2l: 'Required Documents', hg2s: 'Checklist',
+    hg3l: 'AI Assistant', hg3s: 'Ask any question', hg4l: 'Queue Number', hg4s: 'Take your place',
+    hoursTitle: '⏰ Reception Hours', hr1: 'Sunday – Thursday', hr2: '7:30 AM – 3:00 PM', hr3: 'Administration Building, First Floor',
+    ageTitle: 'Grade Placement & Fees', ageSub: "Enter your child's date of birth", dobLbl: "📅 Child's Date of Birth",
+    docsTitle: 'Required Documents', docsSub: 'Tap each document once you have it ready', natSa: 'Saudi', natNs: 'Non-Saudi', progHint: 'Tap each document to confirm it is ready',
+    botLbl: '🤖 Kids Gate Assistant', welcomeMsg: "Hello! 👋 I'm the Kids Gate smart assistant.<br>Pick a question or type anything you need.",
+    chatPh: 'Type your question here...', chipsLbl: 'Common questions',
+    qq1: '💰 What are the fees?', qq2: '📋 Documents needed?', qq4: '🏷️ Any discounts?', qq5: '📚 What is the curriculum?',
+    qLbl: 'Currently serving', ticketLbl: 'Get a Queue Number',
+    qInfoTitle: 'ℹ️ Waiting Instructions',
+    qi1: 'The admissions officer will call your name and number', qi2: 'Please remain in the waiting area',
+    qi3: 'You may use the AI assistant while waiting', qi4: 'Average wait time: <strong style="color:var(--emerald)">10–15 minutes</strong>',
+    nlHome: 'Home', nlAge: 'Grade', nlDocs: 'Documents', nlChat: 'Assistant',
+    cur: 'SAR', feeBreak: 'Fee Details', feeAssess: 'Assessment Fee', feeReg: 'Registration Fee', feeInst1: '1st Instalment', feeInst2: '2nd Instalment',
+    yearTotal: 'Annual total', vatLabel: 'VAT 15%', totalLabel: 'Total incl. VAT',
+    discTitle: '🏷️ Discounts — tap to calculate discounted price',
+    discSave: 'You save', discAfterLbl: 'Price after discount',
+    sylTitle: '📚 Curriculum',
+    warnCond: '⚠️ Children born 25 Aug – 22 Nov 2020 are eligible for KG II subject to completion.',
+    errRange: '⚠️ Date of birth is outside the accepted range for 2026–2027. Please speak with the admissions officer.',
+    ticketYour: 'Your queue number', ticketWait: '📍 Please wait in the reception area', printBtn: '🖨️ Print',
+    youLbl: 'You', gradeOf: "Your child's grade",
+    adminTitle: 'Admin Panel', adminSub: 'Enter the admin code to continue', adminEnter: 'Enter', adminCancel: 'Cancel', adminWrong: 'Wrong code, try again',
+    callTitle: '📢 Call Number', callGo: 'Call', calledTxt: 'Number called successfully',
+    notifTitle: 'Calling number', notifSub: 'Please proceed to the admissions office',
+    noKnow: 'Please speak with our admissions officer directly for this question 😊',
+  }
+};
+function t(k) { return (T[lang] || T.ar)[k] || k; }
+
+function applyLang() {
+  const ids = {
+    'h-title': 'hTitle', 'gt-sub': 'gtSub', 'gt-pill': 'gtPill', 'gf-title': 'gfTitle', 'gf-sub': 'gfSub',
+    'fl-name-t': 'flName', 'fl-phone-t': 'flPhone', 'fl-child-t': 'flChild', 'fl-opt': 'flOpt',
+    'gate-btn-txt': 'gateBtnTxt', 'err-name': 'errName', 'err-phone': 'errPhone', 'priv-txt': 'privTxt',
+    'hero-greet': 'heroGreet', 'hero-sub': 'heroSub', 'hs-title': 'hsTitle',
+    'hg1l': 'hg1l', 'hg1s': 'hg1s', 'hg2l': 'hg2l', 'hg2s': 'hg2s', 'hg3l': 'hg3l', 'hg3s': 'hg3s', 'hg4l': 'hg4l', 'hg4s': 'hg4s',
+    'hours-title': 'hoursTitle', 'hr1': 'hr1', 'hr2': 'hr2', 'hr3': 'hr3',
+    'age-title': 'ageTitle', 'age-sub': 'ageSub', 'dob-lbl': 'dobLbl',
+    'docs-title': 'docsTitle', 'docs-sub': 'docsSub', 'nat-sa-t': 'natSa', 'nat-ns-t': 'natNs', 'prog-hint': 'progHint',
+    'bot-lbl': 'botLbl', 'welcome-msg': 'welcomeMsg', 'chips-lbl-txt': 'chipsLbl',
+    'qq1': 'qq1', 'qq2': 'qq2', 'qq4': 'qq4', 'qq5': 'qq5',
+    'q-lbl': 'qLbl', 'ticket-lbl': 'ticketLbl', 'q-info-title': 'qInfoTitle',    'qi1': 'qi1', 'qi2': 'qi2', 'qi3': 'qi3', 'qi4': 'qi4',
+    'nl-home': 'nlHome', 'nl-age': 'nlAge', 'nl-docs': 'nlDocs', 'nl-chat': 'nlChat',
+    'call-title': 'callTitle', 'call-go': 'callGo',
+  };
+  for (const [id, k] of Object.entries(ids)) { const el = document.getElementById(id); if (el) el.innerHTML = t(k); }
+  const ci = document.getElementById('chat-input'); if (ci) { ci.placeholder = t('chatPh'); ci.dir = lang === 'ar' ? 'rtl' : 'ltr'; }
+  if (currentUser) { const el = document.getElementById('hero-name'); if (el) el.textContent = currentUser.name + ' 👋'; }
+  renderCallGrid();
+}
+
+function setLang(l) {
+  lang = l;
+  document.getElementById('html-root').lang = l;
+  document.getElementById('html-root').dir = l === 'ar' ? 'rtl' : 'ltr';
+  document.body.className = l === 'ar' ? 'ar' : 'en';
+  document.querySelectorAll('.lang-sw button').forEach(b => b.classList.toggle('on', b.textContent.trim() === (l === 'ar' ? 'عربي' : 'EN')));
+  applyLang(); renderDocs();
+  if (currentGrade) renderResult(currentGrade, condFlag);
+}
+function gateLang(l) {
+  lang = l;
+  document.getElementById('html-root').lang = l;
+  document.getElementById('html-root').dir = l === 'ar' ? 'rtl' : 'ltr';
+  document.body.className = l === 'ar' ? 'ar' : 'en';
+  document.querySelectorAll('.g-lang-btn').forEach(b => b.classList.toggle('on', b.textContent.trim() === (l === 'ar' ? 'عربي' : 'English')));
+  applyLang();
+}
+
+/* REGISTRATION */
+let currentUser = null;
+function saveGuardian(data) { try { const arr = JSON.parse(localStorage.getItem('kg_g') || '[]'); arr.push(data); localStorage.setItem('kg_g', JSON.stringify(arr)); } catch (e) { } }
+function submitGate() {
+  const name = document.getElementById('inp-name').value.trim();
+  const phone = document.getElementById('inp-phone').value.trim();
+  const child = document.getElementById('inp-child').value.trim();
+  let ok = true;
+  ['inp-name', 'inp-phone'].forEach(id => document.getElementById(id).classList.remove('bad'));
+  ['err-name', 'err-phone'].forEach(id => document.getElementById(id).classList.remove('show'));
+  if (!name) { document.getElementById('inp-name').classList.add('bad'); document.getElementById('err-name').classList.add('show'); ok = false; }
+  if (!phone || phone.replace(/\D/g, '').length < 9) { document.getElementById('inp-phone').classList.add('bad'); document.getElementById('err-phone').classList.add('show'); ok = false; }
+  if (!ok) return;
+  const btn = document.getElementById('gate-btn'); btn.disabled = true; btn.innerHTML = '<span style="animation:spin 1s linear infinite;display:inline-block">⏳</span>';
+  const entry = { name, phone, child: child || '—', time: new Date().toLocaleString('ar-SA'), ts: Date.now(), lang };
+  saveGuardian(entry); currentUser = { name, phone, child }; openApp();
+}
+function openApp() {
+  document.getElementById('gate').classList.add('gone');
+  document.getElementById('app').classList.add('on');
+  document.getElementById('user-tag').textContent = '👤 ' + currentUser.name.split(' ')[0];
+  const wm = document.getElementById('welcome-msg');  if (wm) wm.innerHTML = lang === 'ar' ? `أهلاً ${currentUser.name}! 👋<br>اختر سؤالاً أو اكتب ما تريد معرفته.` : `Hello ${currentUser.name}! 👋<br>Pick a question or type anything you need.`;
+  applyLang();
+}
+
+/* NAVIGATION */
+const PGS = ['home', 'age', 'docs', 'chat', 'queue'];
+function switchPg(n) {
+  PGS.forEach(p => { document.getElementById('pg-' + p)?.classList.remove('on'); document.getElementById('nav-' + p)?.classList.remove('on'); });
+  document.getElementById('pg-' + n)?.classList.add('on');
+  document.getElementById('nav-' + n)?.classList.add('on');
+  window.scrollTo(0, 0);
+}
+
+/* 📚 GRADES DATA - UPDATED FROM PDF */
+const GRADES = [
+  {
+    id: 'prekg', ar: 'ما قبل الروضة (Pre-KG)', en: 'Pre-Kindergarten',
+    grad: 'linear-gradient(140deg,#c47d0a,#9a6008)',
+    start: new Date('2022-08-25'), end: new Date('2023-08-24'),
+    fees: { assess: 250, reg: 500, inst: 7450, full: 14900 },
+    sylAr: ['إمساك القلم', 'كيفية الإجابة عند السؤال', 'التعبير عن المشاعر', 'تتبع الخطوط', 'المهارات الحركية والفنية'],
+    sylEn: ['Pencil Gripping', 'Know how to response when asked', 'Know how to express emotions', 'Tracing lines', 'Fine motor skills / Art']
+  },
+  {
+    id: 'kg1', ar: 'الروضة الأولى (KG I)', en: 'Kindergarten I',
+    grad: 'linear-gradient(140deg,#0b5e52,#0d7a6a)',
+    start: new Date('2021-08-25'), end: new Date('2022-08-24'),
+    fees: { assess: 250, reg: 500, inst: 8450, full: 16900 },
+    sylAr: ['التعرف على الحروف والأرقام', 'العد شفهياً من 1 إلى 10', 'معرفة الألوان الأساسية'],
+    sylEn: ['Identifying letters and numbers', 'Counting 1-10 (Oral)', 'Primary Colors identification']
+  },
+  {
+    id: 'kg2', ar: 'الروضة الثانية (KG II)', en: 'Kindergarten II',
+    grad: 'linear-gradient(140deg,#1a5fa0,#1874c2)',
+    start: new Date('2020-08-25'), end: new Date('2021-08-24'),
+    fees: { assess: 250, reg: 500, inst: 8450, full: 16900 },
+    sylAr: ['كتابة الحروف الإنجليزية Aa–Zz', 'كتابة الأرقام من 1 إلى 30', 'جمع الأرقام ذات الرقم الواحد', 'أصوات الحروف (Phonics)', 'كتابة الحروف العربية من أ إلى ي (للعرب)', 'تمييز الحرف الأول من كل كلمة عربية'],
+    sylEn: ['Writing alphabet Aa-Zz', 'Writing Numbers 1-30', 'Single Digit Addition', 'Phonics Sound', '(For Arab) Writing Arabic alphabet (ي-أ)', 'Distinguish the first letter of each word in Arabic']
+  },
+  {
+    id: 'g1', ar: 'الصف الأول الابتدائي', en: 'Grade 1',
+    grad: 'linear-gradient(140deg,#5e2d91,#7c3fba)',
+    start: new Date('2019-08-25'), end: new Date('2020-08-24'),
+    fees: { assess: 250, reg: 500, inst: 8950, full: 17900 },
+    sylAr: [
+      'إنجليزي: قراءة وفهم مبتدئ، كلمات 3 حروف، is/am/are، المفرد والجمع، هذا/تلك/هؤلاء',
+      'رياضيات: أرقام 1–100، أسماء الأرقام 1–50، ما قبل/بعد/بين، الأشكال، الجمع والطرح',
+      'عربي: كتابة الحروف أ–ي، قراءة الحروف مع الحركات القصيرة والطويلة، كتابة الحرف الأول من اسم الصورة مع التشكيل الصحيح، ربط الصورة بالحرف المناسب، إدخال أل الشمسية والقمرية، إدخال التنوين، قراءة الجملة بخط جميل مع التشكيل'
+    ],
+    sylEn: [      'English: Reading Comprehension (beginner), 3 letter words, is/am/are, Singular/Plural, This/That/These/Those',
+      'Math: Numbers 1-100, Number Names (1-50), Before/After/Between, Shapes, Addition/Subtraction',
+      'Arabic: Writing letters (ي-أ), Reading with short/long vowels, Writing first letter of picture name with correct vowels, Connecting picture to letter, Al-Shamsiya/Al-Qamariya, Tanween, Beautiful handwriting with diacritics'
+    ]
+  },
+  {
+    id: 'g2', ar: 'الصف الثاني الابتدائي', en: 'Grade 2',
+    grad: 'linear-gradient(140deg,#8b1a1a,#b52525)',
+    start: new Date('2018-08-25'), end: new Date('2019-08-24'),
+    fees: { assess: 250, reg: 500, inst: 8950, full: 17900 },
+    sylAr: [
+      'إنجليزي: أجزاء الكلام (اسم، ضمير، حرف جر، فعل)، علامات الترقيم، قراءة وفهم، كتابة فقرة (5 جمل)',
+      'رياضيات: الأرقام المفقودة، أسماء الأرقام 1-100، العد العكسي، الجمع والطرح، حل المسائل، الأشكال',
+      'عربي: كتابة مواضع الحروف في الكلمة، كتابة الحركات الطويلة، إكمال الحرف الناقص، تحديد المقطع الساكن، تحديد الحرف المشدد، تحليل الكلمات، إدخال أل وكتابة نوعها، إدخال التنوين، قراءة الجملة بخط جميل، قراءة النص بطلاقة مع استخراج الظواهر اللغوية'
+    ],
+    sylEn: [
+      'English: Parts of Speech (Nouns, pronouns, preposition, verbs), Punctuation, Reading comprehension, Paragraph writing (5 sentences)',
+      'Math: Missing numbers, Number names (1-100), Backward counting, Addition/Subtraction, Problem solving, Shapes',
+      'Arabic: Writing letter positions, Long vowels, Completing missing letters, Identifying silent syllables, Stressed letters, Word analysis, Al-Shamsiya/Qamariya, Tanween, Beautiful handwriting, Fluent reading with linguistic phenomena extraction'
+    ]
+  },
+  {
+    id: 'g3', ar: 'الصف الثالث الابتدائي', en: 'Grade 3',
+    grad: 'linear-gradient(140deg,#1a4a7a,#1e5e9e)',
+    start: new Date('2017-08-25'), end: new Date('2018-08-24'),
+    fees: { assess: 250, reg: 500, inst: 8950, full: 17900 },
+    sylAr: [
+      'إنجليزي: أجزاء الكلام (اسم، حرف جر، فعل، ضمير)، علامات الترقيم، قراءة وفهم، كتابة فقرة (8 جمل)',
+      'رياضيات: تكوين أعداد من 4 خانات، أكبر من/أصغر من/يساوي، جمع وطرح 3 خانات، الضرب، الأشكال',
+      'عربي: قراءة النص وفهمه والإجابة على الأسئلة، استخراج التراكيب اللغوية، الفرق بين المفرد والمثنى والجمع، الفرق بين الكلمة وضدها، تحويل الفعل المضارع إلى اسم ممدود، ترتيب الكلمات لتكوين جملة مفيدة، التعبير بأسلوب التوكيد، التعبير باسم الممدود'
+    ],
+    sylEn: [
+      'English: Parts of speech (Noun, preposition, verbs, pronouns), Punctuation, Reading Comprehension, Paragraph writing (8 sentences)',
+      'Math: Forming 4-digit numbers, Less/Greater/Equal to, 3-digit addition/subtraction, Multiplication, Shapes',
+      'Arabic: Reading comprehension & Q&A, Extracting linguistic structures, Singular/Dual/Plural, Antonyms, Converting present verb to extended noun, Sentence formation, Affirmative style expression, Extended noun expression'
+    ]
+  }
+];
+
+/* 💰 DISCOUNTS */
+const DISCS = [
+  { key: 'early', pct: 10, ar: 'دفع مبكر (سنة كاملة)', en: 'Early payment (full year)' },
+  { key: 'second', pct: 5, ar: 'الطفل الثاني', en: '2nd child' },
+  { key: 'third', pct: 7.5, ar: 'الطفل الثالث', en: '3rd child' },
+  { key: 'fourth', pct: 10, ar: 'الطفل الرابع', en: '4th child' }
+];
+const condS = new Date('2020-08-25'), condE = new Date('2020-11-22');
+let currentGrade = null, selDisc = null, condFlag = false;
+const vat = n => Math.round(n * .15 * 100) / 100;
+const fmt = n => Number(n).toLocaleString('en', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+function calcGrade() {
+  const v = document.getElementById('dob').value; if (!v) return;
+  const dob = new Date(v), area = document.getElementById('result-area');
+  let g = null;
+  for (const gr of GRADES) { if (dob >= gr.start && dob <= gr.end) { g = gr; break; } }
+  if (!g) { area.innerHTML = `<div class="err-box">${t('errRange')}</div>`; return; }
+  condFlag = g.id === 'kg2' && dob >= condS && dob <= condE;
+  currentGrade = g; selDisc = null; renderResult(g, condFlag);
+}
+
+function renderResult(g, cond) {
+  const f = g.fees;
+  const Va = { assess: vat(f.assess), reg: vat(f.reg), inst: vat(f.inst), full: vat(f.full) };
+  const disc = DISCS.find(d => d.key === selDisc);
+  const cur = t('cur');
+
+  let discHtml = '';
+  if (disc) {
+    const tot = f.full + Va.full, save = Math.round(tot * disc.pct) / 100, final = Math.round((tot - save) * 100) / 100;
+    discHtml = `<div class="disc-after"><div class="disc-save-lbl">${t('discSave')}: <strong style="font-family:Nunito,sans-serif">${fmt(save)} ${cur}</strong></div><div class="disc-final-price">${fmt(final)} <span style="font-size:14px">${cur}</span></div><div class="disc-label">${t('discAfterLbl')} • ${disc.pct}% off</div></div>`;
+  }
+  const syl = (lang === 'ar' ? g.sylAr : g.sylEn).map(s => `<div class="syl-item"><div class="syl-dot"></div><span>${s}</span></div>`).join('');
+  const chips = DISCS.map(d => `<div class="dc${selDisc === d.key ? ' on' : ''}" onclick="pickDisc('${d.key}')"><span class="dc-pct">${d.pct}%</span><span class="dc-name">${lang === 'ar' ? d.ar : d.en}</span></div>`).join('');
+  const condNote = cond ? `<div class="warn-box">${t('warnCond')}</div>` : '';
+
+  document.getElementById('result-area').innerHTML = `
+  <div class="res-card">
+    <div class="res-head" style="background:${g.grad}">
+      <div class="res-head-label">✅ ${t('gradeOf')}</div>
+      <div class="res-grade">${lang === 'ar' ? g.ar : g.en}</div>
+      <div class="res-year">2026 – 2027</div>
+    </div>
+    <div class="res-body">
+      ${condNote}
+      <div class="fee-sec-lbl" style="margin-top:4px">${t('feeBreak')}</div>
+      ${feeRow(t('feeAssess'), f.assess, Va.assess, cur)}
+      ${feeRow(t('feeReg'), f.reg, Va.reg, cur)}
+      ${feeRow(t('feeInst1'), f.inst, Va.inst, cur)}
+      ${feeRow(t('feeInst2'), f.inst, Va.inst, cur)}
+      <div class="total-band">
+        <div class="total-band-right">
+          <div class="total-band-lbl">${t('yearTotal')}</div>
+          <div class="total-band-base">${fmt(f.full)} ${cur}</div>
+          <div class="total-band-vat">+ ${t('vatLabel')} ${fmt(Va.full)} ${cur}</div>
+        </div>
+        <div class="total-band-left">
+          <div class="total-band-main">${fmt(f.full + Va.full)}</div>
+          <div class="total-band-cur">${cur}</div>
+        </div>      </div>
+      ${discHtml}
+      <div style="font-size:12.5px;font-weight:700;color:var(--text);margin:14px 0 9px">${t('discTitle')}</div>
+      <div class="disc-grid">${chips}</div>
+      <div class="syl-box"><div class="syl-title">${t('sylTitle')}</div>${syl}</div>
+    </div>
+  </div>`;
+}
+
+function feeRow(lbl, base, v, cur) {
+  return `<div class="fee-row">
+    <div class="fee-row-top">
+      <span class="fee-label">${lbl}</span>
+      <span><span class="fee-base-amount">${fmt(base)}</span> <span class="fee-currency">${cur}</span></span>
+    </div>
+    <div class="fee-vat-row">
+      <span class="fee-vat-badge">${t('vatLabel')}</span>
+      <span class="fee-vat-amount">+ ${fmt(v)} ${cur}</span>
+      <span class="fee-sep">|</span>
+      <span class="fee-total-inline">${t('totalLabel')}: ${fmt(base + v)} ${cur}</span>
+    </div>
+  </div>`;
+}
+
+function pickDisc(k) { selDisc = selDisc === k ? null : k; if (currentGrade) renderResult(currentGrade, condFlag); }
+
+/* DOCUMENTS */
+const DOCS = {
+  saudi: {
+    ar: [{ t: 'بطاقة العائلة', s: 'أصل + نسخة' }, { t: 'كرت تطعيم الطالب', s: 'محدّثة ومختومة' }, { t: 'شهادة ميلاد الطالب', s: 'مصدّقة ومختومة' }, { t: 'شهادة آخر مرحلة دراسية', s: 'معتمدة ومختومة (إن وُجدت)' }, { t: 'الكشف الطبي / اللياقة البدنية', s: 'من مستشفى أو مركز معتمد' }, { t: '8 صور شخصية', s: 'خلفية بيضاء، حديثة' }],
+    en: [{ t: 'Family Card', s: 'Original + copy' }, { t: "Student's Immunisation Card", s: 'Up-to-date and stamped' }, { t: "Student's Birth Certificate", s: 'Certified and stamped' }, { t: 'Previous academic report', s: 'If applicable, stamped' }, { t: 'Physical fitness certificate', s: 'From an accredited centre' }, { t: '8 personal photographs', s: 'White background, recent' }]
+  },
+  nonsaudi: {
+    ar: [{ t: 'إقامة الطالب المجددة', s: 'سارية المفعول' }, { t: 'إقامة الأب المجددة', s: 'سارية المفعول' }, { t: 'إقامة الأم المجددة', s: 'سارية المفعول' }, { t: 'جواز سفر الطالب', s: 'صفحة البيانات الشخصية' }, { t: 'جواز سفر الأب', s: 'صفحة البيانات الشخصية' }, { t: 'جواز سفر الأم', s: 'صفحة البيانات الشخصية' }, { t: 'كرت تطعيم الطالب', s: 'محدّثة ومختومة' }, { t: 'شهادة ميلاد الطالب', s: 'مصدّقة ومختومة' }, { t: 'شهادة آخر مرحلة دراسية', s: 'معتمدة ومختومة (إن وُجدت)' }, { t: 'الكشف الطبي / اللياقة البدنية', s: 'من مستشفى أو مركز معتمد' }, { t: '8 صور شخصية', s: 'خلفية بيضاء، حديثة' }],
+    en: [{ t: "Student's renewed Iqama", s: 'Must be valid' }, { t: "Father's renewed Iqama", s: 'Must be valid' }, { t: "Mother's renewed Iqama", s: 'Must be valid' }, { t: "Student's passport", s: 'Personal data page' }, { t: "Father's passport", s: 'Personal data page' }, { t: "Mother's passport", s: 'Personal data page' }, { t: "Student's Immunisation Card", s: 'Up-to-date and stamped' }, { t: "Student's Birth Certificate", s: 'Certified and stamped' }, { t: 'Previous academic report', s: 'If applicable, stamped' }, { t: 'Physical fitness certificate', s: 'From an accredited centre' }, { t: '8 personal photographs', s: 'White background, recent' }]
+  }
+};
+let curNat = 'saudi', checked = { saudi: new Set(), nonsaudi: new Set() };
+function setNat(n) { curNat = n; document.getElementById('nat-sa').classList.toggle('on', n === 'saudi'); document.getElementById('nat-ns').classList.toggle('on', n === 'nonsaudi'); renderDocs(); }
+function renderDocs() {
+  const docs = DOCS[curNat][lang === 'ar' ? 'ar' : 'en'], ck = checked[curNat];
+  document.getElementById('doc-list').innerHTML = docs.map((d, i) => `<div class="doc-item" onclick="togDoc(${i})"><div class="doc-chk${ck.has(i) ? ' on' : ''}"><span class="ck-mark">✓</span></div><div><div class="doc-txt">${d.t}</div><div class="doc-sub">${d.s}</div></div></div>`).join('');
+  const n = ck.size, tot = docs.length, pct = tot ? Math.round(n / tot * 100) : 0;
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-txt').textContent = lang === 'ar' ? `${n} من ${tot} وثيقة جاهزة` : `${n} of ${tot} documents ready`;
+  document.getElementById('prog-pct').textContent = pct + '%';
+}
+function togDoc(i) { const ck = checked[curNat]; ck.has(i) ? ck.delete(i) : ck.add(i); renderDocs(); }
+renderDocs();
+/* TICKET */
+let ticketN = parseInt(localStorage.getItem('kg_t') || '0');
+let currentServing = parseInt(localStorage.getItem('kg_s') || '0');
+function takeTicket() {
+  ticketN++; localStorage.setItem('kg_t', ticketN);
+  updateServingDisplay();
+  const time = new Date().toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' });
+  document.getElementById('ticket-area').innerHTML = `
+    <div class="ticket-result">
+      <div class="ticket-top">
+        <div style="font-size:13px;opacity:.82;margin-bottom:8px">${t('ticketYour')}</div>
+        <div class="ticket-num-big">${ticketN}</div>
+        <div style="font-size:12px;opacity:.72;margin-top:8px">${t('ticketWait')}</div>
+        <div style="font-size:11px;opacity:.6;margin-top:4px;font-family:Nunito,sans-serif">${time}</div>
+      </div>
+      <div class="ticket-bottom">
+        <button class="print-btn" onclick="window.print()">${t('printBtn')}</button>
+      </div>
+    </div>`;
+}
+function updateServingDisplay() { document.getElementById('queue-cur').textContent = currentServing || '—'; }
+updateServingDisplay();
+
+/* CALL NUMBER */
+let isAdmin = false;
+function renderCallGrid() {
+  if (!isAdmin) return;
+  const grid = document.getElementById('call-grid'); if (!grid) return;
+  grid.innerHTML = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => `<button class="call-num-btn" onclick="callNumber(${n})">${n}</button>`).join('');
+}
+function callNumber(n) {
+  const num = n || parseInt(document.getElementById('call-input').value);
+  if (!num || isNaN(num) || num < 1) return;
+  currentServing = num; localStorage.setItem('kg_s', num); updateServingDisplay();
+  if (n) { document.querySelectorAll('.call-num-btn').forEach(b => { if (parseInt(b.textContent) === n) { b.classList.add('ringing'); setTimeout(() => b.classList.remove('ringing'), 700); } }); }
+  const badge = document.getElementById('called-badge');
+  document.getElementById('called-num').textContent = num;
+  document.getElementById('called-txt').textContent = t('calledTxt');
+  badge.classList.add('show'); showNotif(num);
+  setTimeout(() => badge.classList.remove('show'), 4000);
+  document.getElementById('call-input').value = '';
+}
+function showNotif(num) {
+  const banner = document.getElementById('notif-banner');
+  document.getElementById('notif-title').textContent = t('notifTitle');
+  document.getElementById('notif-num').textContent = num;
+  document.getElementById('notif-sub').textContent = t('notifSub');
+  banner.classList.add('show'); setTimeout(() => banner.classList.remove('show'), 5000);
+}
+function closeNotif() { document.getElementById('notif-banner').classList.remove('show'); }
+/* ADMIN */
+function openAdminCode() {
+  document.getElementById('admin-code-overlay')?.remove();
+  const o = document.createElement('div'); o.className = 'admin-code-overlay'; o.id = 'admin-code-overlay';
+  o.innerHTML = `<div class="admin-code-box"><div class="admin-code-icon">🔐</div><div class="admin-code-title">${t('adminTitle')}</div><div class="admin-code-sub">${t('adminSub')}</div><input class="code-input" type="password" id="code-inp" maxlength="10" placeholder="••••" onkeydown="if(event.key==='Enter')checkCode()"><div class="code-err" id="code-err">${t('adminWrong')}</div><div class="code-btns"><button class="code-cancel" onclick="document.getElementById('admin-code-overlay').remove()">${t('adminCancel')}</button><button class="code-go" onclick="checkCode()">${t('adminEnter')}</button></div></div>`;
+  document.body.appendChild(o); setTimeout(() => document.getElementById('code-inp')?.focus(), 100);
+}
+async function checkCode() {
+  const v = document.getElementById('code-inp').value, e = document.getElementById('code-err');
+  if (v === ADMIN_CODE) {
+    document.getElementById('admin-code-overlay').remove(); isAdmin = true;
+    const cs = document.getElementById('call-section'); if (cs) cs.style.display = 'block';
+    renderCallGrid(); switchPg('queue'); await showAdmin();
+  } else {
+    e.classList.add('show'); document.getElementById('code-inp').value = ''; document.getElementById('code-inp').style.borderColor = '#e53935';
+    setTimeout(() => { e.classList.remove('show'); document.getElementById('code-inp').style.borderColor = ''; }, 2000);
+  }
+}
+async function showAdmin() {
+  let guardians = []; try { guardians = JSON.parse(localStorage.getItem('kg_g') || '[]'); } catch (e) { }
+  guardians.sort((a, b) => b.ts - a.ts);
+  const today = guardians.filter(g => g.ts > Date.now() - 86400000).length;
+  const rows = guardians.length ? guardians.map(g => `<tr><td style="padding:9px 10px;font-weight:700;color:#0f1f1c">${g.name}</td><td style="padding:9px 10px;font-family:Nunito,sans-serif;direction:ltr;color:#2d4a45">${g.phone}</td><td style="padding:9px 10px;color:#6b8c85">${g.child}</td><td style="padding:9px 8px;font-size:11px;color:#6b8c85">${g.time}</td></tr>`).join('') : `<tr><td colspan="4" style="text-align:center;padding:24px;color:#6b8c85">${lang === 'ar' ? 'لا يوجد بيانات بعد' : 'No data yet'}</td></tr>`;
+  const csv = 'Name,Phone,Child,Time\n' + guardians.map(g => `"${g.name}","${g.phone}","${g.child}","${g.time}"`).join('\n');
+  const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+  const m = document.createElement('div');
+  m.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:99998;display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;padding:16px;backdrop-filter:blur(4px)';
+  m.innerHTML = `<div style="background:#fff;border-radius:22px;width:100%;max-width:560px;overflow:hidden;margin:auto;box-shadow:0 24px 80px rgba(0,0,0,.3)"><div style="background:linear-gradient(135deg,#0b5e52,#0d7a6a);padding:18px 20px;color:#fff;display:flex;justify-content:space-between;align-items:flex-start"><div><div style="font-size:17px;font-weight:800;margin-bottom:3px">📊 ${lang === 'ar' ? 'لوحة إدارة القبول' : 'Admission Dashboard'}</div><div style="font-size:12px;opacity:.75">${lang === 'ar' ? 'إجمالي الزيارات' : 'Total visits'}: ${guardians.length}</div></div><button onclick="this.closest('div[style*=fixed]').remove()" style="background:rgba(255,255,255,.15);border:none;color:#fff;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center">×</button></div><div style="padding:16px"><div style="display:flex;gap:10px;margin-bottom:14px"><div style="flex:1;background:#eef7f5;border-radius:14px;padding:14px;text-align:center;border:1.5px solid #c8deda"><div style="font-size:30px;font-weight:900;color:#0b5e52;font-family:Nunito,sans-serif">${guardians.length}</div><div style="font-size:11px;color:#6b8c85;margin-top:2px">${lang === 'ar' ? 'إجمالي' : 'Total'}</div></div><div style="flex:1;background:#fdf3d0;border-radius:14px;padding:14px;text-align:center;border:1.5px solid #f5c843"><div style="font-size:30px;font-weight:900;color:#b8860b;font-family:Nunito,sans-serif">${today}</div><div style="font-size:11px;color:#6b8c85;margin-top:2px">${lang === 'ar' ? 'آخر 24 ساعة' : 'Last 24h'}</div></div><div style="flex:1;background:#eef7f5;border-radius:14px;padding:14px;text-align:center;border:1.5px solid #c8deda"><div style="font-size:30px;font-weight:900;color:#0b5e52;font-family:Nunito,sans-serif">${currentServing || '—'}</div><div style="font-size:11px;color:#6b8c85;margin-top:2px">${lang === 'ar' ? 'يُخدم الآن' : 'Serving now'}</div></div></div><a href="${url}" download="kids_gate.csv" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#b8860b,#d4a017);color:#fff;border-radius:12px;padding:11px;font-weight:700;font-size:13px;margin-bottom:14px;text-decoration:none">⬇️ ${lang === 'ar' ? 'تصدير CSV' : 'Export CSV'}</a><div style="overflow-x:auto;border-radius:12px;border:1.5px solid #c8deda"><table style="width:100%;border-collapse:collapse;font-size:12.5px"><thead><tr style="background:#eef7f5;border-bottom:1.5px solid #c8deda"><th style="padding:9px 10px;text-align:right;color:#0b5e52;font-weight:700">${lang === 'ar' ? 'الاسم' : 'Name'}</th><th style="padding:9px 10px;text-align:right;color:#0b5e52;font-weight:700">${lang === 'ar' ? 'الجوال' : 'Mobile'}</th><th style="padding:9px 10px;text-align:right;color:#0b5e52;font-weight:700">${lang === 'ar' ? 'الطفل' : 'Child'}</th><th style="padding:9px 8px;text-align:right;color:#0b5e52;font-weight:700">${lang === 'ar' ? 'الوقت' : 'Time'}</th></tr></thead><tbody>${rows}</tbody></table></div></div></div>`;
+  document.body.appendChild(m);
+}
+
+/* ══ CHAT - STRUCTURED AI RESPONSES ══ */
+const CHAT_ANSWERS = {
+  fees: {
+    match: q => /رس[وو]م|fee|fees|كم|تكلف|price|سعر/.test(q),
+    ar() {
+      return `<div class="ans-block">
+<div class="ans-title">💰 الرسوم الدراسية · 2026–2027</div>
+<div class="a-fee-item">
+  <div class="a-fee-top"><span class="a-fee-name">رسوم التقييم</span><span><span class="a-fee-base">250</span> <span class="a-fee-cur">ريال</span></span></div>
+  <div class="a-fee-vat"><span class="a-vat-badge">ضريبة 15%</span><span class="a-vat-num">+ 37.50 ريال</span><span class="a-sep">|</span><span class="a-total-inline">الإجمالي: 287.50 ريال</span></div>
+</div>
+<div class="a-fee-item">
+  <div class="a-fee-top"><span class="a-fee-name">رسوم التسجيل</span><span><span class="a-fee-base">500</span> <span class="a-fee-cur">ريال</span></span></div>
+  <div class="a-fee-vat"><span class="a-vat-badge">ضريبة 15%</span><span class="a-vat-num">+ 75 ريال</span><span class="a-sep">|</span><span class="a-total-inline">الإجمالي: 575 ريال</span></div>
+</div>
+<div class="a-sect-sep">الرسوم السنوية حسب المرحلة</div>
+<div class="a-grade-grid">
+  <div class="a-gchip"><span class="a-gchip-name">Pre-KG</span><span class="a-gchip-price">14,900</span><span class="a-gchip-vat">+ ض. 2,235</span></div>  <div class="a-gchip"><span class="a-gchip-name">KG I / II</span><span class="a-gchip-price">16,900</span><span class="a-gchip-vat">+ ض. 2,535</span></div>
+  <div class="a-gchip"><span class="a-gchip-name">الصفوف 1–3</span><span class="a-gchip-price">17,900</span><span class="a-gchip-vat">+ ض. 2,685</span></div>
+</div>
+<div class="a-total-band">
+  <div class="a-tb-r"><div class="a-tb-lbl">KG I/II — إجمالي سنوي</div><div class="a-tb-base">16,900 ريال</div><div class="a-tb-vat">+ ضريبة 2,535 ريال</div></div>
+  <div class="a-tb-l"><div class="a-tb-main">19,435</div><div class="a-tb-cur">ريال</div></div>
+</div>
+<div class="a-note"><span class="a-note-icon">📌</span><span>تُدفع على قسطين متساويين خلال العام</span></div>
+</div>`;
+    },
+    en() {
+      return `<div class="ans-block">
+<div class="ans-title">💰 Fees · 2026–2027</div>
+<div class="a-fee-item">
+  <div class="a-fee-top"><span class="a-fee-name">Assessment fee</span><span><span class="a-fee-base">250</span> <span class="a-fee-cur">SAR</span></span></div>
+  <div class="a-fee-vat"><span class="a-vat-badge">VAT 15%</span><span class="a-vat-num">+ 37.50 SAR</span><span class="a-sep">|</span><span class="a-total-inline">Total: 287.50 SAR</span></div>
+</div>
+<div class="a-fee-item">
+  <div class="a-fee-top"><span class="a-fee-name">Registration fee</span><span><span class="a-fee-base">500</span> <span class="a-fee-cur">SAR</span></span></div>
+  <div class="a-fee-vat"><span class="a-vat-badge">VAT 15%</span><span class="a-vat-num">+ 75 SAR</span><span class="a-sep">|</span><span class="a-total-inline">Total: 575 SAR</span></div>
+</div>
+<div class="a-sect-sep">Annual fees by grade</div>
+<div class="a-grade-grid">
+  <div class="a-gchip"><span class="a-gchip-name">Pre-KG</span><span class="a-gchip-price">14,900</span><span class="a-gchip-vat">+ VAT 2,235</span></div>
+  <div class="a-gchip"><span class="a-gchip-name">KG I / II</span><span class="a-gchip-price">16,900</span><span class="a-gchip-vat">+ VAT 2,535</span></div>
+  <div class="a-gchip"><span class="a-gchip-name">Grades 1–3</span><span class="a-gchip-price">17,900</span><span class="a-gchip-vat">+ VAT 2,685</span></div>
+</div>
+<div class="a-total-band">
+  <div class="a-tb-r"><div class="a-tb-lbl">KG I/II — Annual total</div><div class="a-tb-base">16,900 SAR</div><div class="a-tb-vat">+ VAT 2,535 SAR</div></div>
+  <div class="a-tb-l"><div class="a-tb-main">19,435</div><div class="a-tb-cur">SAR</div></div>
+</div>
+<div class="a-note"><span class="a-note-icon">📌</span><span>Paid in two equal instalments</span></div>
+</div>`;
+    }
+  },
+  docs: {
+    match: q => /ورق|وثيق|مستند|doc|paper|أوراق|required/.test(q),
+    ar() {
+      const ls = ['بطاقة العائلة — أصل ونسخة', 'كرت التطعيم — محدّث ومختوم', 'شهادة الميلاد — مصدّقة', 'شهادة آخر مرحلة — إن وُجدت', 'كشف طبي من مركز معتمد', '8 صور شخصية — خلفية بيضاء'];
+      return `<div class="ans-block"><div class="ans-title">📋 الوثائق المطلوبة</div><div class="a-sect-sep">للطلاب السعوديين</div><div class="a-hl-list">${ls.map(l => `<div class="a-hl"><div class="a-hldot"></div><span>${l}</span></div>`).join('')}</div><div class="a-note gold" style="margin-top:10px"><span class="a-note-icon">🌍</span><span>للطلاب غير السعوديين: يُضاف إقامة الطالب والوالدين وجوازات السفر</span></div></div>`;
+    },
+    en() {
+      const ls = ["Family Card — original + copy", "Immunisation card — up-to-date", "Birth certificate — certified", "Previous report — if applicable", "Physical fitness certificate", "8 passport photos — white background"];
+      return `<div class="ans-block"><div class="ans-title">📋 Required Documents</div><div class="a-sect-sep">Saudi students</div><div class="a-hl-list">${ls.map(l => `<div class="a-hl"><div class="a-hldot"></div><span>${l}</span></div>`).join('')}</div><div class="a-note gold" style="margin-top:10px"><span class="a-note-icon">🌍</span><span>Non-Saudi students: add renewed Iqama + passports for student & parents</span></div></div>`;
+    }
+  },
+  disc: {
+    match: q => /خصم|discount|تخفيض|مبكر|early|ثاني|second|ثالث|رابع/.test(q),
+    ar() {
+      const ls = [['10%', 'دفع سنوي مبكر'], ['5%', 'الطفل الثاني'], ['7.5%', 'الطفل الثالث'], ['10%', 'الطفل الرابع']];      return `<div class="ans-block"><div class="ans-title">🏷️ الخصومات المتاحة</div><div class="a-disc-grid">${ls.map(([p, n]) => `<div class="a-dchip"><span class="a-dchip-pct">${p}</span><span class="a-dchip-lbl">${n}</span></div>`).join('')}</div><div class="a-note gold" style="margin-top:10px"><span class="a-note-icon">💡</span><span>تُطبَّق على الرسوم السنوية الكاملة شاملة الضريبة</span></div></div>`;
+    },
+    en() {
+      const ls = [['10%', 'Early full-year payment'], ['5%', '2nd child'], ['7.5%', '3rd child'], ['10%', '4th child']];
+      return `<div class="ans-block"><div class="ans-title">🏷️ Available Discounts</div><div class="a-disc-grid">${ls.map(([p, n]) => `<div class="a-dchip"><span class="a-dchip-pct">${p}</span><span class="a-dchip-lbl">${n}</span></div>`).join('')}</div><div class="a-note gold" style="margin-top:10px"><span class="a-note-icon">💡</span><span>Applied on the full annual fee including VAT</span></div></div>`;
+    }
+  },
+  syl: {
+    match: q => /منهج|curriculum|مواد|subject|يتعلم|يدرس|study|syllabus/.test(q),
+    ar() {
+      const gs = [
+        ['Pre-KG', 'إمساك القلم • الإجابة عند السؤال • التعبير عن المشاعر • تتبع الخطوط • المهارات الحركية والفنية'],
+        ['KG I', 'التعرف على الحروف والأرقام • العد 1–10 شفهياً • الألوان الأساسية'],
+        ['KG II', 'كتابة Aa–Zz • الأرقام 1–30 • الجمع أحادي الرقم • الفونيكس • الحروف العربية أ–ي • تمييز أول حرف في الكلمة'],
+        ['الصف الأول', 'إنجليزي: كلمات 3 حروف، is/am/are، المفرد/الجمع • رياضيات: 1–100، جمع/طرح، أشكال • عربي: الحروف مع الحركات، أل الشمسية/القمرية، التنوين، قراءة بخط جميل'],
+        ['الصف الثاني', 'إنجليزي: أجزاء الكلام، ترقيم، فقرات 5 جمل • رياضيات: أرقام مفقودة، عد عكسي، حل مسائل • عربي: مواضع الحروف، الحركات الطويلة، المقطع الساكن، المشدد، تحليل الكلمات، أل والتنوين'],
+        ['الصف الثالث', 'إنجليزي: أجزاء الكلام، ترقيم، فقرات 8 جمل • رياضيات: أعداد 4 خانات، ضرب، مقارنة • عربي: فهم النصوص، المفرد/المثنى/الجمع، الأضداد، أسماء الممدود']
+      ];
+      return `<div class="ans-block"><div class="ans-title">📚 المنهج الدراسي · 2026–2027</div>${gs.map(([g, s]) => `<div class="a-syl-grade"><div class="a-syl-gname">${g}</div><div class="a-syl-items">${s}</div></div>`).join('')}<div class="a-note" style="margin-top:10px"><span class="a-note-icon">📌</span><span>يتم تدريس المواد باللغة الإنجليزية والعربية حسب الخطة المعتمدة</span></div></div>`;
+    },
+    en() {
+      const gs = [
+        ['Pre-KG', 'Pencil grip • responding when asked • expressing emotions • tracing lines • fine motor & art'],
+        ['KG I', 'Letters & numbers • oral counting 1–10 • primary colours'],
+        ['KG II', 'Writing Aa–Zz • numbers 1–30 • single-digit addition • phonics • Arabic letters Alif–Ya • first-letter identification'],
+        ['Grade 1', 'English: 3-letter words, is/am/are, singular/plural • Maths: 1–100, addition/subtraction, shapes • Arabic: letters with vowels, Al-Shamsiya/Qamariya, Tanween, beautiful handwriting'],
+        ['Grade 2', 'English: parts of speech, punctuation, 5-sentence paragraphs • Maths: missing numbers, backward counting, problem solving • Arabic: letter positions, long vowels, silent syllables, stressed letters, word analysis'],
+        ['Grade 3', 'English: parts of speech, punctuation, 8-sentence paragraphs • Maths: 4-digit numbers, multiplication, comparison • Arabic: text comprehension, singular/dual/plural, antonyms, extended nouns']
+      ];
+      return `<div class="ans-block"><div class="ans-title">📚 Curriculum · 2026–2027</div>${gs.map(([g, s]) => `<div class="a-syl-grade"><div class="a-syl-gname">${g}</div><div class="a-syl-items">${s}</div></div>`).join('')}<div class="a-note" style="margin-top:10px"><span class="a-note-icon">📌</span><span>Subjects taught in English & Arabic per approved curriculum</span></div></div>`;
+    }
+  }
+};
+
+let chatHistory = [], botBusy = false;
+
+function addChatMsg(html, role) {
+  const box = document.getElementById('chat-msgs');
+  const w = document.createElement('div'); w.className = 'msg-wrap';
+  if (role === 'bot') {
+    w.innerHTML = `<div class="msg-lbl bot-l">${t('botLbl')}</div><div class="msg bot" style="position:relative"><div class="bot-icon">🏫</div>${html}</div>`;
+  } else {
+    w.innerHTML = `<div class="msg-lbl" style="${lang === 'en' ? 'text-align:right' : ''}">${t('youLbl')}</div><div class="msg user">${html}</div>`;
+  }
+  box.appendChild(w); box.scrollTop = box.scrollHeight;
+}
+function showTyping() {
+  const b = document.getElementById('chat-msgs');
+  const d = document.createElement('div'); d.id = 'typing'; d.className = 'msg-wrap';
+  d.innerHTML = `<div class="msg-lbl bot-l">${t('botLbl')}</div><div class="msg bot" style="padding:13px 15px"><div class="typing-row"><div class="td"></div><div class="td"></div><div class="td"></div></div></div>`;  b.appendChild(d); b.scrollTop = b.scrollHeight;
+}
+function hideTyping() { document.getElementById('typing')?.remove(); }
+
+function hideChips() { document.getElementById('quick-chips-wrap').style.display = 'none'; }
+function showChips() {
+  const cw = document.getElementById('quick-chips-wrap');
+  cw.style.display = 'block';
+  const chips = cw.querySelectorAll('.qq');
+  chips.forEach((c, i) => { c.style.animationDelay = (i * .06) + 's'; c.style.animation = 'none'; void c.offsetWidth; c.style.animation = 'chipIn .32s ease both'; });
+}
+
+async function sendMsg() {
+  if (botBusy) return;
+  const inp = document.getElementById('chat-input'); const txt = inp.value.trim(); if (!txt) return;
+  inp.value = '';
+  addChatMsg(txt, 'user'); chatHistory.push({ role: 'user', content: txt });
+  hideChips(); botBusy = true; showTyping();
+  const lc = txt.toLowerCase();
+  let structHtml = null;
+  for (const key of Object.keys(CHAT_ANSWERS)) {
+    const a = CHAT_ANSWERS[key];
+    if (a.match(lc)) { structHtml = lang === 'ar' ? a.ar() : a.en(); break; }
+  }
+  if (structHtml) {
+    setTimeout(() => {
+      hideTyping(); addChatMsg(structHtml, 'bot');
+      chatHistory.push({ role: 'assistant', content: txt });
+      setTimeout(() => { showChips(); botBusy = false; }, 380);
+    }, 650 + Math.random() * 380);
+  } else {
+    hideTyping();
+    addChatMsg(t('noKnow'), 'bot');
+    setTimeout(() => { showChips(); botBusy = false; }, 380);
+  }
+}
+
+function sendQ(btn, key) {
+  const txt = btn.textContent.trim();
+  document.getElementById('chat-input').value = '';
+  if (botBusy) return;
+  botBusy = true; hideChips();
+  addChatMsg(txt, 'user'); chatHistory.push({ role: 'user', content: txt });
+  showTyping();
+  const a = CHAT_ANSWERS[key];
+  setTimeout(() => {
+    hideTyping();
+    const html = lang === 'ar' ? a.ar() : a.en();
+    addChatMsg(html, 'bot'); chatHistory.push({ role: 'assistant', content: txt });
+    setTimeout(() => { showChips(); botBusy = false; }, 380);  }, 650 + Math.random() * 380);
+}
+</script>
+</body>
+</html>
